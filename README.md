@@ -19,6 +19,7 @@
 # Project Status
 
 The project is in the process of designing views.
+
 **Features:**
 
 - Standard search for songs/artists/albums **(In progress)**
