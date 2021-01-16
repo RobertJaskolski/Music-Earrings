@@ -3,12 +3,15 @@
 ## Description
 
 **The Music Earrings** web application will serve as a lightweight music player that will replace the standard Spotify player. The application will use the Spotify API.
+
 [link to Spotify API](https://developer.spotify.com/)
 
 ## Languages & tools
 
 **Language:** JavaScript
+
 **Framework:** React + Redux
+
 **Other tools:**
 
 - In progress
