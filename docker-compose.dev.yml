@@ -1,0 +1,29 @@
+version: "3.8"
+
+services:
+  server:
+    restart: unless-stopped
+    build:
+      context: ./server
+      dockerfile: Dockerfile.dev
+    container_name: app-server
+    volumes:
+      - ./server:/code
+    ports:
+      - 8888:8888
+
+  client:
+    restart: unless-stopped
+    build:
+      context: ./client
+      dockerfile: Dockerfile.dev
+    container_name: app-client
+    depends_on:
+      - server
+    volumes:
+      - ./client:/app
+    ports:
+      - 3000:3000
+
+volumes:
+  pgdata:
