@@ -10,7 +10,7 @@ services:
     volumes:
       - ./server:/code
     ports:
-      - 8888:8888
+      - 4000:4000
 
   client:
     restart: unless-stopped
