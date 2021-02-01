@@ -8,9 +8,17 @@ export default function Nav() {
   return (
     <Grid item>
       <nav>
-        <Logo widthLogo="100px" heightLogo="100px" />
-        <SearchInput />
-        <LoginButton />
+        <Grid container maxWidth={true}>
+          <Grid item md={3}>
+            <Logo widthLogo="100px" heightLogo="100px" />
+          </Grid>
+          <Grid item md={6}>
+            <SearchInput />
+          </Grid>
+          <Grid item md={3}>
+            <LoginButton />
+          </Grid>
+        </Grid>
       </nav>
     </Grid>
   );
