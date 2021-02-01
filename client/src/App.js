@@ -1,9 +1,9 @@
-import Login from "./components/Login/Login";
+import Nav from "./containers/Nav/Nav";
 
 function App() {
   return (
     <div className="App">
-      <Login />
+      <Nav />
     </div>
   );
 }
