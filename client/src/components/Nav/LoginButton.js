@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import spotifyLogo from "./spotifyLogo.png";
 const Button = styled.button`
   background-color: #1ed760;
   color: #fff;
@@ -8,6 +9,7 @@ const Button = styled.button`
   border-radius: 5px;
   font-weight: bold;
   transition-duration: 0.5s;
+  font-size: 16px;
   &:hover {
     border-color: #1ed760;
     background-color: #1db954;
@@ -25,7 +27,12 @@ function LoginButton() {
   return (
     <Div>
       <a href="http://localhost:4000/Login">
-        <Button>Connect with Spotify</Button>
+        <Button>
+          <span>
+            <img src={spotifyLogo} width="16px" height="16px" />
+          </span>
+          <span> Connect with Spotify</span>
+        </Button>
       </a>
     </Div>
   );

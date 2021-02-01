@@ -9,13 +9,13 @@ export default function Nav() {
     <Grid item>
       <nav>
         <Grid container maxWidth={true} spacing={1}>
-          <Grid item sm={3}>
+          <Grid item sm={2}>
             <Logo widthLogo="75px" heightLogo="75px" />
           </Grid>
-          <Grid item sm={6}>
+          <Grid item lg={7} md={6} sm={5}>
             <SearchInput />
           </Grid>
-          <Grid item sm={3}>
+          <Grid item lg={3} md={4} sm={5}>
             <LoginButton />
           </Grid>
         </Grid>
