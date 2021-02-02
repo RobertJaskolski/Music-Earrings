@@ -3,11 +3,11 @@ const request = require("request"); // "Request" library
 const cors = require("cors");
 const querystring = require("querystring");
 const cookieParser = require("cookie-parser");
-const secrets = require("./secrets");
+require('dotenv').config();
 
-const client_id = secrets.CLIENT_ID; // Your client id
-const client_secret = secrets.CLIENT_SECRET; // Your secret
-const redirect_uri = secrets.REDIRECT_URI; // Your redirect uri
+const client_id = process.env.CLIENT_ID; // Your client id
+const client_secret = process.env.CLIENT_SECRET; // Your secret
+const redirect_uri = process.env.REDIRECT_URI; // Your redirect uri
 
 /**
  * Generates a random string containing numbers and letters
@@ -88,18 +88,6 @@ app.get("/callback", function (req, res) {
       if (!error && response.statusCode === 200) {
         const { access_token, refresh_token } = body;
 
-        // const options = {
-        //   url: "https://api.spotify.com/v1/me",
-        //   headers: { Authorization: "Bearer " + access_token },
-        //   json: true,
-        // };
-
-        // use the access token to access the Spotify Web API
-        // request.get(options, function (error, response, body) {
-        //   console.log(body);
-        // });
-
-        // we can also pass the token to the browser to make requests from there
         res.redirect(
           "http://localhost:3000/#" +
             querystring.stringify({
