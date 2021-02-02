@@ -1,4 +1,4 @@
-import { Container, Grid } from "@material-ui/core";
+import { Container } from "@material-ui/core";
 import Nav from "./containers/Nav/Nav";
 import Footer from "./components/Footer/Footer";
 

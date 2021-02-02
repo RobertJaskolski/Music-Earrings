@@ -36,7 +36,7 @@ function LoginButton() {
       <A href="http://localhost:4000/Login">
         <Button>
           <Span>
-            <img src={spotifyLogo} width="16px" height="16px" />
+            <img alt="Spotify logo" src={spotifyLogo} width="16px" height="16px" />
           </Span>
           <Span>Connect with Spotify</Span>
         </Button>
