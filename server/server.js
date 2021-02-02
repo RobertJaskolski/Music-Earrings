@@ -3,12 +3,11 @@ const request = require("request"); // "Request" library
 const cors = require("cors");
 const querystring = require("querystring");
 const cookieParser = require("cookie-parser");
-require('dotenv').config();
+require("dotenv").config();
 
 const client_id = process.env.CLIENT_ID; // Your client id
 const client_secret = process.env.CLIENT_SECRET; // Your secret
 const redirect_uri = process.env.REDIRECT_URI; // Your redirect uri
-
 /**
  * Generates a random string containing numbers and letters
  * @param  {number} length The length of the string

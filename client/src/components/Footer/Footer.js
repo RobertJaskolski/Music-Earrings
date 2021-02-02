@@ -4,6 +4,7 @@ import styled from "styled-components";
 
 const FooterStyled = styled.footer`
   display: flex;
+  font-family: "Roboto";
   justify-content: space-between;
   align-items: center;
 `;
@@ -23,7 +24,7 @@ const Li = styled.li`
 export default function Footer() {
   return (
     <Grid item xs={12}>
-      <Grid container justify="center">
+      <Grid container justify='center'>
         <Grid item xs={8}>
           <Line></Line>
         </Grid>
