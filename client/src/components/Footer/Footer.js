@@ -4,7 +4,6 @@ import styled from "styled-components";
 
 const FooterStyled = styled.footer`
   display: flex;
-  font-family: "Roboto";
   justify-content: space-between;
   align-items: center;
 `;
