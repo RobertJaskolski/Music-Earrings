@@ -5,9 +5,8 @@ const refresh = (item) => ({
   item,
 });
 
-const clear = (item) => ({
+const clear = () => ({
   type: types.CLEAR_TOKENS,
-  item,
 });
 
 export default {
