@@ -1,0 +1,7 @@
+const REFRESH_TOKENS = "REFRESH_TOKENS";
+const CLEAR_TOKENS = "CLEAR_TOKENS";
+
+export default {
+  REFRESH_TOKENS,
+  CLEAR_TOKENS,
+};

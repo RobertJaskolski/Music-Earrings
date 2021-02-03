@@ -1,11 +1,13 @@
-import { Container, Grid } from "@material-ui/core";
+import React from "react";
+import { Container } from "@material-ui/core";
 import Nav from "./containers/Nav/Nav";
 import Footer from "./components/Footer/Footer";
+import "./app.styles.css";
 
 function App() {
   return (
-    <div className="App">
-      <Container maxWidth="xl">
+    <div className='App'>
+      <Container maxWidth='xl'>
         <Nav />
         <Footer />
       </Container>

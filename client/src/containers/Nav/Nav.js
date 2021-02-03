@@ -8,7 +8,7 @@ export default function Nav() {
   return (
     <Grid item>
       <nav>
-        <Grid container maxWidth={true} spacing={1}>
+        <Grid container  spacing={1}>
           <Grid item sm={2}>
             <Logo widthLogo="75px" heightLogo="75px" />
           </Grid>

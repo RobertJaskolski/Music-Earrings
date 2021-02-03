@@ -23,7 +23,7 @@ const Li = styled.li`
 export default function Footer() {
   return (
     <Grid item xs={12}>
-      <Grid container justify="center">
+      <Grid container justify='center'>
         <Grid item xs={8}>
           <Line></Line>
         </Grid>
