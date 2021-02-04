@@ -8,6 +8,9 @@ import { connect } from "react-redux";
 import { tokensActions } from "./reducers/tokens";
 import { BrowserRouter as Router } from "react-router-dom";
 import checkAuth from "./utils/Auth";
+import withAuthorizedState from "./components/shared/HOC/withAuthorized";
+
+const AuthorizedNav = withAuthorizedState(Nav);
 
 function App(props) {
   useEffect(() => {
@@ -25,7 +28,7 @@ function App(props) {
     <Router basename='/'>
       <div className='App'>
         <Container maxWidth='xl'>
-          <Nav />
+          <AuthorizedNav />
           <Footer />
         </Container>
       </div>

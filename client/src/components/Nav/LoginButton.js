@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import spotifyLogo from "./spotifyLogo.png";
 const A = styled.a`
@@ -30,13 +30,8 @@ const Span = styled.span`
   margin: 0px 5px;
 `;
 
-function LoginButton() {
-  const [isAuthorized, setIsAuthorized] = useState(true);
-  return isAuthorized ? (
-    <Div>
-      <Button>Logout</Button>
-    </Div>
-  ) : (
+function LoginButton(props) {
+  return (
     <Div>
       <A href='http://localhost:4000/Login'>
         <Button>

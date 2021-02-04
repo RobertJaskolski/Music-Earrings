@@ -1,17 +1,17 @@
 import types from "../../actions/auth/types";
 const INIT_STATE = {
-  isAutorizathed: false,
+  isAuthorized: false,
 };
 
 const authReducer = (state = INIT_STATE, action) => {
   switch (action.type) {
     case types.LOGIN_AUTH:
       return {
-        isAutorizathed: true,
+        isAuthorized: true,
       };
     case types.LOGOUT_AUTH:
       return {
-        isAutorizathed: false,
+        isAuthorized: false,
       };
 
     default:
