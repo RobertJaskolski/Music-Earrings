@@ -1,11 +1,11 @@
 import rootReducer from "./reducers";
 import { createStore } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
-import { loadTokens, saveTokens } from "./LocalStorage";
+import { checkTokens, saveTokens } from "./utils/LocalStorage";
 const configureStore = () => {
   const InitToken = {
     tokens: {
-      ...loadTokens(),
+      ...checkTokens(),
     },
   };
   const store = createStore(rootReducer, InitToken, composeWithDevTools());

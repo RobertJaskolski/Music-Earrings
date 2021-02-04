@@ -1,4 +1,4 @@
-import tokensRedducer from "./reducer";
+import tokensReducer from "./reducer";
 export { default as tokensTypes } from "../../actions/tokens/types";
 export { default as tokensActions } from "../../actions/tokens/actions";
-export default tokensRedducer;
+export default tokensReducer;
