@@ -7,6 +7,7 @@ import queryString from "query-string";
 import { connect } from "react-redux";
 import { tokensActions } from "./reducers/tokens";
 import { BrowserRouter as Router } from "react-router-dom";
+import checkAuth from "./utils/Auth";
 
 function App(props) {
   useEffect(() => {
@@ -16,9 +17,9 @@ function App(props) {
         accessToken: tokens["access_token"],
         refreshToken: tokens["refresh_token"],
       });
-      //window.location.assign("http://localhost:3000/");
       window.history.pushState({}, "", "http://localhost:3000/");
     }
+    checkAuth();
   });
   return (
     <Router basename='/'>

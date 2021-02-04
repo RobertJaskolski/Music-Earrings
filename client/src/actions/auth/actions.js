@@ -1,8 +1,8 @@
 import types from "./types";
 
-const login = (item) => ({ type: types.LOGIN_AUTH, item });
+const login = () => ({ type: types.LOGIN_AUTH });
 
-const logout = (item) => ({ type: types.LOGOUT_AUTH, item });
+const logout = () => ({ type: types.LOGOUT_AUTH });
 
 export default {
   login,

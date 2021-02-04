@@ -1,4 +1,4 @@
-export const checkTokens = () => {
+export const loadTokens = () => {
   try {
     const serializedTokens = localStorage.getItem("tokens");
     if (serializedTokens === null) {
