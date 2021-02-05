@@ -5,19 +5,18 @@ services:
     restart: unless-stopped
     build:
       context: ./server
-      dockerfile: dev.Dockerfile
+      dockerfile: Dockerfile.dev
     container_name: app-server
     volumes:
       - ./server:/code
     ports:
       - 4000:4000
-    env_file: dev.env
 
   client:
     restart: unless-stopped
     build:
       context: ./client
-      dockerfile: dev.Dockerfile
+      dockerfile: Dockerfile.dev
     container_name: app-client
     depends_on:
       - server
@@ -25,7 +24,6 @@ services:
       - ./client:/app
     ports:
       - 3000:3000
-    env_file: dev.env
 
 volumes:
   pgdata:

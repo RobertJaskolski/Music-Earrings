@@ -25,14 +25,8 @@ const generateRandomString = function (length) {
 };
 
 const stateKey = "spotify_auth_state";
+
 const app = express();
-const corsOptions = {
-  origin: [
-    "https://music-earrings.herokuapp.com/",
-    "http://music-earrings.herokuapp.com/",
-  ],
-  methods: "GET,POST",
-};
 
 app
   .use(express.static(__dirname + "/public"))
