@@ -24,12 +24,13 @@ const Div = styled.div`
   align-items: center;
 `;
 
-function LogoutButton() {
+const LogoutButton = (props) => {
+  const { logout } = props;
   return (
     <Div>
-      <Button>Logout</Button>
+      <Button onClick={logout}>Logout</Button>
     </Div>
   );
-}
+};
 
 export default LogoutButton;

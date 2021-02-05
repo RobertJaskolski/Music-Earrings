@@ -4,8 +4,16 @@ import LoginButton from "../../components/Nav/LoginButton";
 import LogoutButton from "../../components/Nav/LogoutButton";
 import Logo from "../../components/Nav/Logo";
 import SearchInput from "../../components/Nav/SearchInput";
+import { connect } from "react-redux";
+import { tokensActions } from "../../reducers/tokens";
+import { authActions } from "../../reducers/auth";
 
 const Nav = (props) => {
+  const { logout, clear } = props;
+  const handleLogout = () => {
+    logout();
+    clear();
+  };
   return (
     <Grid item>
       <nav>
@@ -17,12 +25,26 @@ const Nav = (props) => {
             <SearchInput />
           </Grid>
           <Grid item lg={3} md={4} sm={5}>
-            {props.auth ? <LogoutButton /> : <LoginButton />}
+            {props.auth ? (
+              <LogoutButton logout={handleLogout} />
+            ) : (
+              <LoginButton />
+            )}
           </Grid>
         </Grid>
       </nav>
     </Grid>
   );
 };
+const mapDispatchToProps = (dispatch) => {
+  return {
+    logout: () => {
+      dispatch(authActions.logout());
+    },
+    clear: () => {
+      dispatch(tokensActions.clear());
+    },
+  };
+};
 
-export default Nav;
+export default connect(null, mapDispatchToProps)(Nav);
