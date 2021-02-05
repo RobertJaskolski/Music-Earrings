@@ -1,9 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import spotifyLogo from "./spotifyLogo.png";
-const A = styled.a`
-  text-decoration: none;
-`;
+
 const Button = styled.button`
   background-color: #1ed760;
   color: #fff;
@@ -26,28 +23,14 @@ const Div = styled.div`
   justify-content: flex-end;
   align-items: center;
 `;
-const Span = styled.span`
-  margin: 0px 5px;
-`;
 
-function LoginButton(props) {
+const LogoutButton = (props) => {
+  const { logout } = props;
   return (
     <Div>
-      <A href='http://localhost:4000/Login'>
-        <Button>
-          <Span>
-            <img
-              alt='Spotify logo'
-              src={spotifyLogo}
-              width='16px'
-              height='16px'
-            />
-          </Span>
-          <Span>Connect with Spotify</Span>
-        </Button>
-      </A>
+      <Button onClick={logout}>Logout</Button>
     </Div>
   );
-}
+};
 
-export default LoginButton;
+export default LogoutButton;
