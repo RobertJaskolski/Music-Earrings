@@ -136,5 +136,6 @@ app.get("/refresh_token", function (req, res) {
   });
 });
 
-console.log("Listening on 4000");
-app.listen(4000);
+const port = process.env.PORT;
+if (port == "") app.listen(4000);
+else app.listen(":" + port);
