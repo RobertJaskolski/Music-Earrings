@@ -8,7 +8,7 @@ const checkAuth = () => {
   if (store.getState().tokens["refreshToken"]) {
     axios
       .get(
-        `http://localhost:4000/refresh_token?refresh_token=${
+        `${process.env.REACT_APP_API_URL}/refresh_token?refresh_token=${
           store.getState().tokens["refreshToken"]
         }`
       )
