@@ -87,8 +87,10 @@ app.get("/callback", function (req, res) {
       if (!error && response.statusCode === 200) {
         const { access_token, refresh_token } = body;
 
+        const react_url = process.env.REACT_APP_URL || "http://localhost:3000/";
+
         res.redirect(
-          "http://localhost:3000/#" +
+          `${react_url}#` +
             querystring.stringify({
               access_token: access_token,
               refresh_token: refresh_token,
