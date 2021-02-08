@@ -1,12 +1,16 @@
 import React from "react";
 import { Grid } from "@material-ui/core";
-import LoginButton from "../../components/Nav/LoginButton";
-import LogoutButton from "../../components/Nav/LogoutButton";
-import Logo from "../../components/Nav/Logo";
-import SearchInput from "../../components/Nav/SearchInput";
+import {
+  LoginButton,
+  Logo,
+  SearchInput,
+  LogoutButton,
+  SkieletonNav,
+} from "../../components/Nav";
 import { connect } from "react-redux";
 import { tokensActions } from "../../reducers/tokens";
 import { authActions } from "../../reducers/auth";
+import PropTypes from "prop-types";
 
 const Nav = (props) => {
   const { logout, clear } = props;
@@ -45,6 +49,12 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(tokensActions.clear());
     },
   };
+};
+
+Nav.propTypes = {
+  logout: PropTypes.func,
+  clear: PropTypes.func,
+  auth: PropTypes.bool,
 };
 
 export default connect(null, mapDispatchToProps)(Nav);

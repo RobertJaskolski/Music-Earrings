@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { compose } from "redux";
+import PropTypes from "prop-types";
 
 const withAuthorized = (WrappedComponent) => {
   class HOC extends Component {
@@ -21,5 +22,9 @@ const withAuthorizedState = compose(
   connect(mapStateToProps, null),
   withAuthorized
 );
+
+withAuthorized.propTypes = {
+  isAuth: PropTypes.bool,
+};
 
 export default withAuthorizedState;
