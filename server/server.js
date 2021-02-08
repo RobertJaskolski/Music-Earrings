@@ -28,6 +28,11 @@ const stateKey = "spotify_auth_state";
 
 const app = express();
 
+const corsOptions = {
+  origin: "https://music-earrings.herokuapp.com",
+  methods: "GET,POST",
+};
+
 app
   .use(express.static(__dirname + "/public"))
   .use(cors())

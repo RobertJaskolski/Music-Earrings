@@ -29,7 +29,6 @@ function App(props) {
       <div className='App'>
         <Container maxWidth='xl'>
           <AuthorizedNav />
-          {process.env.REACT_APP_API_URL}
           <Footer />
         </Container>
       </div>

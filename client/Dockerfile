@@ -1,5 +1,7 @@
 FROM node:alpine3.12 as build
 
+ENV REACT_APP_API_URL=https://music-earrings-api.herokuapp.com
+ENV REACT_APP_URL=https://music-earrings.herokuapp.com/
 
 WORKDIR /code
 
