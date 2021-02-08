@@ -20,10 +20,7 @@ function App(props) {
         accessToken: tokens["access_token"],
         refreshToken: tokens["refresh_token"],
       });
-      window.history.pushState(
-        {},
-        process.env.REACT_APP_URL || "http://localhost:3000/"
-      );
+      window.history.replaceState(null, null, " ");
     }
     checkAuth();
   });
@@ -32,6 +29,7 @@ function App(props) {
       <div className='App'>
         <Container maxWidth='xl'>
           <AuthorizedNav />
+          {process.env.REACT_APP_API_URL}
           <Footer />
         </Container>
       </div>
