@@ -1,5 +1,5 @@
 import React from "react";
-import logo from "./logo.png";
+import logo from "../../images/logo.png";
 import styled from "styled-components";
 const Div = styled.div`
   display: flex;
@@ -11,7 +11,7 @@ const Div = styled.div`
 function Logo({ widthLogo, heightLogo }) {
   return (
     <Div>
-      <img src={logo} alt="Logo" width={widthLogo} height={heightLogo} />
+      <img src={logo} alt='Logo' width={widthLogo} height={heightLogo} />
     </Div>
   );
 }
