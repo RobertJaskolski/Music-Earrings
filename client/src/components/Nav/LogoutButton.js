@@ -1,6 +1,6 @@
 import React from "react";
-import { Button } from "../../assets/Buttons";
-import { Div } from "../../assets/GridElements";
+import { Button } from "../../StyledComponents/Buttons";
+import { Div } from "../../StyledComponents/GridElements";
 
 const LogoutButton = (props) => {
   const { logout } = props;

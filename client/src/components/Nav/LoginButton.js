@@ -1,7 +1,7 @@
 import React from "react";
 import spotifyLogo from "../../images/spotifyLogo.png";
-import { Button } from "../../assets/Buttons";
-import { Div, Span } from "../../assets/GridElements";
+import { Button } from "../../StyledComponents/Buttons";
+import { Div, Span } from "../../StyledComponents/GridElements";
 
 function LoginButton(props) {
   return (
