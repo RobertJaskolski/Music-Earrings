@@ -1,9 +1,12 @@
 import React from "react";
 import { Grid } from "@material-ui/core";
-import LoginButton from "../../components/Nav/LoginButton";
-import LogoutButton from "../../components/Nav/LogoutButton";
-import Logo from "../../components/Nav/Logo";
-import SearchInput from "../../components/Nav/SearchInput";
+import {
+  LoginButton,
+  Logo,
+  SearchInput,
+  LogoutButton,
+  SkieletonNav,
+} from "../../components/Nav";
 import { connect } from "react-redux";
 import { tokensActions } from "../../reducers/tokens";
 import { authActions } from "../../reducers/auth";
