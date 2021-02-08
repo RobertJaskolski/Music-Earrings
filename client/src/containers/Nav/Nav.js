@@ -10,6 +10,7 @@ import {
 import { connect } from "react-redux";
 import { tokensActions } from "../../reducers/tokens";
 import { authActions } from "../../reducers/auth";
+import PropTypes from "prop-types";
 
 const Nav = (props) => {
   const { logout, clear } = props;
@@ -48,6 +49,12 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(tokensActions.clear());
     },
   };
+};
+
+Nav.propTypes = {
+  logout: PropTypes.func,
+  clear: PropTypes.func,
+  auth: PropTypes.bool,
 };
 
 export default connect(null, mapDispatchToProps)(Nav);
