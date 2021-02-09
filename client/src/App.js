@@ -9,20 +9,25 @@ import { BrowserRouter as Router } from "react-router-dom";
 import { checkAuth } from "./api/MyAPI";
 import GetHash from "./utils/GetHash";
 import withAuthorizedState from "./components/shared/HOC/withAuthorized";
-import GetUserProfile from "./api/SpotifyAPI/UserProfile";
-const AuthorizedNav = withAuthorizedState(Nav);
+import withUserProfileState from "./components/shared/HOC/withUserProfile";
+import API from "./api/SpotifyAPI";
+import { compose } from "recompose";
+const WithAuthorizedAndUserInfoNav = compose(
+  withAuthorizedState,
+  withUserProfileState
+)(Nav);
 
-function App(props) {
+function App({ refresh, getUserProfile }) {
   useEffect(() => {
-    GetHash(props.refresh);
-    GetUserProfile();
+    GetHash(refresh);
+    getUserProfile();
     checkAuth();
   });
   return (
     <Router basename='/'>
       <div className='App'>
         <Container maxWidth='xl'>
-          <AuthorizedNav />
+          <WithAuthorizedAndUserInfoNav />
           <Footer />
         </Container>
       </div>
@@ -32,6 +37,7 @@ function App(props) {
 
 const mapDispatchToProps = (dispatch) => ({
   refresh: (tokens) => dispatch(tokensActions.refresh(tokens)),
+  getUserProfile: () => dispatch(API.GetUserProfile()),
 });
 
 export default connect(null, mapDispatchToProps)(App);

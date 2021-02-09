@@ -13,7 +13,7 @@ import { authActions } from "../../reducers/auth";
 import PropTypes from "prop-types";
 
 const Nav = (props) => {
-  const { logout, clear } = props;
+  const { logout, clear, loading, auth, userProfile } = props;
   const handleLogout = () => {
     logout();
     clear();
@@ -29,8 +29,14 @@ const Nav = (props) => {
             <SearchInput />
           </Grid>
           <Grid item lg={3} md={4} sm={5}>
-            {props.auth ? (
-              <LogoutButton logout={handleLogout} />
+            {loading ? (
+              <SkieletonNav />
+            ) : auth ? (
+              <LogoutButton
+                logout={handleLogout}
+                name={userProfile?.display_name || "Avatar"}
+                imageURL={userProfile?.images[0].url || ""}
+              />
             ) : (
               <LoginButton />
             )}
