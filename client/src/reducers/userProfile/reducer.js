@@ -2,7 +2,26 @@ import types from "../../actions/userProfile/types";
 const INIT_STATE = {
   isLoading: false,
   isError: false,
-  data: [],
+  data: {
+    country: "",
+    display_name: "",
+    email: "",
+    explicit_content: {
+      filter_enabled: false,
+      filter_locked: false,
+    },
+    external_urls: null,
+    followers: {
+      href: null,
+      total: 0,
+    },
+    href: "",
+    id: "",
+    images: [],
+    product: "",
+    type: "",
+    uri: "",
+  },
 };
 
 const userProfileReducer = (state = INIT_STATE, action) => {
