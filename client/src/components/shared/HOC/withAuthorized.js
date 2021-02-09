@@ -6,8 +6,8 @@ import PropTypes from "prop-types";
 const withAuthorized = (WrappedComponent) => {
   class HOC extends Component {
     render() {
-      const { isAuth, ...rest } = this.props;
-      return <WrappedComponent {...rest} auth={isAuth} />;
+      const { isAuth, loading, ...rest } = this.props;
+      return <WrappedComponent {...rest} loading={loading} auth={isAuth} />;
     }
   }
 
@@ -16,6 +16,7 @@ const withAuthorized = (WrappedComponent) => {
 
 const mapStateToProps = (state) => ({
   isAuth: state.auth["isAuthorized"],
+  loading: state.auth["checking"],
 });
 
 const withAuthorizedState = compose(
@@ -25,6 +26,7 @@ const withAuthorizedState = compose(
 
 withAuthorized.propTypes = {
   isAuth: PropTypes.bool,
+  loading: PropTypes.bool,
 };
 
 export default withAuthorizedState;

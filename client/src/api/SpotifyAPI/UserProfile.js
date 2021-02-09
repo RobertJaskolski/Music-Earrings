@@ -5,7 +5,7 @@ async function GetUserProfile() {
   await instanceAuth
     .get("/v1/me")
     .then((response) => {
-      if (response.statusText === "OK") {
+      if (response.status === 200) {
         return response.data;
       } else return undefined;
     })
