@@ -26,7 +26,9 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test:unit": "react-scripts test --testPathPattern=.*unit.test.js -env=node",
+    "test:int": "react-scripts test --testPathPattern=.*int.test.js --env=jsdom",
+    "test:all": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -48,6 +50,10 @@
     ]
   },
   "devDependencies": {
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.6",
+    "jest": "^26.6.3",
+    "jest-enzyme": "^7.1.2",
     "prop-types": "^15.7.2"
   }
 }
