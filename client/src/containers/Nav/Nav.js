@@ -38,7 +38,9 @@ const Nav = (props) => {
                 imageURL={userProfile?.images[0].url || ""}
               />
             ) : (
-              <LoginButton />
+              <LoginButton
+                redirectLink={`${process.env.REACT_APP_API_URL}/login`}
+              />
             )}
           </Grid>
         </Grid>

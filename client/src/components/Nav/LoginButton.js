@@ -2,14 +2,16 @@ import React from "react";
 import spotifyLogo from "../../images/spotifyLogo.png";
 import { Button } from "../../StyledComponents/Buttons";
 import { Div, Span } from "../../StyledComponents/GridElements";
+import PropTypes from "prop-types";
 
-function LoginButton(props) {
+const LoginButton = ({ redirectLink }) => {
   return (
-    <Div>
-      <a href={`${process.env.REACT_APP_API_URL}/login`}>
-        <Button>
+    <Div data-test='loginButtonComponent'>
+      <a data-test='redirect' href={redirectLink}>
+        <Button data-test='redirectButton'>
           <Span>
             <img
+              data-test='spotifyLogoIMG'
               alt='Spotify logo'
               src={spotifyLogo}
               width='16px'
@@ -21,6 +23,10 @@ function LoginButton(props) {
       </a>
     </Div>
   );
-}
+};
+
+LoginButton.propType = {
+  redirectLink: PropTypes.string,
+};
 
 export default LoginButton;
