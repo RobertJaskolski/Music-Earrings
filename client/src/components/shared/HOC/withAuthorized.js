@@ -24,7 +24,7 @@ const withAuthorizedState = compose(
   withAuthorized
 );
 
-withAuthorized.propTypes = {
+withAuthorizedState.propTypes = {
   isAuth: PropTypes.bool,
   loading: PropTypes.bool,
 };

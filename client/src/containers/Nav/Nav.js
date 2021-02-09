@@ -13,7 +13,7 @@ import { authActions } from "../../reducers/auth";
 import PropTypes from "prop-types";
 
 const Nav = (props) => {
-  const { logout, clear, loading, auth } = props;
+  const { logout, clear, loading, auth, userProfile } = props;
   const handleLogout = () => {
     logout();
     clear();
@@ -32,7 +32,11 @@ const Nav = (props) => {
             {loading ? (
               <SkieletonNav />
             ) : auth ? (
-              <LogoutButton logout={handleLogout} />
+              <LogoutButton
+                logout={handleLogout}
+                name={userProfile?.display_name || "Avatar"}
+                imageURL={userProfile?.images[0].url || ""}
+              />
             ) : (
               <LoginButton />
             )}
