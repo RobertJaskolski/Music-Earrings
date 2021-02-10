@@ -25,7 +25,7 @@ const LoginButton = ({ redirectLink }) => {
   );
 };
 
-LoginButton.propType = {
+LoginButton.propTypes = {
   redirectLink: PropTypes.string,
 };
 

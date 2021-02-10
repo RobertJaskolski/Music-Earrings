@@ -1,7 +1,7 @@
 import React from "react";
 import { shallow } from "enzyme";
 import { LoginButton } from "../../components/Nav";
-import { findByDataTest } from "../../utils/testsUtils";
+import { findByDataTest, checkProps } from "../../utils/testsUtils";
 
 const setup = (props = {}) => {
   const component = shallow(<LoginButton {...props} />);
@@ -13,6 +13,15 @@ describe("LoginButton Component", () => {
   beforeEach(() => {
     const props = { redirectLink: "exampleURL" };
     component = setup(props);
+  });
+  describe("Checking prop types", () => {
+    it("should not throw a warning", () => {
+      const expectProps = {
+        redirectLink: "Test string",
+      };
+      const propsError = checkProps(LoginButton, expectProps);
+      expect(propsError).toBeUndefined();
+    });
   });
 
   it("should render without errors", () => {
