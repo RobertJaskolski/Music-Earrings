@@ -10,8 +10,14 @@ const Div = styled.div`
 
 function Logo({ widthLogo, heightLogo }) {
   return (
-    <Div>
-      <img src={logo} alt='Logo' width={widthLogo} height={heightLogo} />
+    <Div data-test='logoComponent'>
+      <img
+        data-test='logoIMG'
+        src={logo}
+        alt='Logo'
+        width={widthLogo}
+        height={heightLogo}
+      />
     </Div>
   );
 }

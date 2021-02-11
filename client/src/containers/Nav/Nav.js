@@ -38,7 +38,9 @@ const Nav = (props) => {
                 imageURL={userProfile?.images[0].url || ""}
               />
             ) : (
-              <LoginButton />
+              <LoginButton
+                redirectLink={`${process.env.REACT_APP_API_URL}/login`}
+              />
             )}
           </Grid>
         </Grid>
@@ -61,6 +63,26 @@ Nav.propTypes = {
   logout: PropTypes.func,
   clear: PropTypes.func,
   auth: PropTypes.bool,
+  userProfile: PropTypes.shape({
+    country: PropTypes.string,
+    display_name: PropTypes.string,
+    email: PropTypes.string,
+    explicit_content: PropTypes.shape({
+      filter_enabled: PropTypes.bool,
+      filter_locked: PropTypes.bool,
+    }),
+    external_urls: PropTypes.object,
+    followers: PropTypes.shape({
+      href: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+      total: PropTypes.number,
+    }),
+    href: PropTypes.string,
+    id: PropTypes.string,
+    images: PropTypes.array,
+    product: PropTypes.string,
+    type: PropTypes.string,
+    uri: PropTypes.string,
+  }),
 };
 
 export default connect(null, mapDispatchToProps)(Nav);

@@ -22,19 +22,19 @@ const Li = styled.li`
 
 export default function Footer() {
   return (
-    <Grid item xs={12}>
+    <Grid data-test='FooterComponent' item xs={12}>
       <Grid container justify='center'>
         <Grid item xs={8}>
           <Line></Line>
         </Grid>
         <Grid item xs={8}>
           <FooterStyled>
-            <span>&copy; 2021 Robert Jaskólski</span>
+            <span data-test='copyright'>&copy; 2021 Robert Jaskólski</span>
             <span>
               <Ul>
-                <Li>Github</Li>
-                <Li>Linkedin</Li>
-                <Li>Contact</Li>
+                <Li data-test='links'>Github</Li>
+                <Li data-test='links'>Linkedin</Li>
+                <Li data-test='links'>Contact</Li>
               </Ul>
             </span>
           </FooterStyled>

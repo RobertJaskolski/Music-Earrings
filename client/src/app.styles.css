@@ -2,6 +2,8 @@ body {
   background-color: #191414;
   font-family: "Roboto";
   color: white;
+  margin: 0;
+  padding: 0;
 }
 a {
   text-decoration: none;

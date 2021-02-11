@@ -6,10 +6,15 @@ import PropTypes from "prop-types";
 
 const LogoutButton = (props) => {
   const { logout, imageURL, name } = props;
+  if (!logout || !imageURL || !name) {
+    return null;
+  }
   return (
-    <Div>
-      <Avatar alt={name} src={imageURL} />
-      <Button onClick={logout}>Logout</Button>
+    <Div data-test='LogoutButtonComponent'>
+      <Avatar data-test='avatar' alt={name} src={imageURL} />
+      <Button data-test='logoutButton' onClick={logout}>
+        Logout
+      </Button>
     </Div>
   );
 };
