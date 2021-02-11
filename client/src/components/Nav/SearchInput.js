@@ -10,8 +10,12 @@ const Div = styled.div`
 
 function SearchInput() {
   return (
-    <Div>
-      <TextField label="Search artist, song or album..." fullWidth={true} />
+    <Div data-test='SearchInputComponent'>
+      <TextField
+        data-test='searchTextField'
+        label='Search artist, song or album...'
+        fullWidth={true}
+      />
     </Div>
   );
 }

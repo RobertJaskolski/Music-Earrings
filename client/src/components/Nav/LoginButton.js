@@ -5,6 +5,10 @@ import { Div, Span } from "../../StyledComponents/GridElements";
 import PropTypes from "prop-types";
 
 const LoginButton = ({ redirectLink }) => {
+  if (!redirectLink) {
+    return null;
+  }
+
   return (
     <Div data-test='loginButtonComponent'>
       <a data-test='redirect' href={redirectLink}>
