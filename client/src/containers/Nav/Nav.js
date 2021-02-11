@@ -35,7 +35,7 @@ const Nav = (props) => {
               <LogoutButton
                 logout={handleLogout}
                 name={userProfile?.display_name || "Avatar"}
-                imageURL={userProfile?.images[0].url || ""}
+                imageURL={userProfile?.images[0]?.url || ""}
               />
             ) : (
               <LoginButton
