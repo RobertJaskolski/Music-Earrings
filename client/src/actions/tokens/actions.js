@@ -2,7 +2,7 @@ import types from "./types";
 
 const refresh = (item) => ({
   type: types.REFRESH_TOKENS,
-  item,
+  payload,
 });
 
 const clear = () => ({

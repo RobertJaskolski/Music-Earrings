@@ -11,7 +11,10 @@ function GetUserProfile() {
       .then((response) => {
         if (response.status === 200) {
           dispatch(userProfileActions.successUserProfile(response.data));
-        } else return undefined;
+        } else {
+          dispatch(authActions.logout());
+          dispatch(tokensActions.clear());
+        }
       })
       .catch((err) => {
         dispatch(userProfileActions.failureUserProfile(err));
