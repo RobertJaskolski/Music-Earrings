@@ -25,7 +25,7 @@ async function checkAuth() {
         }
       })
       .catch((err) => {
-        console.log(err);
+        store.dispatch(authActions.logout());
       });
   } else {
     store.dispatch(authActions.logout());

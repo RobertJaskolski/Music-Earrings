@@ -1,7 +1,7 @@
 import instanceAuth, { setToken } from "./Instance";
 import { userProfileActions } from "../../reducers/userProfile";
-import { tokensActions } from "../../reducers/tokens";
-import { authActions } from "../../reducers/auth";
+import LogoutUser from "../../utils/LogoutUser";
+
 function GetUserProfile() {
   return (dispatch) => {
     setToken();
@@ -12,14 +12,12 @@ function GetUserProfile() {
         if (response.status === 200) {
           dispatch(userProfileActions.successUserProfile(response.data));
         } else {
-          dispatch(authActions.logout());
-          dispatch(tokensActions.clear());
+          LogoutUser(dispatch);
         }
       })
       .catch((err) => {
         dispatch(userProfileActions.failureUserProfile(err));
-        dispatch(authActions.logout());
-        dispatch(tokensActions.clear());
+        LogoutUser(dispatch);
       });
   };
 }
