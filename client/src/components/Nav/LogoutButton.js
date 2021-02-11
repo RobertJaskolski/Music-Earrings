@@ -6,7 +6,7 @@ import PropTypes from "prop-types";
 
 const LogoutButton = (props) => {
   const { logout, imageURL, name } = props;
-  if (!logout || !imageURL || !name) {
+  if (!logout || !name) {
     return null;
   }
   return (
