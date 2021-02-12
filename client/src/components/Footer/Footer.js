@@ -9,8 +9,9 @@ const FooterStyled = styled.footer`
 `;
 const Line = styled.div`
   background-color: #1ed760;
-  height: 1px;
+  height: 2px;
   width: 100%;
+  margin-left: 6px;
 `;
 const Ul = styled.span`
   list-style-type: none;
