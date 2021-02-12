@@ -1,8 +1,8 @@
 import types from "./types";
 
-const refresh = (item) => ({
+const refresh = (payload) => ({
   type: types.REFRESH_TOKENS,
-  item,
+  payload,
 });
 
 const clear = () => ({

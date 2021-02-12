@@ -6,6 +6,7 @@ import axios from "axios";
 async function checkAuth() {
   if (store.getState().tokens["refreshToken"]) {
     store.dispatch(authActions.checking());
+
     await axios
       .get(
         `${process.env.REACT_APP_API_URL}/refresh_token?refresh_token=${
@@ -25,7 +26,7 @@ async function checkAuth() {
         }
       })
       .catch((err) => {
-        console.log(err);
+        store.dispatch(authActions.logout());
       });
   } else {
     store.dispatch(authActions.logout());

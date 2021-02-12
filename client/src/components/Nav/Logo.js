@@ -9,6 +9,10 @@ const Div = styled.div`
 `;
 
 function Logo({ widthLogo, heightLogo }) {
+  if (!widthLogo || !heightLogo) {
+    return null;
+  }
+
   return (
     <Div data-test='logoComponent'>
       <img

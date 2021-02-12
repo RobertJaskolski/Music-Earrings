@@ -8,8 +8,8 @@ const tokenReducer = (state = INIT_STATE, action) => {
   switch (action.type) {
     case types.REFRESH_TOKENS:
       return {
-        accessToken: action.item.accessToken,
-        refreshToken: action.item.refreshToken,
+        accessToken: action.payload.accessToken,
+        refreshToken: action.payload.refreshToken,
       };
     case types.CLEAR_TOKENS:
       return {

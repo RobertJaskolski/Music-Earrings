@@ -1,7 +1,7 @@
 import React from "react";
 import { shallow } from "enzyme";
 import { Logo } from "../../components/Nav";
-import { findByDataTest } from "../../utils/testsUtils";
+import { findByDataTest, checkProps } from "../../utils/testsUtils";
 
 const setup = (props = {}) => {
   const component = shallow(<Logo {...props} />);
@@ -11,16 +11,38 @@ const setup = (props = {}) => {
 describe("Logo component", () => {
   let component;
   beforeEach(() => {
-    component = setup();
+    const props = { widthLogo: "75px", heightLogo: "44px" };
+    component = setup(props);
   });
-
-  it("should render without errors", () => {
-    const wrapper = findByDataTest(component, "logoComponent");
-    expect(wrapper.length).toBe(1);
-    expect(component.exists()).toBe(true);
+  describe("Checking PropTypes", () => {
+    it("should not throw a warning", () => {
+      const expectProps = {
+        widthLogo: "75px",
+        heightLogo: "44px",
+      };
+      const propsError = checkProps(Logo, expectProps);
+      expect(propsError).toBeUndefined();
+    });
   });
-  it("Should render a logo", () => {
-    const img = findByDataTest(component, "logoIMG");
-    expect(img.length).toBe(1);
+  describe("With props", () => {
+    it("should render without errors", () => {
+      const wrapper = findByDataTest(component, "logoComponent");
+      expect(wrapper.length).toBe(1);
+      expect(component.exists()).toBe(true);
+    });
+    it("Should render a logo", () => {
+      const img = findByDataTest(component, "logoIMG");
+      expect(img.length).toBe(1);
+    });
+  });
+  describe("Without props", () => {
+    let component;
+    beforeEach(() => {
+      component = setup();
+    });
+    it("should not render", () => {
+      const wrapper = findByDataTest(component, "logoComponent");
+      expect(wrapper.length).toBe(0);
+    });
   });
 });
