@@ -10,6 +10,13 @@ const instanceAuth = axios.create({
   },
 });
 
+export const searchValue = () => {
+  if (store.getState().search["searchText"]) {
+    return store.getState().search["searchText"];
+  }
+  return undefined;
+};
+
 export const setToken = () => {
   if (store.getState().tokens["accessToken"]) {
     instanceAuth.defaults.headers.common["Authorization"] = `Bearer ${

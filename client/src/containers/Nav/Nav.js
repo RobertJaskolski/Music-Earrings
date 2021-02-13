@@ -10,17 +10,28 @@ import {
 import { connect } from "react-redux";
 import { tokensActions } from "../../reducers/tokens";
 import { searchActions } from "../../reducers/search";
+import { spotifyApiActions } from "../../reducers/spotifyApiResponses";
 import { authActions } from "../../reducers/auth";
 import PropTypes from "prop-types";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
+import API from "../../api/SpotifyAPI";
 
 const Nav = (props) => {
-  const { logout, clear, loading, auth, userProfile, search } = props;
+  const {
+    logout,
+    clearTokens,
+    loading,
+    auth,
+    userProfile,
+    search,
+    clearResponse,
+    getArtistAndTrack,
+  } = props;
   let time;
   const changeNav = useMediaQuery("(min-width:650px)");
   const handleLogout = () => {
     logout();
-    clear();
+    clearTokens();
   };
   const handleOnChangeSearch = (event) => {
     if (time) {
@@ -28,6 +39,11 @@ const Nav = (props) => {
     }
     time = setTimeout(() => {
       search({ searchText: event.target.value });
+      if (event.target.value) {
+        getArtistAndTrack();
+      } else {
+        clearResponse();
+      }
     }, 700);
   };
   return (
@@ -91,19 +107,25 @@ const mapDispatchToProps = (dispatch) => {
     logout: () => {
       dispatch(authActions.logout());
     },
-    clear: () => {
+    clearTokens: () => {
       dispatch(tokensActions.clear());
     },
     search: (item) => {
       dispatch(searchActions.change(item));
+    },
+    getArtistAndTrack: () => dispatch(API.GetArtistAndTrack()),
+    clearResponse: () => {
+      dispatch(spotifyApiActions.clear());
     },
   };
 };
 
 Nav.propTypes = {
   logout: PropTypes.func,
-  clear: PropTypes.func,
+  clearTokens: PropTypes.func,
   search: PropTypes.func,
+  clearResponse: PropTypes.func,
+  getArtistAndTrack: PropTypes.func,
   auth: PropTypes.bool,
   userProfile: PropTypes.shape({
     country: PropTypes.string,
