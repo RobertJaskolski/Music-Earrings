@@ -2,7 +2,6 @@ import React from "react";
 import TextField from "@material-ui/core/TextField";
 import styled from "styled-components";
 import { withStyles } from "@material-ui/core/styles";
-import PropTypes from "prop-types";
 
 const Div = styled.div`
   display: flex;
@@ -43,7 +42,6 @@ const CssTextField = withStyles({
 })(TextField);
 
 function SearchInput(props) {
-  const { classes } = props;
   return (
     <Div data-test='SearchInputComponent'>
       <CssTextField
@@ -54,9 +52,5 @@ function SearchInput(props) {
     </Div>
   );
 }
-
-SearchInput.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
 
 export default SearchInput;

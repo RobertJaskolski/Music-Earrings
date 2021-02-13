@@ -26,10 +26,10 @@ export default function Footer() {
   return (
     <Grid data-test='FooterComponent' item xs={12}>
       <Grid container justify='center'>
-        <Grid sm={10} xs={12}>
+        <Grid item sm={10} xs={12}>
           <Line></Line>
         </Grid>
-        <Grid sm={10} xs={12}>
+        <Grid item sm={10} xs={12}>
           <FooterStyled>
             <span data-test='copyright'>&copy; 2021 Robert Jaskólski</span>
             <span>
