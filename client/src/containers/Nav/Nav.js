@@ -9,16 +9,26 @@ import {
 } from "../../components/Nav";
 import { connect } from "react-redux";
 import { tokensActions } from "../../reducers/tokens";
+import { searchActions } from "../../reducers/search";
 import { authActions } from "../../reducers/auth";
 import PropTypes from "prop-types";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 
 const Nav = (props) => {
-  const { logout, clear, loading, auth, userProfile } = props;
+  const { logout, clear, loading, auth, userProfile, search } = props;
+  let time;
   const changeNav = useMediaQuery("(min-width:650px)");
   const handleLogout = () => {
     logout();
     clear();
+  };
+  const handleOnChangeSearch = (event) => {
+    if (time) {
+      clearTimeout(time);
+    }
+    time = setTimeout(() => {
+      search({ searchText: event.target.value });
+    }, 700);
   };
   return (
     <Grid item>
@@ -29,7 +39,7 @@ const Nav = (props) => {
               <Logo widthLogo='75px' heightLogo='75px' />
             </Grid>
             <Grid item lg={8} md={6} sm={5}>
-              <SearchInput />
+              <SearchInput handleOnChangeSearch={handleOnChangeSearch} />
             </Grid>
             <Grid item lg={3} md={4} sm={5}>
               {loading ? (
@@ -68,7 +78,7 @@ const Nav = (props) => {
               )}
             </Grid>
             <Grid item xs={12}>
-              <SearchInput />
+              <SearchInput handleOnChangeSearch={handleOnChangeSearch} />
             </Grid>
           </Grid>
         )}
@@ -84,12 +94,16 @@ const mapDispatchToProps = (dispatch) => {
     clear: () => {
       dispatch(tokensActions.clear());
     },
+    search: (item) => {
+      dispatch(searchActions.change(item));
+    },
   };
 };
 
 Nav.propTypes = {
   logout: PropTypes.func,
   clear: PropTypes.func,
+  search: PropTypes.func,
   auth: PropTypes.bool,
   userProfile: PropTypes.shape({
     country: PropTypes.string,

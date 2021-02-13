@@ -2,6 +2,7 @@ import React from "react";
 import TextField from "@material-ui/core/TextField";
 import styled from "styled-components";
 import { withStyles } from "@material-ui/core/styles";
+import PropTypes from "prop-types";
 
 const Div = styled.div`
   display: flex;
@@ -42,9 +43,11 @@ const CssTextField = withStyles({
 })(TextField);
 
 function SearchInput(props) {
+  const { handleOnChangeSearch } = props;
   return (
     <Div data-test='SearchInputComponent'>
       <CssTextField
+        onChange={handleOnChangeSearch}
         data-test='searchTextField'
         label='Search artist, song or album...'
         fullWidth={true}
@@ -52,5 +55,9 @@ function SearchInput(props) {
     </Div>
   );
 }
+
+SearchInput.propTypes = {
+  handleOnChangeSearch: PropTypes.func.isRequired,
+};
 
 export default SearchInput;
