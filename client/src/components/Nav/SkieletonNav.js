@@ -1,6 +1,6 @@
 import React from "react";
 import Skeleton from "@material-ui/lab/Skeleton";
-import { Div } from "../../StyledComponents/GridElements";
+import { Div } from "../../styles/GridElements";
 
 export default function SkieletonNav() {
   return (

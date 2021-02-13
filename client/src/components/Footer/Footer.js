@@ -1,6 +1,7 @@
 import { Grid } from "@material-ui/core";
 import React from "react";
 import styled from "styled-components";
+import Flag from "./Flag";
 
 const FooterStyled = styled.footer`
   display: flex;
@@ -9,8 +10,9 @@ const FooterStyled = styled.footer`
 `;
 const Line = styled.div`
   background-color: #1ed760;
-  height: 1px;
+  height: 2px;
   width: 100%;
+  margin-left: 6px;
 `;
 const Ul = styled.span`
   list-style-type: none;
@@ -24,14 +26,17 @@ export default function Footer() {
   return (
     <Grid data-test='FooterComponent' item xs={12}>
       <Grid container justify='center'>
-        <Grid item xs={8}>
+        <Grid item sm={10} xs={12}>
           <Line></Line>
         </Grid>
-        <Grid item xs={8}>
+        <Grid item sm={10} xs={12}>
           <FooterStyled>
             <span data-test='copyright'>&copy; 2021 Robert Jaskólski</span>
             <span>
               <Ul>
+                <Li>
+                  <Flag />
+                </Li>
                 <Li data-test='links'>Github</Li>
                 <Li data-test='links'>Linkedin</Li>
                 <Li data-test='links'>Contact</Li>

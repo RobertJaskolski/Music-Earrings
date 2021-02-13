@@ -1,6 +1,6 @@
 import React from "react";
-import { Button } from "../../StyledComponents/Buttons";
-import { Div } from "../../StyledComponents/GridElements";
+import { Button } from "../../styles/Buttons";
+import { Div } from "../../styles/GridElements";
 import Avatar from "@material-ui/core/Avatar";
 import PropTypes from "prop-types";
 

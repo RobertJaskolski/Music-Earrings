@@ -1,7 +1,7 @@
 import React from "react";
 import spotifyLogo from "../../images/spotifyLogo.png";
-import { Button } from "../../StyledComponents/Buttons";
-import { Div, Span } from "../../StyledComponents/GridElements";
+import { Button } from "../../styles/Buttons";
+import { Div, Span } from "../../styles/GridElements";
 import PropTypes from "prop-types";
 
 const LoginButton = ({ redirectLink }) => {

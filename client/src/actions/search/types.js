@@ -1,0 +1,7 @@
+const CHANGE_SEARCH = "CHANGE_SEARCH";
+const CLEAR_SEARCH = "CLEAR_SEARCH";
+
+export default {
+  CHANGE_SEARCH,
+  CLEAR_SEARCH,
+};
