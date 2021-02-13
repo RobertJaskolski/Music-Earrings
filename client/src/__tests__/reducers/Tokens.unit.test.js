@@ -16,7 +16,7 @@ describe("Tokens Reducer", () => {
       type: tokensTypes.REFRESH_TOKENS,
       payload: tokens,
     });
-    expect(newState).toEqual({ accessToken: "token", refreshToken: "token" });
+    expect(newState).toEqual(tokens);
   });
   it("should return empty tokens", () => {
     const newState = tokensReducer(undefined, {
