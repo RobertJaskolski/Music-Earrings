@@ -6,28 +6,16 @@ const FlagBox = styled.div`
   height: 16px;
   display: inline-block;
   border: "2px solid black";
-`;
-const ButtonChangeLang = styled.button`
-  margin: 0;
-  padding: 0;
-  border: none;
-  height: 16px;
   &:hover {
     opacity: 0.5;
-  }
-  &:focus {
-    border: none;
-    margin: 0px;
-    padding: 0px;
+    cursor: pointer;
   }
 `;
 
 export default function Flag() {
   return (
     <FlagBox>
-      <ButtonChangeLang>
-        <img alt='lang' width='100%' height='100%' src={poland} />
-      </ButtonChangeLang>
+      <img alt='lang' width='100%' height='100%' src={poland} />
     </FlagBox>
   );
 }
