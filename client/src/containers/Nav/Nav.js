@@ -11,9 +11,11 @@ import { connect } from "react-redux";
 import { tokensActions } from "../../reducers/tokens";
 import { authActions } from "../../reducers/auth";
 import PropTypes from "prop-types";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 
 const Nav = (props) => {
   const { logout, clear, loading, auth, userProfile } = props;
+  const changeNav = useMediaQuery("(min-width:650px)");
   const handleLogout = () => {
     logout();
     clear();
@@ -21,29 +23,55 @@ const Nav = (props) => {
   return (
     <Grid item>
       <nav>
-        <Grid container spacing={1}>
-          <Grid item sm={2}>
-            <Logo widthLogo='75px' heightLogo='75px' />
+        {changeNav ? (
+          <Grid container spacing={2}>
+            <Grid item lg={1} md={2} sm={2}>
+              <Logo widthLogo='75px' heightLogo='75px' />
+            </Grid>
+            <Grid item lg={8} md={6} sm={5}>
+              <SearchInput />
+            </Grid>
+            <Grid item lg={3} md={4} sm={5}>
+              {loading ? (
+                <SkieletonNav />
+              ) : auth ? (
+                <LogoutButton
+                  logout={handleLogout}
+                  name={userProfile?.display_name || "Avatar"}
+                  imageURL={userProfile?.images[0]?.url || ""}
+                />
+              ) : (
+                <LoginButton
+                  redirectLink={`${process.env.REACT_APP_API_URL}/login`}
+                />
+              )}
+            </Grid>
           </Grid>
-          <Grid item lg={7} md={6} sm={5}>
-            <SearchInput />
+        ) : (
+          <Grid container>
+            <Grid item xs={2}>
+              <Logo widthLogo='50px' heightLogo='50px' />
+            </Grid>
+            <Grid item xs={10}>
+              {loading ? (
+                <SkieletonNav />
+              ) : auth ? (
+                <LogoutButton
+                  logout={handleLogout}
+                  name={userProfile?.display_name || "Avatar"}
+                  imageURL={userProfile?.images[0]?.url || ""}
+                />
+              ) : (
+                <LoginButton
+                  redirectLink={`${process.env.REACT_APP_API_URL}/login`}
+                />
+              )}
+            </Grid>
+            <Grid item xs={12}>
+              <SearchInput />
+            </Grid>
           </Grid>
-          <Grid item lg={3} md={4} sm={5}>
-            {loading ? (
-              <SkieletonNav />
-            ) : auth ? (
-              <LogoutButton
-                logout={handleLogout}
-                name={userProfile?.display_name || "Avatar"}
-                imageURL={userProfile?.images[0]?.url || ""}
-              />
-            ) : (
-              <LoginButton
-                redirectLink={`${process.env.REACT_APP_API_URL}/login`}
-              />
-            )}
-          </Grid>
-        </Grid>
+        )}
       </nav>
     </Grid>
   );

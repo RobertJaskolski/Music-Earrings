@@ -6,16 +6,13 @@ import PropTypes from "prop-types";
 
 const Div = styled.div`
   display: flex;
-  margin: 5px;
+  margin: 6px;
   justify-content: flex-start;
   align-items: center;
 `;
 
 const CssTextField = withStyles({
   root: {
-    "& ": {
-      width: "500px",
-    },
     "& label.Mui-focused": {
       color: "white",
     },
@@ -52,6 +49,7 @@ function SearchInput(props) {
       <CssTextField
         data-test='searchTextField'
         label='Search artist, song or album...'
+        fullWidth={true}
       />
     </Div>
   );
