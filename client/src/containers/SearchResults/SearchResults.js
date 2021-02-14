@@ -2,30 +2,31 @@ import { Grid } from "@material-ui/core";
 import React from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import { ArtistChip, TrackChip } from "../../components/SearchResults";
 
-function SearchResults(props) {
+function Search(props) {
   const { searchTracks, searchArtists, loading } = props;
   return (
     <Grid item>
       <section>
         <Grid container>
-          <Grid item sm={1}></Grid>
-          <Grid item sm={10} xs={12}>
-            <h1>Artist</h1>
+          <Grid item xs={12}>
+            {searchArtists.map((item) => {
+              return <ArtistChip key={item.id} {...item} />;
+            })}
           </Grid>
-          <Grid item sm={1}></Grid>
-          <Grid item sm={1}></Grid>
-          <Grid item sm={10} xs={12}>
-            <h2>Tracks</h2>
+          <Grid item xs={12}>
+            {searchTracks.map((item) => {
+              return <TrackChip key={item.id} {...item} />;
+            })}
           </Grid>
-          <Grid item sm={1}></Grid>
         </Grid>
       </section>
     </Grid>
   );
 }
 
-SearchResults.propTypes = {};
+Search.propTypes = {};
 
 const mapStateToProps = (state) => {
   return {
@@ -35,4 +36,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, {})(SearchResults);
+export default connect(mapStateToProps, {})(Search);

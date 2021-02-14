@@ -10,7 +10,6 @@ import withAuthorizedState from "../components/shared/HOC/withAuthorized";
 import withUserProfileState from "../components/shared/HOC/withUserProfile";
 import API from "../api/SpotifyAPI";
 import { compose } from "recompose";
-import SearchResults from "./SearchResults/SearchResults";
 
 const WithAuthorizedAndUserInfoNav = compose(
   withAuthorizedState,
@@ -28,7 +27,6 @@ function RootContainer({ refresh, getUserProfile, auth }) {
   return (
     <Container maxWidth='xl'>
       <WithAuthorizedAndUserInfoNav />
-      <SearchResults />
       <Footer />
     </Container>
   );
