@@ -60,7 +60,7 @@ function SearchInput(props) {
 }
 
 SearchInput.propTypes = {
-  handleOnChangeSearch: PropTypes.func.isRequired,
+  handleOnChangeSearch: PropTypes.func,
 };
 
 export default SearchInput;

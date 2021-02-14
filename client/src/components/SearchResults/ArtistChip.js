@@ -28,16 +28,28 @@ const H3 = styled.h3`
 
 function ArtistChip(props) {
   const { name, images } = props;
+  if (!name) {
+    return null;
+  }
   return (
-    <Chip>
-      <H3>
-        <IMG height='55px' width='55px' src={images[0]?.url} alt={name} />
-        {"\t" + name}
+    <Chip data-test='chipComponent'>
+      <H3 data-test='chipText'>
+        <IMG
+          data-test='chipIMG'
+          height='55px'
+          width='55px'
+          src={images[0]?.url || ""}
+          alt={name}
+        />
+        {name}
       </H3>
     </Chip>
   );
 }
 
-ArtistChip.propTypes = {};
+ArtistChip.propTypes = {
+  name: PropTypes.string,
+  images: PropTypes.array,
+};
 
 export default ArtistChip;
