@@ -8,6 +8,7 @@ const FlagBox = styled.div`
   height: 16px;
   display: inline-block;
   border: "2px solid black";
+  transition-duration: 400ms;
   &:hover {
     opacity: 0.5;
     cursor: pointer;

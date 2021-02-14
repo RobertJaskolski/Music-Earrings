@@ -50,8 +50,15 @@ export default function Footer() {
                   <Li>
                     <Flag lang='pl' />
                   </Li>
-                  <Li data-test='links'>Github</Li>
-                  <Li data-test='links'>Linkedin</Li>
+                  <a href='https://github.com/RobertJaskolski' target='_blank'>
+                    <Li data-test='links'>Github</Li>
+                  </a>
+                  <a
+                    href='https://www.linkedin.com/in/robert-jask%C3%B3lski-b207351a4/'
+                    target='_blank'
+                  >
+                    <Li data-test='links'>Linkedin</Li>
+                  </a>
                   <Li data-test='links'>Contact</Li>
                 </Ul>
               </span>

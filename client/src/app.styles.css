@@ -7,4 +7,11 @@ body {
 }
 a {
   text-decoration: none;
+  transition-duration: 400ms;
+}
+a:hover {
+  opacity: 0.5;
+}
+a:visited {
+  color: white;
 }
