@@ -1,3 +1,3 @@
 import GetUserProfile from "./UserProfile";
-
-export default { GetUserProfile };
+import GetArtistAndTrack from "./ArtistAndTrack";
+export default { GetUserProfile, GetArtistAndTrack };

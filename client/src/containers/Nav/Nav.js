@@ -9,16 +9,42 @@ import {
 } from "../../components/Nav";
 import { connect } from "react-redux";
 import { tokensActions } from "../../reducers/tokens";
+import { searchActions } from "../../reducers/search";
+import { spotifyApiActions } from "../../reducers/spotifyApiResponses";
 import { authActions } from "../../reducers/auth";
 import PropTypes from "prop-types";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
-
+import API from "../../api/SpotifyAPI";
+import SearchResults from "../SearchResults/SearchResults";
 const Nav = (props) => {
-  const { logout, clear, loading, auth, userProfile } = props;
+  const {
+    logout,
+    clearTokens,
+    loading,
+    auth,
+    userProfile,
+    search,
+    clearResponse,
+    getArtistAndTrack,
+  } = props;
+  let time;
   const changeNav = useMediaQuery("(min-width:650px)");
   const handleLogout = () => {
     logout();
-    clear();
+    clearTokens();
+  };
+  const handleOnChangeSearch = (event) => {
+    if (time) {
+      clearTimeout(time);
+    }
+    time = setTimeout(() => {
+      search({ searchText: event.target.value });
+      if (event.target.value) {
+        getArtistAndTrack();
+      } else {
+        clearResponse();
+      }
+    }, 700);
   };
   return (
     <Grid item>
@@ -29,7 +55,8 @@ const Nav = (props) => {
               <Logo widthLogo='75px' heightLogo='75px' />
             </Grid>
             <Grid item lg={8} md={6} sm={5}>
-              <SearchInput />
+              <SearchInput handleOnChangeSearch={handleOnChangeSearch} />
+              <SearchResults />
             </Grid>
             <Grid item lg={3} md={4} sm={5}>
               {loading ? (
@@ -68,7 +95,8 @@ const Nav = (props) => {
               )}
             </Grid>
             <Grid item xs={12}>
-              <SearchInput />
+              <SearchInput handleOnChangeSearch={handleOnChangeSearch} />
+              <SearchResults />
             </Grid>
           </Grid>
         )}
@@ -81,15 +109,25 @@ const mapDispatchToProps = (dispatch) => {
     logout: () => {
       dispatch(authActions.logout());
     },
-    clear: () => {
+    clearTokens: () => {
       dispatch(tokensActions.clear());
+    },
+    search: (item) => {
+      dispatch(searchActions.change(item));
+    },
+    getArtistAndTrack: () => dispatch(API.GetArtistAndTrack()),
+    clearResponse: () => {
+      dispatch(spotifyApiActions.clear());
     },
   };
 };
 
 Nav.propTypes = {
   logout: PropTypes.func,
-  clear: PropTypes.func,
+  clearTokens: PropTypes.func,
+  search: PropTypes.func,
+  clearResponse: PropTypes.func,
+  getArtistAndTrack: PropTypes.func,
   auth: PropTypes.bool,
   userProfile: PropTypes.shape({
     country: PropTypes.string,
