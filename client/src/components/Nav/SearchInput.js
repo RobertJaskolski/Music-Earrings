@@ -6,7 +6,7 @@ import PropTypes from "prop-types";
 
 const Div = styled.div`
   display: flex;
-  margin: 10px 0px 15px 6px;
+  margin: 10px 0px 0px 6px;
   justify-content: flex-start;
   align-items: center;
 `;

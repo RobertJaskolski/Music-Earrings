@@ -10,9 +10,10 @@ const GetArtistAndTrack = () => async (dispatch) => {
     .get("/v1/search" + queryString)
     .then((response) => {
       if (response.status === 200) {
+        const artists = response.data.artists.items.slice(0, 6);
         dispatch(
           spotifyApiActions.save({
-            artists: response.data.artists.items,
+            artists: artists,
             tracks: response.data.tracks.items,
           })
         );
