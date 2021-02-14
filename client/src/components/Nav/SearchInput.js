@@ -44,6 +44,9 @@ const CssTextField = withStyles({
 
 function SearchInput(props) {
   const { handleOnChangeSearch } = props;
+  if (!handleOnChangeSearch) {
+    return null;
+  }
   return (
     <Div data-test='SearchInputComponent'>
       <CssTextField
