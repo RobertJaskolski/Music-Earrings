@@ -16,10 +16,10 @@ const WithAuthorizedAndUserInfoNav = compose(
   withUserProfileState
 )(Nav);
 
-function RootContainer({ refresh, getUserProfile, auth }) {
+function RootContainer({ refresh, getUserProfile, auth, refreshToken }) {
   useEffect(() => {
     GetHash(refresh);
-    checkAuth();
+    checkAuth(refreshToken);
     if (auth) {
       getUserProfile();
     }
@@ -36,5 +36,10 @@ const mapDispatchToProps = (dispatch) => ({
   refresh: (tokens) => dispatch(tokensActions.refresh(tokens)),
   getUserProfile: () => dispatch(API.GetUserProfile()),
 });
+const mapStateToProps = (state) => {
+  return {
+    refreshToken: state.tokens["refreshToken"],
+  };
+};
 
-export default connect(null, mapDispatchToProps)(RootContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(RootContainer);

@@ -39,7 +39,7 @@ const Nav = (props) => {
     }
     time = setTimeout(() => {
       search({ searchText: event.target.value });
-      if (event.target.value) {
+      if (event.target.value && auth) {
         getArtistAndTrack();
       } else {
         clearResponse();
