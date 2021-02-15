@@ -1,5 +1,9 @@
 # Music Earrings
 
+## [Live demo](https://music-earrings.herokuapp.com/)
+
+API goes to sleep after 30 minutes of inactivity. Therefore, the first login may take longer.
+
 ## Description
 
 **The Music Earrings** web application will serve as a lightweight music player that will replace the standard Spotify player. The application will use the Spotify API.
@@ -16,9 +20,10 @@
 
 **Other tools:**
 
-- SCSS
+- Styled-components
 - MaterialUI
-- Jest (tests)
+- Jest + Enzyme (tests)
+- Axios
 
 # Project Status
 
@@ -26,8 +31,8 @@ The project is in the process of designing views.
 
 **Features:**
 
-- OAuth with spotifyApi **(Almost done)**
-- Standard search for songs/artists/albums **(In progress)**
+- OAuth with spotifyApi **(Done)**
+- Standard search for songs/artists/albums **(Almost done)**
 - Standard music player **(In progress)**
 - Generating a playlist based on given artists, the ability to save it on your Spotify account **(In progress)**
 - Create a queue of songs **(In progress)**
