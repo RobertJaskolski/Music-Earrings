@@ -1,9 +1,10 @@
-import instanceAuth, { setToken } from "./Instance";
+import instanceAuth from "./Instance";
 import { userProfileActions } from "../../reducers/userProfile";
-import LogoutUser from "../../utils/LogoutUser";
+import { LogoutUser, setToken } from "../../utils/ApiUtils";
 
-const GetUserProfile = () => async (dispatch) => {
-  setToken();
+const GetUserProfile = () => async (dispatch, getState) => {
+  const { tokens } = getState();
+  setToken(tokens["accessToken"]);
   dispatch(userProfileActions.requestUserProfile());
   await instanceAuth
     .get("/v1/me")

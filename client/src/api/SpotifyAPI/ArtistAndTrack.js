@@ -1,10 +1,13 @@
-import instanceAuth, { setToken, searchValue } from "./Instance";
-import LogoutUser from "../../utils/LogoutUser";
+import instanceAuth from "./Instance";
+import { LogoutUser, setToken, searchValue } from "../../utils/ApiUtils";
 import { spotifyApiActions } from "../../reducers/spotifyApiResponses";
 
-const GetArtistAndTrack = () => async (dispatch) => {
-  setToken();
-  const queryString = `?q=${searchValue()}&type=track%2Cartist&limit=10`;
+const GetArtistAndTrack = () => async (dispatch, getState) => {
+  const { tokens, search } = getState();
+  setToken(tokens["accessToken"]);
+  const queryString = `?q=${searchValue(
+    search["searchText"]
+  )}&type=track%2Cartist&limit=10`;
   dispatch(spotifyApiActions.fetching());
   await instanceAuth
     .get("/v1/search" + queryString)
