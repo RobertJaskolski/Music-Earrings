@@ -3,15 +3,16 @@ import { createStore, applyMiddleware } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 import { loadTokens, saveTokens } from "./utils/LocalStorage";
 import thunk from "redux-thunk";
-const configureStore = () => {
-  const InitToken = {
-    tokens: {
-      ...loadTokens(),
-    },
-  };
+const InitToken = {
+  tokens: {
+    ...loadTokens(),
+  },
+};
+
+const configureStore = (INIT_STATE = InitToken) => {
   const store = createStore(
     rootReducer,
-    InitToken,
+    INIT_STATE,
     composeWithDevTools(applyMiddleware(thunk))
   );
   store.subscribe(() => {
