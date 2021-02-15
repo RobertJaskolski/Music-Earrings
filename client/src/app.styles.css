@@ -9,6 +9,9 @@ a {
   text-decoration: none;
   transition-duration: 400ms;
 }
+a:link {
+  color: white;
+}
 a:hover {
   opacity: 0.5;
 }

@@ -21,13 +21,27 @@ const IMG = styled.img`
 `;
 function TrackChip(props) {
   const { name, album } = props;
+  if (!name) {
+    return null;
+  }
   return (
-    <Chip>
-      <IMG src={album?.images[0].url} width='32px' height='32px' /> {name}
+    <Chip data-test='chipComponent'>
+      <p data-test='chipText'>
+        <IMG
+          data-test='chipIMG'
+          src={album?.images[0]?.url || ""}
+          width='32px'
+          height='32px'
+        />{" "}
+        {name}
+      </p>
     </Chip>
   );
 }
 
-TrackChip.propTypes = {};
+TrackChip.propTypes = {
+  name: PropTypes.string,
+  album: PropTypes.object,
+};
 
 export default TrackChip;

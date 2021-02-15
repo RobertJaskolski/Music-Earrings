@@ -44,6 +44,9 @@ const CssTextField = withStyles({
 
 function SearchInput(props) {
   const { handleOnChangeSearch } = props;
+  if (!handleOnChangeSearch) {
+    return null;
+  }
   return (
     <Div data-test='SearchInputComponent'>
       <CssTextField
@@ -57,7 +60,7 @@ function SearchInput(props) {
 }
 
 SearchInput.propTypes = {
-  handleOnChangeSearch: PropTypes.func.isRequired,
+  handleOnChangeSearch: PropTypes.func,
 };
 
 export default SearchInput;

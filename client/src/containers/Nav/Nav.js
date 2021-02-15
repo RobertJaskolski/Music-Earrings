@@ -39,7 +39,7 @@ const Nav = (props) => {
     }
     time = setTimeout(() => {
       search({ searchText: event.target.value });
-      if (event.target.value) {
+      if (event.target.value && auth) {
         getArtistAndTrack();
       } else {
         clearResponse();
@@ -47,28 +47,33 @@ const Nav = (props) => {
     }, 700);
   };
   return (
-    <Grid item>
+    <Grid item data-test='NavContainer'>
       <nav>
         {changeNav ? (
           <Grid container spacing={2}>
             <Grid item lg={1} md={2} sm={2}>
-              <Logo widthLogo='75px' heightLogo='75px' />
+              <Logo widthLogo='75px' heightLogo='75px' data-test='logo' />
             </Grid>
             <Grid item lg={8} md={6} sm={5}>
-              <SearchInput handleOnChangeSearch={handleOnChangeSearch} />
-              <SearchResults />
+              <SearchInput
+                handleOnChangeSearch={handleOnChangeSearch}
+                data-test='searchInput'
+              />
+              <SearchResults data-test='searchResults' />
             </Grid>
             <Grid item lg={3} md={4} sm={5}>
               {loading ? (
-                <SkieletonNav />
+                <SkieletonNav data-test='skielton' />
               ) : auth ? (
                 <LogoutButton
+                  data-test='logout'
                   logout={handleLogout}
                   name={userProfile?.display_name || "Avatar"}
                   imageURL={userProfile?.images[0]?.url || ""}
                 />
               ) : (
                 <LoginButton
+                  data-test='login'
                   redirectLink={`${process.env.REACT_APP_API_URL}/login`}
                 />
               )}
@@ -77,26 +82,31 @@ const Nav = (props) => {
         ) : (
           <Grid container>
             <Grid item xs={2}>
-              <Logo widthLogo='50px' heightLogo='50px' />
+              <Logo widthLogo='50px' heightLogo='50px' data-test='logo' />
             </Grid>
             <Grid item xs={10}>
               {loading ? (
-                <SkieletonNav />
+                <SkieletonNav data-test='skielton' />
               ) : auth ? (
                 <LogoutButton
+                  data-test='logout'
                   logout={handleLogout}
                   name={userProfile?.display_name || "Avatar"}
                   imageURL={userProfile?.images[0]?.url || ""}
                 />
               ) : (
                 <LoginButton
+                  data-test='login'
                   redirectLink={`${process.env.REACT_APP_API_URL}/login`}
                 />
               )}
             </Grid>
             <Grid item xs={12}>
-              <SearchInput handleOnChangeSearch={handleOnChangeSearch} />
-              <SearchResults />
+              <SearchInput
+                handleOnChangeSearch={handleOnChangeSearch}
+                data-test='searchInput'
+              />
+              <SearchResults data-test='searchResults' />
             </Grid>
           </Grid>
         )}

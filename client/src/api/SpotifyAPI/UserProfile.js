@@ -1,12 +1,12 @@
-import instanceAuth, { setToken } from "./Instance";
 import { userProfileActions } from "../../reducers/userProfile";
-import LogoutUser from "../../utils/LogoutUser";
+import { LogoutUser, options } from "../../utils/ApiUtils";
+import axios from "axios";
 
-const GetUserProfile = () => async (dispatch) => {
-  setToken();
+const GetUserProfile = () => async (dispatch, getState) => {
+  const { tokens } = getState();
   dispatch(userProfileActions.requestUserProfile());
-  await instanceAuth
-    .get("/v1/me")
+  const optionsAxios = options("/v1/me", tokens["accessToken"]);
+  await axios(optionsAxios)
     .then((response) => {
       if (response.status === 200) {
         dispatch(userProfileActions.successUserProfile(response.data));

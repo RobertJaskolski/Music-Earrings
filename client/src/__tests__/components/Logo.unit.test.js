@@ -17,7 +17,7 @@ describe("Logo component", () => {
   describe("Checking PropTypes", () => {
     it("should not throw a warning", () => {
       const expectProps = {
-        widthLogo: "75px",
+        widthLogo: 33,
         heightLogo: "44px",
       };
       const propsError = checkProps(Logo, expectProps);

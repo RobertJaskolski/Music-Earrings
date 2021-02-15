@@ -3,21 +3,19 @@ import { tokensActions } from "../../reducers/tokens";
 import { authActions } from "../../reducers/auth";
 import axios from "axios";
 
-async function checkAuth() {
-  if (store.getState().tokens["refreshToken"]) {
+async function checkAuth(refreshToken) {
+  if (refreshToken) {
     store.dispatch(authActions.checking());
 
     await axios
       .get(
-        `${process.env.REACT_APP_API_URL}/refresh_token?refresh_token=${
-          store.getState().tokens["refreshToken"]
-        }`
+        `${process.env.REACT_APP_API_URL}/refresh_token?refresh_token=${refreshToken}`
       )
       .then((response) => {
         if (response.statusText === "OK") {
           tokensActions.refresh({
             accessToken: response.data["access_token"],
-            refreshToken: store.getState().tokens["refreshToken"],
+            refreshToken: refreshToken,
           });
           store.dispatch(authActions.login());
         } else {
