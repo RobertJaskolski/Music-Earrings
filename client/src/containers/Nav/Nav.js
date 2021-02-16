@@ -15,7 +15,6 @@ import { authActions } from "../../reducers/auth";
 import PropTypes from "prop-types";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import API from "../../api/SpotifyAPI";
-import SearchResults from "../SearchResults/SearchResults";
 const Nav = (props) => {
   const {
     logout,
@@ -59,7 +58,6 @@ const Nav = (props) => {
                 handleOnChangeSearch={handleOnChangeSearch}
                 data-test='searchInput'
               />
-              <SearchResults data-test='searchResults' />
             </Grid>
             <Grid item lg={3} md={4} sm={5}>
               {loading ? (
@@ -106,7 +104,6 @@ const Nav = (props) => {
                 handleOnChangeSearch={handleOnChangeSearch}
                 data-test='searchInput'
               />
-              <SearchResults data-test='searchResults' />
             </Grid>
           </Grid>
         )}
