@@ -1,14 +1,10 @@
 import { Grid } from "@material-ui/core";
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { ArtistChip, TrackChip } from "../../components/SearchResults";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
-const H1 = styled.h1`
-  margin: 10px 0px 5px 5px;
-  padding: 0;
-`;
 const Div = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -16,16 +12,30 @@ const Div = styled.div`
 `;
 const Section = styled.section`
   border-radius: 5px;
+  overflow: hidden;
+  transition: transform 0.3s ease-out;
+  height: auto;
+  transform-origin: top;
+  ${({ active }) =>
+    active &&
+    css`
+      transform: scaleY(1);
+    `}
+  ${({ active }) =>
+    !active &&
+    css`
+      transform: scaleY(0);
+    `}
 `;
 
 function Search(props) {
-  const { searchTracks, searchArtists, loading } = props;
+  const { searchTracks, searchArtists, loading, search } = props;
   return (
     <Grid id='searchBox' item>
-      <Section>
-        <H1>Search Results</H1>
+      <Section active={search ? true : false}>
         <Grid container>
-          <Grid item sm={6} xs={12}>
+          <Grid item lg={6} xs={12}>
+            <h1>Artists</h1>
             <Div>
               {searchArtists.map((item) => {
                 if (!item.name.includes("feat"))
@@ -33,7 +43,8 @@ function Search(props) {
               })}
             </Div>
           </Grid>
-          <Grid item sm={6} xs={12}>
+          <Grid item lg={6} xs={12}>
+            <h1>Tracks</h1>
             <Div>
               {searchTracks.map((item) => {
                 return <TrackChip key={item.id} {...item} />;
@@ -53,6 +64,7 @@ const mapStateToProps = (state) => {
     searchTracks: state.SpotifyResponses["tracks"],
     searchArtists: state.SpotifyResponses["artists"],
     loading: state.SpotifyResponses["loading"],
+    search: state.search["searchText"],
   };
 };
 

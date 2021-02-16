@@ -42,7 +42,7 @@ const Nav = (props) => {
       if (event.target.value && auth) {
         getArtistAndTrack();
       } else {
-        clearResponse();
+        setTimeout(() => clearResponse(), 300);
       }
     }, 700);
   };

@@ -18,6 +18,7 @@ const Chip = styled.div`
 `;
 const IMG = styled.img`
   float: left;
+  margin-right: 5px;
 `;
 function TrackChip(props) {
   const { name, album } = props;
@@ -26,15 +27,15 @@ function TrackChip(props) {
   }
   return (
     <Chip data-test='chipComponent'>
-      <p data-test='chipText'>
+      <span data-test='chipText'>
         <IMG
           data-test='chipIMG'
-          src={album?.images[0]?.url || ""}
+          src={album?.images[0]?.url || "/images/wrapper.jpg"}
           width='32px'
           height='32px'
-        />{" "}
+        />
         {name}
-      </p>
+      </span>
     </Chip>
   );
 }

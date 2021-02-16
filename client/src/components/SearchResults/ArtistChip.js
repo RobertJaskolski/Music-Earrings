@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 
 const Chip = styled.div`
-  flex-basis: 85%;
+  flex-basis: 95%;
   cursor: pointer;
   border-radius: 5px;
   margin-bottom: 25px;
@@ -19,6 +19,7 @@ const Chip = styled.div`
 
 const IMG = styled.img`
   float: left;
+  margin-right: 5px;
 `;
 
 const H3 = styled.h3`
@@ -38,7 +39,7 @@ function ArtistChip(props) {
           data-test='chipIMG'
           height='55px'
           width='55px'
-          src={images[0]?.url || ""}
+          src={images[0]?.url || "/images/wrapper.jpg"}
           alt={name}
         />
         {name}
