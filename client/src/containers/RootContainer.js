@@ -4,7 +4,7 @@ import Nav from "./Nav/Nav";
 import Footer from "../components/Footer/Footer";
 import { connect } from "react-redux";
 import { tokensActions } from "../reducers/tokens";
-import { checkAuth } from "../api/MyAPI";
+import { RefreshToken } from "../api/MyAPI";
 import GetHash from "../utils/GetHash";
 import withAuthorizedState from "../components/shared/HOC/withAuthorized";
 import withUserProfileState from "../components/shared/HOC/withUserProfile";
@@ -20,7 +20,7 @@ const WithAuthorizedAndUserInfoNav = compose(
 function RootContainer({ refresh, getUserProfile, auth, refreshToken }) {
   useEffect(() => {
     GetHash(refresh);
-    checkAuth(refreshToken);
+    RefreshToken(refreshToken);
     if (auth) {
       getUserProfile();
     }
