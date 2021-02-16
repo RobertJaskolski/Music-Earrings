@@ -171,9 +171,9 @@ app.get("/ArtistsAndTracks", function (req, res) {
             Authorization: `Bearer ${access_token}`,
           },
         },
-        function (error, response) {
+        function (error, response, body) {
           if (!error && response.statusCode === 200) {
-            res.status(200).send(response);
+            res.status(200).send(body);
           } else {
             res.status(401).send({ body: "Bad token" });
           }
