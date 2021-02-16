@@ -28,7 +28,6 @@ const H1 = styled.h1`
     `}
 `;
 const Section = styled.section`
-  border-radius: 5px;
   overflow: hidden;
   transition: transform 0.3s ease-out;
   min-height: 0px;

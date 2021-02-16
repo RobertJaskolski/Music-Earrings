@@ -19,6 +19,7 @@ const Line = styled.div`
   height: 2px;
   width: 100%;
   margin-left: 6px;
+  margin-top: 10px;
 `;
 const Ul = styled.span`
   list-style-type: none;
