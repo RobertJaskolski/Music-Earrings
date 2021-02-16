@@ -1,3 +1,3 @@
 import RefreshToken from "./RefreshToken";
-
-export { RefreshToken };
+import GetArtistAndTrack from "./ArtistAndTrack";
+export default { RefreshToken, GetArtistAndTrack };

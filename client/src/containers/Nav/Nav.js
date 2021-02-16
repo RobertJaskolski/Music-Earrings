@@ -15,6 +15,7 @@ import { authActions } from "../../reducers/auth";
 import PropTypes from "prop-types";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import API from "../../api/SpotifyAPI";
+import MyAPI from "../../api/MyAPI";
 const Nav = (props) => {
   const {
     logout,
@@ -24,7 +25,8 @@ const Nav = (props) => {
     userProfile,
     search,
     clearResponse,
-    getArtistAndTrack,
+    SpotifyGetArtistAndTrack,
+    MyAPIGetArtistAndTrack,
   } = props;
   let time;
   const changeNav = useMediaQuery("(min-width:650px)");
@@ -39,7 +41,9 @@ const Nav = (props) => {
     time = setTimeout(() => {
       search({ searchText: event.target.value });
       if (event.target.value && auth) {
-        getArtistAndTrack();
+        SpotifyGetArtistAndTrack();
+      } else if (event.target.value && !auth) {
+        MyAPIGetArtistAndTrack();
       } else {
         setTimeout(() => clearResponse(), 300);
       }
@@ -122,7 +126,8 @@ const mapDispatchToProps = (dispatch) => {
     search: (item) => {
       dispatch(searchActions.change(item));
     },
-    getArtistAndTrack: () => dispatch(API.GetArtistAndTrack()),
+    SpotifyGetArtistAndTrack: () => dispatch(API.GetArtistAndTrack()),
+    MyAPIGetArtistAndTrack: () => dispatch(MyAPI.GetArtistAndTrack()),
     clearResponse: () => {
       dispatch(spotifyApiActions.clear());
     },
@@ -134,7 +139,8 @@ Nav.propTypes = {
   clearTokens: PropTypes.func,
   search: PropTypes.func,
   clearResponse: PropTypes.func,
-  getArtistAndTrack: PropTypes.func,
+  SpotifyGetArtistAndTrack: PropTypes.func,
+  MyAPIGetArtistAndTrack: PropTypes.func,
   auth: PropTypes.bool,
   userProfile: PropTypes.shape({
     country: PropTypes.string,
