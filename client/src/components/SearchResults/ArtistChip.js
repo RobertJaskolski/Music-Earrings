@@ -3,12 +3,12 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 
 const Chip = styled.div`
-  flex-basis: 85%;
+  flex-basis: 95%;
   cursor: pointer;
   border-radius: 5px;
   margin-bottom: 25px;
   flex-wrap: wrap;
-  height: 35px;
+  min-height: 35px;
   background-color: #1db954;
   opacity: 0.8;
   transition-duration: 300ms;
@@ -18,11 +18,12 @@ const Chip = styled.div`
 `;
 
 const IMG = styled.img`
-  float: left;
+  position: absolute;
+  margin-right: 5px;
 `;
 
 const H3 = styled.h3`
-  margin: 0;
+  margin: 0px 0px 0px 60px;
   padding: 0px;
 `;
 
@@ -33,16 +34,14 @@ function ArtistChip(props) {
   }
   return (
     <Chip data-test='chipComponent'>
-      <H3 data-test='chipText'>
-        <IMG
-          data-test='chipIMG'
-          height='55px'
-          width='55px'
-          src={images[0]?.url || ""}
-          alt={name}
-        />
-        {name}
-      </H3>
+      <IMG
+        data-test='chipIMG'
+        height='55px'
+        width='55px'
+        src={images[0]?.url || "/images/wrapper.jpg"}
+        alt={name}
+      />
+      <H3 data-test='chipText'>{name}</H3>
     </Chip>
   );
 }

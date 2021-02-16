@@ -1,15 +1,16 @@
 import React, { useEffect } from "react";
-import { Container } from "@material-ui/core";
+import { Container, Grid } from "@material-ui/core";
 import Nav from "./Nav/Nav";
 import Footer from "../components/Footer/Footer";
 import { connect } from "react-redux";
 import { tokensActions } from "../reducers/tokens";
-import { checkAuth } from "../api/MyAPI";
+import MyAPI from "../api/MyAPI";
 import GetHash from "../utils/GetHash";
 import withAuthorizedState from "../components/shared/HOC/withAuthorized";
 import withUserProfileState from "../components/shared/HOC/withUserProfile";
 import API from "../api/SpotifyAPI";
 import { compose } from "recompose";
+import SearchResults from "./SearchResults/SearchResults";
 
 const WithAuthorizedAndUserInfoNav = compose(
   withAuthorizedState,
@@ -19,14 +20,19 @@ const WithAuthorizedAndUserInfoNav = compose(
 function RootContainer({ refresh, getUserProfile, auth, refreshToken }) {
   useEffect(() => {
     GetHash(refresh);
-    checkAuth(refreshToken);
+    MyAPI.RefreshToken(refreshToken);
     if (auth) {
       getUserProfile();
     }
   });
   return (
     <Container maxWidth='xl'>
-      <WithAuthorizedAndUserInfoNav />
+      <Grid item xs={12}>
+        <WithAuthorizedAndUserInfoNav />
+      </Grid>
+      <Grid item xs={12}>
+        <SearchResults data-test='searchResults' />
+      </Grid>
       <Footer />
     </Container>
   );

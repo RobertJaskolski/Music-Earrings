@@ -8,6 +8,8 @@ require("dotenv").config();
 const client_id = process.env.CLIENT_ID; // Your client id
 const client_secret = process.env.CLIENT_SECRET; // Your secret
 const redirect_uri = process.env.REDIRECT_URI; // Your redirect uri
+const client_id_credensials = process.env.CLIENT_ID_CREDENSIALS;
+const client_secret_credensials = process.env.CLIENT_SECRET_CREDENSIALS;
 /**
  * Generates a random string containing numbers and letters
  * @param  {number} length The length of the string
@@ -139,6 +141,46 @@ app.get("/refresh_token", function (req, res) {
       });
     } else {
       res.status(401).send("Invald Token");
+    }
+  });
+});
+app.get("/ArtistsAndTracks", function (req, res) {
+  const search = req.query.search;
+  const authOptions = {
+    url: "https://accounts.spotify.com/api/token",
+    form: {
+      grant_type: "client_credentials",
+    },
+    headers: {
+      Authorization:
+        "Basic " +
+        new Buffer(client_id + ":" + client_secret).toString("base64"),
+    },
+    json: true,
+  };
+
+  request.post(authOptions, function (error, response, body) {
+    if (!error && response.statusCode === 200) {
+      const { access_token } = body;
+      request.get(
+        {
+          url: `https://api.spotify.com/v1/search?q=${search}&type=track%2Cartist&limit=10`,
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${access_token}`,
+          },
+        },
+        function (error, response, body) {
+          if (!error && response.statusCode === 200) {
+            res.status(200).send(body);
+          } else {
+            res.status(401).send({ body: "Bad token" });
+          }
+        }
+      );
+    } else {
+      res.status(400).send({ body: "Bad request" });
     }
   });
 });
