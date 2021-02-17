@@ -6,8 +6,10 @@ const fetching = () => ({
 const clear = () => ({ type: types.CLEAR_DATA });
 const save = (payload) => ({ type: types.SAVE_RESPONSE_DATA, payload });
 
-export default {
+const ex = {
   clear,
   save,
   fetching,
 };
+
+export default ex;

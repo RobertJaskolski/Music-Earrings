@@ -10,8 +10,10 @@ const failureUserProfile = (error) => ({
   payload: error,
 });
 
-export default {
+const ex = {
   requestUserProfile,
   successUserProfile,
   failureUserProfile,
 };
+
+export default ex;

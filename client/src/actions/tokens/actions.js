@@ -9,7 +9,9 @@ const clear = () => ({
   type: types.CLEAR_TOKENS,
 });
 
-export default {
+const ex = {
   refresh,
   clear,
 };
+
+export default ex;
