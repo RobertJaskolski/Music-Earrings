@@ -9,7 +9,9 @@ const clear = () => ({
   type: types.CLEAR_SEARCH,
 });
 
-export default {
+const ex = {
   change,
   clear,
 };
+
+export default ex;

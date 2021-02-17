@@ -3,7 +3,7 @@ import Skeleton from "@material-ui/lab/Skeleton";
 import styled from "styled-components";
 
 const StyledSkeletonText = styled(Skeleton)`
-  height: 32px;
+  height: 40px;
   background-color: #1db954;
 `;
 

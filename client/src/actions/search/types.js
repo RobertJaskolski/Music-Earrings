@@ -1,7 +1,9 @@
 const CHANGE_SEARCH = "CHANGE_SEARCH";
 const CLEAR_SEARCH = "CLEAR_SEARCH";
 
-export default {
+const ex = {
   CHANGE_SEARCH,
   CLEAR_SEARCH,
 };
+
+export default ex;
