@@ -1,5 +1,5 @@
 import React from "react";
-import spotifyLogo from "../../images/spotifyLogo.png";
+//import spotifyLogo from "../../images/SpotifyLogo.svg";
 import { Button } from "../../styles/Buttons";
 import { Div, Span } from "../../styles/GridElements";
 import PropTypes from "prop-types";
@@ -17,9 +17,9 @@ const LoginButton = ({ redirectLink }) => {
             <img
               data-test='spotifyLogoIMG'
               alt='Spotify logo'
-              src={spotifyLogo}
-              width='16px'
-              height='16px'
+              src='/images/spotifyLogo.svg'
+              width='25px'
+              height='25px'
             />
           </Span>
           <Span>Connect with Spotify</Span>
