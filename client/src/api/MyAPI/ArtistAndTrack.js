@@ -9,7 +9,7 @@ const GetArtistAndTrack = () => async (dispatch, getState) => {
   await axios(`${process.env.REACT_APP_API_URL}/ArtistsAndTracks${queryString}`)
     .then((response) => {
       if (response.status === 200) {
-        const artists = response.data.artists.items.slice(0, 6);
+        const artists = response.data.artists.items.slice(0, 4);
         dispatch(
           spotifyApiActions.save({
             artists: artists,

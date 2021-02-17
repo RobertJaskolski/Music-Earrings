@@ -15,7 +15,7 @@ const GetArtistAndTrack = () => async (dispatch, getState) => {
   await axios(optionsAxios)
     .then((response) => {
       if (response.status === 200) {
-        const artists = response.data.artists.items.slice(0, 6);
+        const artists = response.data.artists.items.slice(0, 4);
         dispatch(
           spotifyApiActions.save({
             artists: artists,
