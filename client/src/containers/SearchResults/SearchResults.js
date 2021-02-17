@@ -46,8 +46,8 @@ const Section = styled.section`
     `}
 `;
 
-function Search(props) {
-  const { searchTracks, searchArtists, loading, search } = props;
+function SearchResults(props) {
+  const { searchTracks, searchArtists, loading, search, auth } = props;
   const showSearch = search ? true : false;
   return (
     <Section id='searchBox' active={showSearch}>
@@ -89,7 +89,7 @@ function Search(props) {
                 {searchArtists.map((item) => {
                   return (
                     !item.name.includes("feat") && (
-                      <ArtistChip key={item.id} {...item} />
+                      <ArtistChip key={item.id} {...item} auth={auth} />
                     )
                   );
                 })}
@@ -105,7 +105,7 @@ function Search(props) {
             {searchTracks.length ? (
               <Div>
                 {searchTracks.map((item) => {
-                  return <TrackChip key={item.id} {...item} />;
+                  return <TrackChip key={item.id} {...item} auth={auth} />;
                 })}
               </Div>
             ) : (
@@ -120,11 +120,12 @@ function Search(props) {
   );
 }
 
-Search.propTypes = {
+SearchResults.propTypes = {
   searchTracks: PropTypes.array,
   searchArtists: PropTypes.array,
   loading: PropTypes.bool,
   search: PropTypes.string,
+  auth: PropTypes.bool,
 };
 
 const mapStateToProps = (state) => {
@@ -136,4 +137,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, {})(Search);
+export default connect(mapStateToProps, {})(SearchResults);

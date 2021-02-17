@@ -16,6 +16,7 @@ const WithAuthorizedAndUserInfoNav = compose(
   withAuthorizedState,
   withUserProfileState
 )(Nav);
+const WithAuthorizedSearchResults = withAuthorizedState(SearchResults);
 
 function RootContainer({ refresh, getUserProfile, auth, refreshToken }) {
   useEffect(() => {
@@ -31,7 +32,7 @@ function RootContainer({ refresh, getUserProfile, auth, refreshToken }) {
         <WithAuthorizedAndUserInfoNav />
       </Grid>
       <Grid item xs={12}>
-        <SearchResults data-test='searchResults' />
+        <WithAuthorizedSearchResults data-test='searchResults' />
       </Grid>
       <Footer />
     </Container>
