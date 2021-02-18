@@ -15,7 +15,7 @@ const Div = styled.div`
   justify-content: space-around;
 `;
 const H1 = styled.h1`
-  transition: all 0.3s ease-out;
+  transition: all 0.5s ease-out;
   ${({ active }) =>
     active &&
     css`
@@ -29,13 +29,13 @@ const H1 = styled.h1`
 `;
 const Section = styled.section`
   overflow: hidden;
-  transition: transform 0.3s ease-out;
+  transition: transform 0.5s ease-out;
   min-height: 0px;
   transform-origin: top;
   ${({ active }) =>
     active &&
     css`
-      min-height: 450px;
+      min-height: 560px;
       transform: scaleY(1);
     `}
   ${({ active }) =>
