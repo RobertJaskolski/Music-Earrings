@@ -1,19 +1,6 @@
 import React from "react";
-import styled from "styled-components";
-import poland from "../../images/poland.png";
 import PropTypes from "prop-types";
-
-const FlagBox = styled.div`
-  width: 30px;
-  height: 16px;
-  display: inline-block;
-  border: "2px solid black";
-  transition-duration: 400ms;
-  &:hover {
-    opacity: 0.5;
-    cursor: pointer;
-  }
-`;
+import { FlagBox } from "./style/style";
 
 export function Flag(props) {
   const { lang } = props;
@@ -26,7 +13,7 @@ export function Flag(props) {
         alt='lang'
         width='100%'
         height='100%'
-        src={poland}
+        src='/images/poland.ico'
         data-test='FlagIMG'
       />
     </FlagBox>
