@@ -1,23 +1,24 @@
 import React from "react";
-import Skeleton from "@material-ui/lab/Skeleton";
-import styled from "styled-components";
+import { StyledSkeletonTextTrack, ChipSkeltonTrack } from "./style/style";
+import { Line } from "./style/phone.style";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 
-const StyledSkeletonText = styled(Skeleton)`
-  height: 40px;
-  background-color: #1db954;
-`;
-
-const Chip = styled.div`
-  flex-basis: 95%;
-  border-radius: 5px;
-  margin-bottom: 5px;
-  opacity: 0.8;
-`;
-
-export default function SkieletonTrack(props) {
+export default function SkieletonTrack() {
+  const changeChip = useMediaQuery("(min-width:1000px)");
   return (
-    <Chip>
-      <StyledSkeletonText variant='rect' />
-    </Chip>
+    <ChipSkeltonTrack>
+      {changeChip ? (
+        <StyledSkeletonTextTrack variant='rect' />
+      ) : (
+        <div>
+          <Line />
+          <StyledSkeletonTextTrack
+            desktop={changeChip}
+            height={70}
+            variant='rect'
+          />
+        </div>
+      )}
+    </ChipSkeltonTrack>
   );
 }

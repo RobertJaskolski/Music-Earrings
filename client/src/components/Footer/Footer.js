@@ -1,37 +1,9 @@
 import { Grid } from "@material-ui/core";
 import React from "react";
-import styled from "styled-components";
 import Flag from "./Flag";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
-const FooterStyled = styled.footer`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-top: 10px;
-`;
-const FooterStyledPhone = styled.footer`
-  display: flex;
-  justify-content: space-between;
-  padding-top: 10px;
-`;
-const Line = styled.div`
-  background-color: #1ed760;
-  height: 2px;
-  width: 100%;
-  margin-left: 6px;
-  margin-top: 10px;
-`;
-const Ul = styled.span`
-  list-style-type: none;
-`;
-const Li = styled.li`
-  display: inline-block;
-  margin: 15px;
-`;
-const LiPhone = styled.li`
-  display: block;
-  margin: 0px 10px 10px 0px;
-`;
+import { FooterStyled, Li, Line, Ul } from "./style/style";
+import { LiPhone, FooterStyledPhone } from "./style/phone.style";
 
 export default function Footer() {
   const changeFooter = useMediaQuery("(min-width:650px)");

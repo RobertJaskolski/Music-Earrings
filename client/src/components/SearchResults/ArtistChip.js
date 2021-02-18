@@ -1,75 +1,79 @@
 import React from "react";
 import PropTypes from "prop-types";
-import styled from "styled-components";
 import Tooltip from "@material-ui/core/Tooltip";
 import QueueIcon from "@material-ui/icons/Queue";
+import RadioIcon from "@material-ui/icons/Radio";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
-
-const Chip = styled.div`
-  flex-basis: 95%;
-  border-radius: 5px;
-  margin-bottom: 35px;
-  flex-wrap: wrap;
-  min-height: 40px;
-  background-color: #1db954;
-  opacity: 0.8;
-  transition-duration: 300ms;
-  &:hover {
-    opacity: 1;
-  }
-  svg {
-    font-size: 35px;
-    cursor: pointer;
-  }
-`;
-
-const Div = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-`;
-
-const IMG = styled.img`
-  position: absolute;
-  margin-right: 5px;
-  border-radius: 5px;
-`;
-
-const H2 = styled.h2`
-  margin: 0px 0px 0px 70px;
-  padding: 0px;
-`;
+import { ChipArtist, DivArtist, IMGArtist, H2Artist } from "./style/style";
+import {
+  DivArtistPhone,
+  IMGArtistPhone,
+  H4ArtistPhone,
+  SpanArtistPhone,
+} from "./style/phone.style";
 
 function ArtistChip(props) {
   const { name, images, auth } = props;
-  const changeNChip = useMediaQuery("(min-width:1280px)");
+  const changeChip = useMediaQuery("(min-width:1000px)");
   if (!name) {
     return null;
   }
   return (
-    <Chip data-test='chipComponent'>
-      <Div>
-        <IMG
-          data-test='chipIMG'
-          height='65px'
-          width='65px'
-          src={images[0]?.url || "/images/wrapper.jpg"}
-          alt={name}
-        />
-        <H2 data-test='chipText'>{name}</H2>
-        <span>
+    <ChipArtist data-test='chipComponent' desktop={changeChip}>
+      {changeChip ? (
+        <DivArtist>
+          <IMGArtist
+            data-test='chipIMG'
+            height='65px'
+            width='65px'
+            src={images[0]?.url || "/images/wrapper.jpg"}
+            alt={name}
+          />
+          <H2Artist data-test='chipText'>{name}</H2Artist>
+
           {auth ? (
-            <Tooltip title='Add to quequ'>
-              <QueueIcon />
-            </Tooltip>
+            <span>
+              <Tooltip title='Listen artist radio'>
+                <RadioIcon />
+              </Tooltip>
+              <Tooltip title='Add to quequ'>
+                <QueueIcon />
+              </Tooltip>
+            </span>
           ) : (
-            <Tooltip title='Add to quequ'>
-              <QueueIcon />
-            </Tooltip>
+            <span>
+              <Tooltip title='Add to quequ'>
+                <QueueIcon />
+              </Tooltip>
+            </span>
           )}
-        </span>
-      </Div>
-    </Chip>
+        </DivArtist>
+      ) : (
+        <DivArtistPhone>
+          <IMGArtistPhone
+            data-test='chipIMG'
+            height='110px'
+            width='110px'
+            src={images[0]?.url || "/images/wrapper.jpg"}
+            alt={name}
+          />
+          <H4ArtistPhone>
+            {name}
+            <br />
+            {auth ? (
+              <SpanArtistPhone>
+                <RadioIcon />
+                <QueueIcon />
+              </SpanArtistPhone>
+            ) : (
+              <SpanArtistPhone>
+                <QueueIcon />
+              </SpanArtistPhone>
+            )}
+          </H4ArtistPhone>
+        </DivArtistPhone>
+      )}
+    </ChipArtist>
   );
 }
 
