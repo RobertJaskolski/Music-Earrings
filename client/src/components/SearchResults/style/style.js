@@ -1,21 +1,40 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import Skeleton from "@material-ui/lab/Skeleton";
 //Artist
 export const ChipArtist = styled.div`
-  flex-basis: 95%;
+  ${({ desktop }) =>
+    desktop &&
+    css`
+      flex-basis: 95%;
+      background-color: #1db954;
+      svg {
+        font-size: 35px;
+      }
+    `}
+  ${({ desktop }) =>
+    !desktop &&
+    css`
+      flex-basis: 44%;
+      svg {
+        font-size: 30px;
+      }
+    `}
   border-radius: 5px;
   margin-bottom: 35px;
   flex-wrap: wrap;
   min-height: 40px;
-  background-color: #1db954;
   opacity: 0.8;
   transition-duration: 300ms;
   &:hover {
     opacity: 1;
   }
   svg {
-    font-size: 35px;
+    margin-right: 5px;
+    transition: all 0.3s linear;
     cursor: pointer;
+    :hover {
+      color: black;
+    }
   }
 `;
 
@@ -56,9 +75,18 @@ export const Div = styled.div`
 `;
 
 export const ChipSkeltonArtist = styled.div`
-  flex-basis: 95%;
   margin-bottom: 35px;
   min-height: 40px;
+  ${({ desktop }) =>
+    desktop &&
+    css`
+      flex-basis: 95%;
+    `}
+  ${({ desktop }) =>
+    !desktop &&
+    css`
+      flex-basis: 44%;
+    `}
 `;
 //Track
 export const ChipTrack = styled.div`
