@@ -8,43 +8,7 @@ import {
   SkeletonArtist,
   SkieletonTrack,
 } from "../../components/SearchResults";
-import styled, { css } from "styled-components";
-const Div = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-`;
-const H1 = styled.h1`
-  transition: all 0.5s ease-out;
-  ${({ active }) =>
-    active &&
-    css`
-      font-size: 2.5em;
-    `}
-  ${({ active }) =>
-    !active &&
-    css`
-      font-size: 0px;
-    `}
-`;
-const Section = styled.section`
-  overflow: hidden;
-  transition: transform 0.5s ease-out;
-  min-height: 0px;
-  transform-origin: top;
-  ${({ active }) =>
-    active &&
-    css`
-      min-height: 560px;
-      transform: scaleY(1);
-    `}
-  ${({ active }) =>
-    !active &&
-    css`
-      transform: scaleY(0);
-      min-height: 0px;
-    `}
-`;
+import { Section, Div, H1 } from "./style/style";
 
 function SearchResults(props) {
   const { searchTracks, searchArtists, loading, search, auth } = props;
