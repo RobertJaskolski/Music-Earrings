@@ -90,9 +90,14 @@ export const ChipSkeltonArtist = styled.div`
 `;
 //Track
 export const ChipTrack = styled.div`
+  ${({ desktop }) =>
+    desktop &&
+    css`
+      background-color: #1db954;
+    `}
+  ${({ desktop }) => !desktop && css``}
   flex-basis: 95%;
   width: 100%;
-  background-color: #1db954;
   margin-bottom: 5px;
   border-radius: 2px;
   min-height: 40px;
@@ -137,6 +142,9 @@ export const DivTrack = styled.div`
       :hover {
         color: black;
       }
+      :last-of-type {
+        float: right;
+      }
     }
     img {
       margin-right: 5px;
@@ -156,7 +164,16 @@ export const IMGTrack = styled.img`
 //Track skelton
 export const StyledSkeletonTextTrack = styled(Skeleton)`
   height: 40px;
-  background-color: #1db954;
+  ${({ desktop }) =>
+    desktop &&
+    css`
+      background-color: #1db954;
+    `}
+  ${({ desktop }) =>
+    !desktop &&
+    css`
+      background-color: #262626;
+    `}
 `;
 
 export const ChipSkeltonTrack = styled.div`

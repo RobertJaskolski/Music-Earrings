@@ -25,7 +25,11 @@ export default function SkeletonArtist() {
         </Div>
       ) : (
         <DivArtistPhone>
-          <StyledSkeletonIMGArtistPhone variant='rect' width={90} height={90} />
+          <StyledSkeletonIMGArtistPhone
+            variant='rect'
+            width={110}
+            height={110}
+          />
           <StyledSkeletonTextArtistPhone variant='rect' />
         </DivArtistPhone>
       )}

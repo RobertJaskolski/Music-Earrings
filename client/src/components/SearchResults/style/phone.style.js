@@ -36,5 +36,39 @@ export const StyledSkeletonTextArtistPhone = styled(Skeleton)`
   border-radius: 3px;
 `;
 //Track
+export const DivTrackPhone = styled.div`
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  span {
+    flex-basis: 100%;
+  }
+  span:last-of-type {
+    margin-left: 45px;
+    display: flex;
+    justify-content: space-between;
+  }
+  svg {
+    font-size: 40px;
+    margin-right: 5px;
+    cursor: pointer;
+    transition: all linear 300ms;
+    :hover {
+      color: black;
+    }
+  }
+  img:last-of-type {
+    margin-right: 5px;
+  }
+`;
+export const Line = styled.div`
+  width: 100%;
+  height: 1px;
+  margin-bottom: 5px;
+  background-color: #1db954;
+`;
 
+export const TextTrackPhone = styled.span`
+  margin-left: 45px;
+`;
 //Track skelton

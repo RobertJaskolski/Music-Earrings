@@ -52,8 +52,8 @@ function ArtistChip(props) {
         <DivArtistPhone>
           <IMGArtistPhone
             data-test='chipIMG'
-            height='90px'
-            width='90px'
+            height='110px'
+            width='110px'
             src={images[0]?.url || "/images/wrapper.jpg"}
             alt={name}
           />
