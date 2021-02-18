@@ -1,14 +1,7 @@
 import React from "react";
 import logo from "../../images/logo.png";
-import styled from "styled-components";
 import PropTypes from "prop-types";
-
-const Div = styled.div`
-  display: flex;
-  margin: 5px;
-  justify-content: flex-start;
-  align-items: center;
-`;
+import { Div } from "./style/style";
 
 function Logo({ widthLogo, heightLogo }) {
   if (!widthLogo || !heightLogo) {

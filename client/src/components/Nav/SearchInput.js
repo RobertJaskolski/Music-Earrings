@@ -1,15 +1,8 @@
 import React from "react";
-import TextField from "@material-ui/core/TextField";
-import styled from "styled-components";
-import { withStyles } from "@material-ui/core/styles";
 import PropTypes from "prop-types";
-
-const Div = styled.div`
-  display: flex;
-  margin: 10px 0px 0px 6px;
-  justify-content: flex-start;
-  align-items: center;
-`;
+import { Div } from "./style/style";
+import TextField from "@material-ui/core/TextField";
+import { withStyles } from "@material-ui/core/styles";
 
 const CssTextField = withStyles({
   root: {
