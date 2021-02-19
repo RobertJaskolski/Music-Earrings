@@ -1,10 +1,8 @@
 import React from "react";
 import { StyledSkeletonTextTrack, ChipSkeltonTrack } from "./style/style";
 import { Line } from "./style/phone.style";
-import useMediaQuery from "@material-ui/core/useMediaQuery";
 
-export default function SkieletonTrack() {
-  const changeChip = useMediaQuery("(min-width:1000px)");
+export default function SkieletonTrack({ changeChip }) {
   return (
     <ChipSkeltonTrack>
       {changeChip ? (

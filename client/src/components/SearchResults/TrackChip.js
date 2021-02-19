@@ -4,12 +4,10 @@ import PlayArrowIcon from "@material-ui/icons/PlayArrow";
 import PlaylistAddIcon from "@material-ui/icons/PlaylistAdd";
 import QueueIcon from "@material-ui/icons/Queue";
 import Tooltip from "@material-ui/core/Tooltip";
-import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { ChipTrack, DivTrack, IMGTrack } from "./style/style";
 import { DivTrackPhone, Line, TextTrackPhone } from "./style/phone.style";
 function TrackChip(props) {
-  const { track, addToFilters, auth } = props;
-  const changeChip = useMediaQuery("(min-width:1000px)");
+  const { track, addToFilters, auth, changeChip } = props;
   const { name, album, external_urls } = track;
   if (!name) {
     return null;

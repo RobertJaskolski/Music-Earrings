@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import Tooltip from "@material-ui/core/Tooltip";
 import QueueIcon from "@material-ui/icons/Queue";
 import RadioIcon from "@material-ui/icons/Radio";
-import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { ChipArtist, DivArtist, IMGArtist, H2Artist } from "./style/style";
 import {
   DivArtistPhone,
@@ -13,10 +12,9 @@ import {
 } from "./style/phone.style";
 
 function ArtistChip(props) {
-  const { artist, auth, addToFilters } = props;
+  const { artist, auth, addToFilters, changeChip } = props;
   const { name, images } = artist;
 
-  const changeChip = useMediaQuery("(min-width:1000px)");
   if (!name) {
     return null;
   }

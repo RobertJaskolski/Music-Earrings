@@ -2,14 +2,18 @@ import { Grid } from "@material-ui/core";
 import React from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 import {
   ArtistChip,
   TrackChip,
   SkeletonArtist,
   SkieletonTrack,
 } from "../../components/SearchResults";
-import { Section, Div, H1 } from "./style/style";
+import { Section, Div, H1, DivX, DivNoResults } from "./style/style";
+import CancelPresentationIcon from "@material-ui/icons/CancelPresentation";
 import { filtersActions } from "../../reducers/filtersForGeneratePlaylist";
+import { searchActions } from "../../reducers/search";
+import { spotifyApiActions } from "../../reducers/spotifyApiResponses";
 
 function SearchResults(props) {
   const {
@@ -21,7 +25,10 @@ function SearchResults(props) {
     addTrackToFiltr,
     addArtistToFiltr,
     filtersLength,
+    clearSearch,
+    responseClear,
   } = props;
+  let changeChip = useMediaQuery("(min-width:1000px)");
   const showSearch = search ? true : false;
   const addToFilters = (item) => {
     if (filtersLength < 5) {
@@ -36,28 +43,39 @@ function SearchResults(props) {
           <Grid item lg={6} xs={12}>
             <H1 active={showSearch}>Artists</H1>
             <Div>
-              <SkeletonArtist />
-              <SkeletonArtist />
-              <SkeletonArtist />
-              <SkeletonArtist />
-              <SkeletonArtist />
-              <SkeletonArtist />
+              <SkeletonArtist changeChip={changeChip} />
+              <SkeletonArtist changeChip={changeChip} />
+              <SkeletonArtist changeChip={changeChip} />
+              <SkeletonArtist changeChip={changeChip} />
+              <SkeletonArtist changeChip={changeChip} />
+              <SkeletonArtist changeChip={changeChip} />
             </Div>
           </Grid>
           <Grid item lg={6} xs={12}>
             <H1 active={showSearch}>Tracks</H1>
             <Div>
-              <SkieletonTrack />
-              <SkieletonTrack />
-              <SkieletonTrack />
-              <SkieletonTrack />
-              <SkieletonTrack />
-              <SkieletonTrack />
-              <SkieletonTrack />
-              <SkieletonTrack />
-              <SkieletonTrack />
-              <SkieletonTrack />
+              <SkieletonTrack changeChip={changeChip} />
+              <SkieletonTrack changeChip={changeChip} />
+              <SkieletonTrack changeChip={changeChip} />
+              <SkieletonTrack changeChip={changeChip} />
+              <SkieletonTrack changeChip={changeChip} />
+              <SkieletonTrack changeChip={changeChip} />
+              <SkieletonTrack changeChip={changeChip} />
+              <SkieletonTrack changeChip={changeChip} />
+              <SkieletonTrack changeChip={changeChip} />
+              <SkieletonTrack changeChip={changeChip} />
             </Div>
+          </Grid>
+          <Grid item lg={11} xs={5}></Grid>
+          <Grid item lg={1} xs={1}>
+            <DivX>
+              <CancelPresentationIcon
+                onClick={() => {
+                  clearSearch();
+                  responseClear();
+                }}
+              />
+            </DivX>
           </Grid>
         </Grid>
       ) : (
@@ -74,15 +92,16 @@ function SearchResults(props) {
                         key={item.id}
                         artist={item}
                         auth={auth}
+                        changeChip={changeChip}
                       />
                     )
                   );
                 })}
               </Div>
             ) : (
-              <Div>
+              <DivNoResults active={showSearch}>
                 <H1 active={showSearch}>No results</H1>
-              </Div>
+              </DivNoResults>
             )}
           </Grid>
           <Grid item lg={6} xs={12}>
@@ -96,15 +115,27 @@ function SearchResults(props) {
                       track={item}
                       auth={auth}
                       addToFilters={addToFilters}
+                      changeChip={changeChip}
                     />
                   );
                 })}
               </Div>
             ) : (
-              <Div>
+              <DivNoResults active={showSearch}>
                 <H1 active={showSearch}>No results</H1>
-              </Div>
+              </DivNoResults>
             )}
+          </Grid>
+          <Grid item lg={11} xs={5}></Grid>
+          <Grid item lg={1} xs={1}>
+            <DivX>
+              <CancelPresentationIcon
+                onClick={() => {
+                  clearSearch();
+                  responseClear();
+                }}
+              />
+            </DivX>
           </Grid>
         </Grid>
       )}
@@ -121,6 +152,8 @@ SearchResults.propTypes = {
   addTrackToFiltr: PropTypes.func,
   addArtistToFiltr: PropTypes.func,
   filtersLength: PropTypes.number,
+  clearSearch: PropTypes.func,
+  responseClear: PropTypes.func,
 };
 
 const mapStateToProps = (state) => {
@@ -141,6 +174,12 @@ const mapDispatchToProps = (dispatch) => {
     },
     addArtistToFiltr: (artist) => {
       dispatch(filtersActions.addArtist(artist));
+    },
+    clearSearch: () => {
+      dispatch(searchActions.clear());
+    },
+    responseClear: () => {
+      dispatch(spotifyApiActions.clear());
     },
   };
 };
