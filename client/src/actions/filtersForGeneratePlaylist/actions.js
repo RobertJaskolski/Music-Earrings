@@ -14,3 +14,5 @@ const deleteTrack = (track) => ({ type: types.DELETE_TRACK, payload: track });
 const clearFilters = () => ({ type: types.CLEAR_FILTERS });
 
 const ex = { addArtist, deleteArtist, addTrack, deleteTrack, clearFilters };
+
+export default ex;
