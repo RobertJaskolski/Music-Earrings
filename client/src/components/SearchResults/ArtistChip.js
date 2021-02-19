@@ -13,32 +13,9 @@ import {
 } from "./style/phone.style";
 
 function ArtistChip(props) {
-  const {
-    name,
-    images,
-    external_urls,
-    followers,
-    generes,
-    href,
-    id,
-    popularity,
-    type,
-    uri,
-    auth,
-    addToFilters,
-  } = props;
-  const artist = {
-    name,
-    images,
-    external_urls,
-    followers,
-    generes,
-    href,
-    id,
-    popularity,
-    type,
-    uri,
-  };
+  const { artist, auth, addToFilters } = props;
+  const { name, images } = artist;
+
   const changeChip = useMediaQuery("(min-width:1000px)");
   if (!name) {
     return null;

@@ -8,8 +8,9 @@ import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { ChipTrack, DivTrack, IMGTrack } from "./style/style";
 import { DivTrackPhone, Line, TextTrackPhone } from "./style/phone.style";
 function TrackChip(props) {
-  const { name, album, auth, external_urls } = props;
+  const { track, addToFilters, auth } = props;
   const changeChip = useMediaQuery("(min-width:1000px)");
+  const { name, album, external_urls } = track;
   if (!name) {
     return null;
   }
@@ -50,7 +51,7 @@ function TrackChip(props) {
               </Tooltip>
             )}
             <Tooltip title='Add to filters for generate playlist'>
-              <QueueIcon />
+              <QueueIcon onClick={() => addToFilters(track)} />
             </Tooltip>
           </span>
         </DivTrack>
@@ -80,7 +81,7 @@ function TrackChip(props) {
                   />
                 </a>
               )}
-              <QueueIcon />
+              <QueueIcon onClick={() => addToFilters(track)} />
             </div>
             <PlayArrowIcon />
           </span>

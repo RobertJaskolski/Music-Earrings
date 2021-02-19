@@ -60,7 +60,7 @@ function SearchResults(props) {
                       <ArtistChip
                         addToFilters={addToFilters}
                         key={item.id}
-                        {...item}
+                        artist={item}
                         auth={auth}
                       />
                     )
@@ -78,7 +78,14 @@ function SearchResults(props) {
             {searchTracks.length ? (
               <Div>
                 {searchTracks.map((item) => {
-                  return <TrackChip key={item.id} {...item} auth={auth} />;
+                  return (
+                    <TrackChip
+                      key={item.id}
+                      track={item}
+                      auth={auth}
+                      addToFilters={addToFilters}
+                    />
+                  );
                 })}
               </Div>
             ) : (
