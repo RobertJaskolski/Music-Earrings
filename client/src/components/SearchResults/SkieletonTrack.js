@@ -8,7 +8,7 @@ export default function SkieletonTrack() {
   return (
     <ChipSkeltonTrack>
       {changeChip ? (
-        <StyledSkeletonTextTrack variant='rect' />
+        <StyledSkeletonTextTrack desktop={changeChip} variant='rect' />
       ) : (
         <div>
           <Line />
