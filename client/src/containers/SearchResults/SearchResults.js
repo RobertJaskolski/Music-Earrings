@@ -9,14 +9,26 @@ import {
   SkieletonTrack,
 } from "../../components/SearchResults";
 import { Section, Div, H1 } from "./style/style";
-
-const addToFilters = (e) => {
-  console.log(e);
-};
+import { filtersActions } from "../../reducers/filtersForGeneratePlaylist";
 
 function SearchResults(props) {
-  const { searchTracks, searchArtists, loading, search, auth } = props;
+  const {
+    searchTracks,
+    searchArtists,
+    loading,
+    search,
+    auth,
+    addTrackToFiltr,
+    addArtistToFiltr,
+    filtersLength,
+  } = props;
   const showSearch = search ? true : false;
+  const addToFilters = (item) => {
+    if (filtersLength < 5) {
+      if (item.type === "track") addTrackToFiltr(item);
+      else if (item.type === "artist") addArtistToFiltr(item);
+    }
+  };
   return (
     <Section id='searchBox' active={showSearch}>
       {loading ? (
@@ -106,6 +118,9 @@ SearchResults.propTypes = {
   loading: PropTypes.bool,
   search: PropTypes.string,
   auth: PropTypes.bool,
+  addTrackToFiltr: PropTypes.func,
+  addArtistToFiltr: PropTypes.func,
+  filtersLength: PropTypes.number,
 };
 
 const mapStateToProps = (state) => {
@@ -114,7 +129,20 @@ const mapStateToProps = (state) => {
     searchArtists: state.SpotifyResponses["artists"],
     loading: state.SpotifyResponses["loading"],
     search: state.search["searchText"],
+    filtersLength:
+      state.filtrsGeneratePlaylist["artistSeeds"].length +
+      state.filtrsGeneratePlaylist["trackSeeds"].length,
+  };
+};
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addTrackToFiltr: (track) => {
+      dispatch(filtersActions.addTrack(track));
+    },
+    addArtistToFiltr: (artist) => {
+      dispatch(filtersActions.addArtist(artist));
+    },
   };
 };
 
-export default connect(mapStateToProps, {})(SearchResults);
+export default connect(mapStateToProps, mapDispatchToProps)(SearchResults);
