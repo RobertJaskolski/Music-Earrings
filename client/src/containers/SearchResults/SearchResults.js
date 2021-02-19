@@ -10,6 +10,10 @@ import {
 } from "../../components/SearchResults";
 import { Section, Div, H1 } from "./style/style";
 
+const addToFilters = (e) => {
+  console.log(e);
+};
+
 function SearchResults(props) {
   const { searchTracks, searchArtists, loading, search, auth } = props;
   const showSearch = search ? true : false;
@@ -53,7 +57,12 @@ function SearchResults(props) {
                 {searchArtists.map((item) => {
                   return (
                     !item.name.includes("feat") && (
-                      <ArtistChip key={item.id} {...item} auth={auth} />
+                      <ArtistChip
+                        addToFilters={addToFilters}
+                        key={item.id}
+                        {...item}
+                        auth={auth}
+                      />
                     )
                   );
                 })}

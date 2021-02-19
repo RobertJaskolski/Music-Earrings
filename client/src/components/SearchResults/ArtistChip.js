@@ -13,7 +13,32 @@ import {
 } from "./style/phone.style";
 
 function ArtistChip(props) {
-  const { name, images, auth } = props;
+  const {
+    name,
+    images,
+    external_urls,
+    followers,
+    generes,
+    href,
+    id,
+    popularity,
+    type,
+    uri,
+    auth,
+    addToFilters,
+  } = props;
+  const artist = {
+    name,
+    images,
+    external_urls,
+    followers,
+    generes,
+    href,
+    id,
+    popularity,
+    type,
+    uri,
+  };
   const changeChip = useMediaQuery("(min-width:1000px)");
   if (!name) {
     return null;
@@ -36,14 +61,14 @@ function ArtistChip(props) {
               <Tooltip title='Listen artist radio'>
                 <RadioIcon />
               </Tooltip>
-              <Tooltip title='Add to quequ'>
-                <QueueIcon />
+              <Tooltip title='Add to filters'>
+                <QueueIcon onClick={() => addToFilters(artist)} />
               </Tooltip>
             </span>
           ) : (
             <span>
-              <Tooltip title='Add to quequ'>
-                <QueueIcon />
+              <Tooltip title='Add to filters'>
+                <QueueIcon onClick={() => addToFilters(artist)} />
               </Tooltip>
             </span>
           )}
@@ -63,11 +88,11 @@ function ArtistChip(props) {
             {auth ? (
               <SpanArtistPhone>
                 <RadioIcon />
-                <QueueIcon />
+                <QueueIcon onClick={() => addToFilters(artist)} />
               </SpanArtistPhone>
             ) : (
               <SpanArtistPhone>
-                <QueueIcon />
+                <QueueIcon onClick={() => addToFilters(artist)} />
               </SpanArtistPhone>
             )}
           </H4ArtistPhone>

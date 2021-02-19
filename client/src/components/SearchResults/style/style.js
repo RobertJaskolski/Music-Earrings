@@ -2,10 +2,10 @@ import styled, { css } from "styled-components";
 import Skeleton from "@material-ui/lab/Skeleton";
 //Artist
 export const ChipArtist = styled.div`
+  flex-basis: 95%;
   ${({ desktop }) =>
     desktop &&
     css`
-      flex-basis: 95%;
       background-color: #1db954;
       svg {
         font-size: 35px;
@@ -77,11 +77,7 @@ export const Div = styled.div`
 export const ChipSkeltonArtist = styled.div`
   margin-bottom: 35px;
   min-height: 40px;
-  ${({ desktop }) =>
-    desktop &&
-    css`
-      flex-basis: 95%;
-    `}
+  flex-basis: 95%;
   ${({ desktop }) =>
     !desktop &&
     css`

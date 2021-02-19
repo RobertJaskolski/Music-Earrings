@@ -8,12 +8,15 @@ export default function SkieletonTrack() {
   return (
     <ChipSkeltonTrack>
       {changeChip ? (
-        <StyledSkeletonTextTrack desktop={changeChip} variant='rect' />
+        <StyledSkeletonTextTrack
+          desktop={changeChip.toString()}
+          variant='rect'
+        />
       ) : (
         <div>
           <Line />
           <StyledSkeletonTextTrack
-            desktop={changeChip}
+            desktop={changeChip.toString()}
             height={70}
             variant='rect'
           />
