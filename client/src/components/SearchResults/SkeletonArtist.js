@@ -11,11 +11,8 @@ import {
   StyledSkeletonIMGArtistPhone,
   StyledSkeletonTextArtistPhone,
 } from "./style/phone.style";
-import useMediaQuery from "@material-ui/core/useMediaQuery";
 
-export default function SkeletonArtist() {
-  const changeChip = useMediaQuery("(min-width:1000px)");
-
+export default function SkeletonArtist({ changeChip }) {
   return (
     <ChipSkeltonArtist desktop={changeChip}>
       {changeChip ? (

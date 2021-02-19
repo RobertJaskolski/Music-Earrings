@@ -35,3 +35,23 @@ export const Section = styled.section`
       min-height: 0px;
     `}
 `;
+
+export const DivX = styled.div`
+  margin-right: 20%;
+  cursor: pointer;
+  text-align: right;
+  color: #1ed760;
+`;
+
+export const DivNoResults = styled(Div)`
+  ${({ active }) =>
+    active &&
+    css`
+      min-height: 450px;
+    `}
+  ${({ active }) =>
+    !active &&
+    css`
+      min-height: 0px;
+    `}
+`;

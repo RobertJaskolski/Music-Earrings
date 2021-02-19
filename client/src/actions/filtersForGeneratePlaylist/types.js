@@ -1,0 +1,15 @@
+const ADD_TRACK = "ADD_TRACK";
+const ADD_ARTIST = "ADD_ARTIST";
+const DELETE_TRACK = "DELETE_TRACK";
+const DELETE_ARTIST = "DELETE_ARTIST";
+const CLEAR_FILTERS = "CLEAR_FILTERS";
+
+const ex = {
+  ADD_TRACK,
+  ADD_ARTIST,
+  DELETE_TRACK,
+  DELETE_ARTIST,
+  CLEAR_FILTERS,
+};
+
+export default ex;
