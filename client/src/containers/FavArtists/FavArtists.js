@@ -4,10 +4,17 @@ import { Grid } from "@material-ui/core";
 import FavArtist from "../../components/FavArtists/FavArtist";
 import { Div, H2, Line } from "./style/style";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
+import { filtersActions } from "../../reducers/filtersForGeneratePlaylist";
+import { connect } from "react-redux";
 
 function FavArtists(props) {
   const changeFav = useMediaQuery("(min-width:500px)");
-  const { auth, favs } = props;
+  const { auth, favs, addArtistToFiltr, filtersLength } = props;
+  const addToFilters = (item) => {
+    if (filtersLength < 5) {
+      addArtistToFiltr(item);
+    }
+  };
   if (!auth) {
     return null;
   }
@@ -18,7 +25,14 @@ function FavArtists(props) {
         <Line />
         <Div>
           {favs.map((item) => {
-            return <FavArtist changeFav={changeFav} key={item.id} {...item} />;
+            return (
+              <FavArtist
+                addToFilters={addToFilters}
+                changeFav={changeFav}
+                key={item.id}
+                artist={item}
+              />
+            );
           })}
         </Div>
       </Grid>
@@ -26,4 +40,19 @@ function FavArtists(props) {
   );
 }
 
-export default FavArtists;
+const mapStateToProps = (state) => {
+  return {
+    filtersLength:
+      state.filtrsGeneratePlaylist["artistSeeds"].length +
+      state.filtrsGeneratePlaylist["trackSeeds"].length,
+  };
+};
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addArtistToFiltr: (artist) => {
+      dispatch(filtersActions.addArtist(artist));
+    },
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(FavArtists);

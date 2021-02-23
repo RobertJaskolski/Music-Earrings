@@ -4,7 +4,8 @@ import { Div, Span, P } from "./style/style";
 import QueueIcon from "@material-ui/icons/Queue";
 
 function FavArtist(props) {
-  const { name, images, changeFav } = props;
+  const { artist, changeFav, addToFilters } = props;
+  const { name, images } = artist;
   return (
     <Div desktop={changeFav}>
       <Span>
@@ -19,7 +20,7 @@ function FavArtist(props) {
         <P>{name}</P>
       </Span>
       <Span>
-        <QueueIcon />
+        <QueueIcon onClick={() => addToFilters(artist)} />
       </Span>
     </Div>
   );
