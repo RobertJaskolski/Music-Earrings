@@ -22,6 +22,7 @@ const INIT_STATE = {
     type: "",
     uri: "",
   },
+  favs: [],
 };
 
 const userProfileReducer = (state = INIT_STATE, action) => {
@@ -30,8 +31,12 @@ const userProfileReducer = (state = INIT_STATE, action) => {
       return { ...state, isLoading: false, isError: true };
     case types.GET_USER_PROFILE_REQUEST:
       return { ...state, isLoading: true };
+    case types.GET_USER_FAV_ARTISTS_REQUEST:
+      return { ...state, isLoading: true };
     case types.GET_USER_PROFILE_SUCCESS:
       return { ...state, isLoading: false, data: action.payload };
+    case types.GET_USER_FAV_ARTIST_SUCCESS:
+      return { ...state, isLoading: false, favs: action.payload };
     default:
       return state;
   }
