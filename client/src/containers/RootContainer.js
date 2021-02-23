@@ -23,12 +23,19 @@ const WithAuthorizedAndUserInfoNav = compose(
 )(Nav);
 const WithAuthorizedSearchResults = withAuthorizedState(SearchResults);
 
-function RootContainer({ refresh, getUserProfile, auth, refreshToken }) {
+function RootContainer({
+  refresh,
+  getUserProfile,
+  auth,
+  refreshToken,
+  getFavArtists,
+}) {
   useEffect(() => {
     GetHash(refresh);
     MyAPI.RefreshToken(refreshToken);
     if (auth) {
       getUserProfile();
+      getFavArtists();
     }
   });
   return (
@@ -50,6 +57,7 @@ function RootContainer({ refresh, getUserProfile, auth, refreshToken }) {
 const mapDispatchToProps = (dispatch) => ({
   refresh: (tokens) => dispatch(tokensActions.refresh(tokens)),
   getUserProfile: () => dispatch(API.GetUserProfile()),
+  getFavArtists: () => dispatch(API.GetUserFavArtists()),
 });
 const mapStateToProps = (state) => {
   return {
