@@ -6,7 +6,7 @@ const GetUserFavArtists = () => async (dispatch, getState) => {
   const { tokens } = getState();
   dispatch(userProfileActions.requestFavArtists());
   const optionsAxios = options(
-    `/v1/me/top/artists?limit=8`,
+    `/v1/me/top/artists?limit=5`,
     tokens["accessToken"]
   );
   await axios(optionsAxios)
