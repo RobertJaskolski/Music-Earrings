@@ -1,3 +1,6 @@
 import GetUserProfile from "./UserProfile";
 import GetArtistAndTrack from "./ArtistAndTrack";
-export default { GetUserProfile, GetArtistAndTrack };
+import GetUserFavArtists from "./UserFavArtists";
+const API = { GetUserProfile, GetArtistAndTrack, GetUserFavArtists };
+
+export default API;

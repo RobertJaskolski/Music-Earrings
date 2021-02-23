@@ -11,19 +11,31 @@ import withUserProfileState from "../components/shared/HOC/withUserProfile";
 import API from "../api/SpotifyAPI";
 import { compose } from "recompose";
 import SearchResults from "./SearchResults/SearchResults";
+import FavArtists from "./FavArtists/FavArtists";
 
+const WithAuthorizedAndUserInfoFavArtists = compose(
+  withAuthorizedState,
+  withUserProfileState
+)(FavArtists);
 const WithAuthorizedAndUserInfoNav = compose(
   withAuthorizedState,
   withUserProfileState
 )(Nav);
 const WithAuthorizedSearchResults = withAuthorizedState(SearchResults);
 
-function RootContainer({ refresh, getUserProfile, auth, refreshToken }) {
+function RootContainer({
+  refresh,
+  getUserProfile,
+  auth,
+  refreshToken,
+  getFavArtists,
+}) {
   useEffect(() => {
     GetHash(refresh);
     MyAPI.RefreshToken(refreshToken);
     if (auth) {
       getUserProfile();
+      getFavArtists();
     }
   });
   return (
@@ -34,6 +46,9 @@ function RootContainer({ refresh, getUserProfile, auth, refreshToken }) {
       <Grid item xs={12}>
         <WithAuthorizedSearchResults data-test='searchResults' />
       </Grid>
+      <Grid item xs={12}>
+        <WithAuthorizedAndUserInfoFavArtists />
+      </Grid>
       <Footer />
     </Container>
   );
@@ -42,6 +57,7 @@ function RootContainer({ refresh, getUserProfile, auth, refreshToken }) {
 const mapDispatchToProps = (dispatch) => ({
   refresh: (tokens) => dispatch(tokensActions.refresh(tokens)),
   getUserProfile: () => dispatch(API.GetUserProfile()),
+  getFavArtists: () => dispatch(API.GetUserFavArtists()),
 });
 const mapStateToProps = (state) => {
   return {

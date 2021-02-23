@@ -6,8 +6,8 @@ import PropTypes from "prop-types";
 const withUserProfile = (WrappedComponent) => {
   class HOC extends Component {
     render() {
-      const { data, ...rest } = this.props;
-      return <WrappedComponent {...rest} userProfile={data} />;
+      const { data, favs, ...rest } = this.props;
+      return <WrappedComponent {...rest} favs={favs} userProfile={data} />;
     }
   }
   return HOC;
@@ -15,6 +15,7 @@ const withUserProfile = (WrappedComponent) => {
 
 const mapStateToProps = (state) => ({
   data: state.userInfo["data"],
+  favs: state.userInfo["favs"],
 });
 
 const withUserProfileState = compose(
@@ -43,6 +44,7 @@ withUserProfileState.propTypes = {
     type: PropTypes.string,
     uri: PropTypes.string,
   }),
+  favs: PropTypes.array,
 };
 
 export default withUserProfileState;
