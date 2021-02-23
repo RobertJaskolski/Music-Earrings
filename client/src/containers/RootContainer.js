@@ -11,7 +11,12 @@ import withUserProfileState from "../components/shared/HOC/withUserProfile";
 import API from "../api/SpotifyAPI";
 import { compose } from "recompose";
 import SearchResults from "./SearchResults/SearchResults";
+import FavArtists from "./FavArtists/FavArtists";
 
+const WithAuthorizedAndUserInfoFavArtists = compose(
+  withAuthorizedState,
+  withUserProfileState
+)(FavArtists);
 const WithAuthorizedAndUserInfoNav = compose(
   withAuthorizedState,
   withUserProfileState
@@ -33,6 +38,9 @@ function RootContainer({ refresh, getUserProfile, auth, refreshToken }) {
       </Grid>
       <Grid item xs={12}>
         <WithAuthorizedSearchResults data-test='searchResults' />
+      </Grid>
+      <Grid item xs={12}>
+        <WithAuthorizedAndUserInfoFavArtists />
       </Grid>
       <Footer />
     </Container>
