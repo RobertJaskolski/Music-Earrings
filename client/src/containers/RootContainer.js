@@ -12,6 +12,7 @@ import API from "../api/SpotifyAPI";
 import { compose } from "recompose";
 import SearchResults from "./SearchResults/SearchResults";
 import FavArtists from "./FavArtists/FavArtists";
+import Tracklist from "./Tracklist/Tracklist";
 
 const WithAuthorizedAndUserInfoFavArtists = compose(
   withAuthorizedState,
@@ -49,7 +50,12 @@ function RootContainer({
       <Grid item xs={12}>
         <WithAuthorizedAndUserInfoFavArtists />
       </Grid>
-      <Footer />
+      <Grid item md={8} xs={12}>
+        <Tracklist />
+      </Grid>
+      <Grid item xs={12}>
+        <Footer />
+      </Grid>
     </Container>
   );
 }
