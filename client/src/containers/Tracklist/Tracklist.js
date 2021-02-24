@@ -13,6 +13,12 @@ function Tracklist(props) {
     deleteTrack,
     filtersLength,
   } = props;
+  const handleDeleteArtist = (artist) => {
+    deleteArtist(artist);
+  };
+  const handleDeleteTrack = (track) => {
+    deleteTrack(track);
+  };
   return (
     <Div>
       <main style={{ width: "100%" }}>
@@ -20,7 +26,12 @@ function Tracklist(props) {
         <Line />
         <Filters />
         {filtersLength ? (
-          <TracksAndArtists artists={seedArtists} tracks={seedTracks} />
+          <TracksAndArtists
+            handleDeleteArtist={handleDeleteArtist}
+            handleDeleteTrack={handleDeleteTrack}
+            artists={seedArtists}
+            tracks={seedTracks}
+          />
         ) : null}
       </main>
     </Div>
