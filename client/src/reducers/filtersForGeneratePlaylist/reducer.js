@@ -26,7 +26,10 @@ const filterReducer = (state = INIT_STATE, action) => {
       else return state;
 
     case types.DELETE_TRACK:
-      return { ...state, artistSeeds: [...state.artistSeeds, action.payload] };
+      const newTrackSeeds = state.trackSeeds.filter((item) => {
+        if (item !== action.payload) return item;
+      });
+      return { ...state, trackSeeds: newTrackSeeds };
 
     case types.CLEAR_FILTERS:
       return INIT_STATE;
