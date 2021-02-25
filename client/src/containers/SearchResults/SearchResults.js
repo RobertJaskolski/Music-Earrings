@@ -179,7 +179,7 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(searchActions.clear());
     },
     responseClear: () => {
-      dispatch(spotifyApiActions.clear());
+      dispatch(spotifyApiActions.clearSearch());
     },
   };
 };

@@ -17,20 +17,20 @@ const GetArtistAndTrack = () => async (dispatch, getState) => {
       if (response.status === 200) {
         const artists = response.data.artists.items.slice(0, 6);
         dispatch(
-          spotifyApiActions.save({
+          spotifyApiActions.saveSearch({
             artists: artists,
             tracks: response.data.tracks.items,
           })
         );
       } else {
         LogoutUser(dispatch);
-        dispatch(spotifyApiActions.clear());
+        dispatch(spotifyApiActions.clearSearch());
         return undefined;
       }
     })
     .catch(() => {
       LogoutUser(dispatch);
-      dispatch(spotifyApiActions.clear());
+      dispatch(spotifyApiActions.clearSearch());
       return undefined;
     });
 };
