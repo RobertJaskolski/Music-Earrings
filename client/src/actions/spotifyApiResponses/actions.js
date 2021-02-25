@@ -3,13 +3,22 @@ import types from "./types";
 const fetching = () => ({
   type: types.FETCHING_DATA,
 });
-const clear = () => ({ type: types.CLEAR_DATA });
-const save = (payload) => ({ type: types.SAVE_RESPONSE_DATA, payload });
-
+const clearSearch = () => ({ type: types.CLEAR_DATA_SEARCH });
+const saveSearch = (payload) => ({
+  type: types.SAVE_RESPONSE_DATA_SEARCH,
+  payload,
+});
+const clearTracklist = () => ({ type: types.CLEAR_DATA_TRACKLIST });
+const saveTracklist = (payload) => ({
+  type: types.SAVE_RESPONSE_DATA_TRACKLIST,
+  payload,
+});
 const ex = {
-  clear,
-  save,
+  clearSearch,
+  saveSearch,
   fetching,
+  saveTracklist,
+  clearTracklist,
 };
 
 export default ex;
