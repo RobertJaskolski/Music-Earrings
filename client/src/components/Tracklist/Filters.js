@@ -4,14 +4,26 @@ import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import Typography from "@material-ui/core/Typography";
 import Slider from "@material-ui/core/Slider";
+import { connect } from "react-redux";
+import { filtersActions } from "../../reducers/filtersForGeneratePlaylist";
 
-function Filters() {
-  const [valuePopularity, setvaluePopularity] = useState([0, 100]);
-  const [valueEnergy, setvalueEnergy] = useState([0, 100]);
-  const [valueDanceable, setvalueDanceable] = useState([0, 100]);
-
-  const handleChange = (event, newValue) => {
-    console.log(event);
+function Filters(props) {
+  // const [valuePopularity, setvaluePopularity] = useState([0, 100]);
+  // const [valueEnergy, setvalueEnergy] = useState([0, 100]);
+  // const [valueDanceable, setvalueDanceable] = useState([0, 100]);
+  const {
+    limit,
+    popularity,
+    energy,
+    danceable,
+    changeEnergy,
+    changePopularity,
+    changeDanceable,
+  } = props;
+  const handleChange = (name, newValue) => {
+    if (name === "energy") changeEnergy(newValue);
+    else if (name === "popularity") changePopularity(newValue);
+    else if (name === "danceable") changeDanceable(newValue);
   };
 
   return (
@@ -20,7 +32,7 @@ function Filters() {
         <InputLabel htmlFor='numberOfTracks'>Max number of tracks</InputLabel>
         <Select
           native
-          defaultValue={25}
+          defaultValue={limit}
           //onChange={}
           label='Max number of tracks'
           inputProps={{
@@ -39,8 +51,10 @@ function Filters() {
         Popularity
       </Typography>
       <Slider
-        value={valuePopularity}
-        onChange={handleChange}
+        value={popularity}
+        onChange={(_, newValue) => {
+          handleChange("popularity", newValue);
+        }}
         valueLabelDisplay='auto'
         aria-labelledby='range-slider-Popularity'
       />
@@ -49,8 +63,10 @@ function Filters() {
         Energy
       </Typography>
       <Slider
-        value={valueEnergy}
-        onChange={handleChange}
+        value={energy}
+        onChange={(_, newValue) => {
+          handleChange("energy", newValue);
+        }}
         valueLabelDisplay='auto'
         aria-labelledby='range-slider-Energy'
       />
@@ -59,8 +75,10 @@ function Filters() {
         Danceable
       </Typography>
       <Slider
-        value={valueDanceable}
-        onChange={handleChange}
+        value={danceable}
+        onChange={(_, newValue) => {
+          handleChange("danceable", newValue);
+        }}
         valueLabelDisplay='auto'
         aria-labelledby='range-slider-Danceable'
       />
@@ -68,4 +86,27 @@ function Filters() {
   );
 }
 
-export default Filters;
+const mapStateToProps = (state) => {
+  return {
+    limit: state.filtrsGeneratePlaylist["limit"],
+    popularity: state.filtrsGeneratePlaylist["popularity"],
+    energy: state.filtrsGeneratePlaylist["energy"],
+    danceable: state.filtrsGeneratePlaylist["danceable"],
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    changeEnergy: (item) => {
+      dispatch(filtersActions.addEnergy(item));
+    },
+    changePopularity: (item) => {
+      dispatch(filtersActions.addPopularity(item));
+    },
+    changeDanceable: (item) => {
+      dispatch(filtersActions.addDanceable(item));
+    },
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Filters);
