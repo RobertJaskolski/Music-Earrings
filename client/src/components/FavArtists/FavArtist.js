@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { Div, Span, P } from "./style/style";
 import QueueIcon from "@material-ui/icons/Queue";
 

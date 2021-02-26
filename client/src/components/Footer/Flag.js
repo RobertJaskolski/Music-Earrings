@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { FlagBox } from "./style/style";
 
 export function Flag(props) {
@@ -19,9 +18,5 @@ export function Flag(props) {
     </FlagBox>
   );
 }
-
-Flag.propTypes = {
-  lang: PropTypes.string,
-};
 
 export default Flag;
