@@ -12,7 +12,6 @@ import { tokensActions } from "../../reducers/tokens";
 import { searchActions } from "../../reducers/search";
 import { spotifyApiActions } from "../../reducers/spotifyApiResponses";
 import { authActions } from "../../reducers/auth";
-import PropTypes from "prop-types";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import API from "../../api/SpotifyAPI";
 import MyAPI from "../../api/MyAPI";
@@ -132,36 +131,6 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(spotifyApiActions.clearSearch());
     },
   };
-};
-
-Nav.propTypes = {
-  logout: PropTypes.func,
-  clearTokens: PropTypes.func,
-  search: PropTypes.func,
-  clearResponse: PropTypes.func,
-  SpotifyGetArtistAndTrack: PropTypes.func,
-  MyAPIGetArtistAndTrack: PropTypes.func,
-  auth: PropTypes.bool,
-  userProfile: PropTypes.shape({
-    country: PropTypes.string,
-    display_name: PropTypes.string,
-    email: PropTypes.string,
-    explicit_content: PropTypes.shape({
-      filter_enabled: PropTypes.bool,
-      filter_locked: PropTypes.bool,
-    }),
-    external_urls: PropTypes.object,
-    followers: PropTypes.shape({
-      href: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-      total: PropTypes.number,
-    }),
-    href: PropTypes.string,
-    id: PropTypes.string,
-    images: PropTypes.array,
-    product: PropTypes.string,
-    type: PropTypes.string,
-    uri: PropTypes.string,
-  }),
 };
 
 export default connect(null, mapDispatchToProps)(Nav);

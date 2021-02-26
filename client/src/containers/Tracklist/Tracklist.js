@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import PropTypes from "prop-types";
 import { Div, Line, H2 } from "./style/style";
 import { connect } from "react-redux";
 import { filtersActions } from "../../reducers/filtersForGeneratePlaylist";

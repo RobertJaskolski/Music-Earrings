@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import Tooltip from "@material-ui/core/Tooltip";
 import QueueIcon from "@material-ui/icons/Queue";
 import RadioIcon from "@material-ui/icons/Radio";
@@ -76,10 +75,5 @@ function ArtistChip(props) {
     </ChipArtist>
   );
 }
-
-ArtistChip.propTypes = {
-  name: PropTypes.string,
-  images: PropTypes.array,
-};
 
 export default ArtistChip;
