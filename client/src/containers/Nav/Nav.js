@@ -129,7 +129,7 @@ const mapDispatchToProps = (dispatch) => {
     SpotifyGetArtistAndTrack: () => dispatch(API.GetArtistAndTrack()),
     MyAPIGetArtistAndTrack: () => dispatch(MyAPI.GetArtistAndTrack()),
     clearResponse: () => {
-      dispatch(spotifyApiActions.clear());
+      dispatch(spotifyApiActions.clearSearch());
     },
   };
 };
