@@ -21,9 +21,15 @@ const GetRecommendations = () => async (dispatch, getState) => {
     });
     seed = seed.slice(0, -1);
   }
-
+  const filters = `limit=${filtrsGeneratePlaylist["limit"]}&min_popularity=${
+    filtrsGeneratePlaylist["popularity"][0]
+  }&max_popularity=${filtrsGeneratePlaylist["popularity"][1]}&min_energy=${
+    filtrsGeneratePlaylist["energy"][0] / 100
+  }&max_energy=${filtrsGeneratePlaylist["energy"][1] / 100}&min_danceability=${
+    filtrsGeneratePlaylist["danceable"][0] / 100
+  }&max_danceability=${filtrsGeneratePlaylist["danceable"][1] / 100}`;
   const optionsAxios = options(
-    `/v1/recommendations?limit=10${seed}`,
+    `/v1/recommendations?${filters}${seed}`,
     tokens["accessToken"]
   );
   await axios(optionsAxios)
