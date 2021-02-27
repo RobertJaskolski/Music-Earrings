@@ -33,7 +33,7 @@ const GetRecommendations = () => async (dispatch, getState) => {
     tokens["accessToken"]
   );
   await axios(
-    `${process.env.REACT_APP_API_URL}/Recommendations/?${filters}${seed}`
+    `${process.env.REACT_APP_API_URL}/Recommendations?${filters}${seed}`
   )
     .then((response) => {
       if (response.status === 200) {

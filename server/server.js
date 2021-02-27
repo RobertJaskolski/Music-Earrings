@@ -144,6 +144,7 @@ app.get("/refresh_token", function (req, res) {
     }
   });
 });
+
 app.get("/ArtistsAndTracks", function (req, res) {
   const search = req.query.search;
   const authOptions = {
@@ -165,6 +166,53 @@ app.get("/ArtistsAndTracks", function (req, res) {
       request.get(
         {
           url: `https://api.spotify.com/v1/search?q=${search}&type=track%2Cartist&limit=10`,
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${access_token}`,
+          },
+        },
+        function (error, response, body) {
+          if (!error && response.statusCode === 200) {
+            res.status(200).send(body);
+          } else {
+            res.status(401).send({ body: "Bad token" });
+          }
+        }
+      );
+    } else {
+      res.status(400).send({ body: "Bad request" });
+    }
+  });
+});
+
+app.get("/Recommendations", function (req, res) {
+  const limit = req.query.limit;
+  const min_danceability = req.query.min_danceability;
+  const max_danceability = req.query.max_danceability;
+  const min_energy = req.query.min_energy;
+  const max_energy = req.query.max_energy;
+  const min_popularity = req.query.min_popularity;
+  const max_popularity = req.query.max_popularity;
+  const authOptions = {
+    url: "https://accounts.spotify.com/api/token",
+    form: {
+      grant_type: "client_credentials",
+    },
+    headers: {
+      Authorization:
+        "Basic " +
+        new Buffer(client_id + ":" + client_secret).toString("base64"),
+    },
+    json: true,
+  };
+
+  request.post(authOptions, function (error, response, body) {
+    if (!error && response.statusCode === 200) {
+      const { access_token } = body;
+      request.get(
+        {
+          url: `https://api.spotify.com/v1/recommendations?limit=${limit}&min_danceability=${min_danceability}&max_danceability=${max_danceability}&min_energy=${min_energy}&max_energy=${max_energy}&min_popularity=${min_popularity}&max_popularity=${max_popularity}`,
           headers: {
             Accept: "application/json",
             "Content-Type": "application/json",
