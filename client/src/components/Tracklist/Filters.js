@@ -8,9 +8,6 @@ import { connect } from "react-redux";
 import { filtersActions } from "../../reducers/filtersForGeneratePlaylist";
 
 function Filters(props) {
-  // const [valuePopularity, setvaluePopularity] = useState([0, 100]);
-  // const [valueEnergy, setvalueEnergy] = useState([0, 100]);
-  // const [valueDanceable, setvalueDanceable] = useState([0, 100]);
   const {
     limit,
     popularity,
@@ -19,13 +16,16 @@ function Filters(props) {
     changeEnergy,
     changePopularity,
     changeDanceable,
+    changeLimit,
   } = props;
   const handleChange = (name, newValue) => {
     if (name === "energy") changeEnergy(newValue);
     else if (name === "popularity") changePopularity(newValue);
     else if (name === "danceable") changeDanceable(newValue);
   };
-
+  const handleChangeLimit = (e) => {
+    changeLimit(e.target.value);
+  };
   return (
     <div>
       <FormControl variant='outlined'>
@@ -33,7 +33,7 @@ function Filters(props) {
         <Select
           native
           defaultValue={limit}
-          //onChange={}
+          onChange={handleChangeLimit}
           label='Max number of tracks'
           inputProps={{
             name: "numberOfTracks",
@@ -55,7 +55,6 @@ function Filters(props) {
         onChange={(_, newValue) => {
           handleChange("popularity", newValue);
         }}
-        valueLabelDisplay='auto'
         aria-labelledby='range-slider-Popularity'
       />
 
@@ -67,7 +66,6 @@ function Filters(props) {
         onChange={(_, newValue) => {
           handleChange("energy", newValue);
         }}
-        valueLabelDisplay='auto'
         aria-labelledby='range-slider-Energy'
       />
 
@@ -79,7 +77,6 @@ function Filters(props) {
         onChange={(_, newValue) => {
           handleChange("danceable", newValue);
         }}
-        valueLabelDisplay='auto'
         aria-labelledby='range-slider-Danceable'
       />
     </div>
@@ -105,6 +102,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     changeDanceable: (item) => {
       dispatch(filtersActions.addDanceable(item));
+    },
+    changeLimit: (item) => {
+      dispatch(filtersActions.addLimit(item));
     },
   };
 };
