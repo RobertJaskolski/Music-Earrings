@@ -1,7 +1,6 @@
 import { Grid } from "@material-ui/core";
 import React from "react";
 import { connect } from "react-redux";
-import PropTypes from "prop-types";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import {
   ArtistChip,
@@ -143,19 +142,6 @@ function SearchResults(props) {
   );
 }
 
-SearchResults.propTypes = {
-  searchTracks: PropTypes.array,
-  searchArtists: PropTypes.array,
-  loading: PropTypes.bool,
-  search: PropTypes.string,
-  auth: PropTypes.bool,
-  addTrackToFiltr: PropTypes.func,
-  addArtistToFiltr: PropTypes.func,
-  filtersLength: PropTypes.number,
-  clearSearch: PropTypes.func,
-  responseClear: PropTypes.func,
-};
-
 const mapStateToProps = (state) => {
   return {
     searchTracks: state.SpotifyResponses["tracks"],
@@ -179,7 +165,7 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(searchActions.clear());
     },
     responseClear: () => {
-      dispatch(spotifyApiActions.clear());
+      dispatch(spotifyApiActions.clearSearch());
     },
   };
 };

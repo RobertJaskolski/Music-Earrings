@@ -1,6 +1,5 @@
 import React from "react";
 import logo from "../../images/logo.png";
-import PropTypes from "prop-types";
 import { Div } from "./style/style";
 
 function Logo({ widthLogo, heightLogo }) {
@@ -20,10 +19,5 @@ function Logo({ widthLogo, heightLogo }) {
     </Div>
   );
 }
-
-Logo.propTypes = {
-  widthLogo: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  heightLogo: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-};
 
 export default Logo;

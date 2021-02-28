@@ -9,7 +9,7 @@ function TracksAndArtists(props) {
       {artists.length
         ? artists.map((item) => {
             return (
-              <Chip>
+              <Chip key={item.id}>
                 <span>{item.name}</span>
                 <span>
                   <CloseIcon
@@ -25,7 +25,7 @@ function TracksAndArtists(props) {
       {tracks.length
         ? tracks.map((item) => {
             return (
-              <Chip>
+              <Chip key={item.id}>
                 <span>{item.name}</span>
                 <span>
                   <CloseIcon

@@ -23,7 +23,7 @@ const WithAuthorizedAndUserInfoNav = compose(
   withUserProfileState
 )(Nav);
 const WithAuthorizedSearchResults = withAuthorizedState(SearchResults);
-
+const WithAuthorizedTracklist = withAuthorizedState(Tracklist);
 function RootContainer({
   refresh,
   getUserProfile,
@@ -51,7 +51,7 @@ function RootContainer({
         <WithAuthorizedAndUserInfoFavArtists />
       </Grid>
       <Grid item md={8} xs={12}>
-        <Tracklist />
+        <WithAuthorizedTracklist />
       </Grid>
       <Grid item xs={12}>
         <Footer />

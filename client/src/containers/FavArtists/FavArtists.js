@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { Grid } from "@material-ui/core";
 import FavArtist from "../../components/FavArtists/FavArtist";
 import { Div, H2, Line } from "./style/style";

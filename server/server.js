@@ -144,6 +144,7 @@ app.get("/refresh_token", function (req, res) {
     }
   });
 });
+
 app.get("/ArtistsAndTracks", function (req, res) {
   const search = req.query.search;
   const authOptions = {
@@ -175,6 +176,65 @@ app.get("/ArtistsAndTracks", function (req, res) {
           if (!error && response.statusCode === 200) {
             res.status(200).send(body);
           } else {
+            res.status(401).send({ body: "Bad token" });
+          }
+        }
+      );
+    } else {
+      res.status(400).send({ body: "Bad request" });
+    }
+  });
+});
+
+app.get("/Recommendations", function (req, res) {
+  const limit = req.query.limit;
+  const min_danceability = req.query.min_danceability;
+  const max_danceability = req.query.max_danceability;
+  const min_energy = req.query.min_energy;
+  const max_energy = req.query.max_energy;
+  const min_popularity = req.query.min_popularity;
+  const max_popularity = req.query.max_popularity;
+  const seed_artists = req.query.seed_artists;
+  const seed_tracks = req.query.seed_tracks;
+  const filters = `limit=${limit}&min_popularity=${min_popularity}&max_popularity=${max_popularity}&min_energy=${min_energy}&max_energy=${max_energy}&min_danceability=${min_danceability}&max_danceability=${max_danceability}`;
+  let seed = "";
+  if (seed_artists) {
+    seed += `&seed_artists=${seed_artists}`;
+  }
+  if (seed_tracks) {
+    seed += `&seed_tracks=${seed_tracks}`;
+  }
+
+  const authOptions = {
+    url: "https://accounts.spotify.com/api/token",
+    form: {
+      grant_type: "client_credentials",
+    },
+    headers: {
+      Authorization:
+        "Basic " +
+        new Buffer(client_id + ":" + client_secret).toString("base64"),
+    },
+    json: true,
+  };
+
+  request.post(authOptions, function (error, response, body) {
+    if (!error && response.statusCode === 200) {
+      const { access_token } = body;
+      request.get(
+        {
+          url: `https://api.spotify.com/v1/recommendations?${filters}${seed}`,
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${access_token}`,
+          },
+        },
+        function (error, response, body) {
+          if (!error && response.statusCode === 200) {
+            res.status(200).send(body);
+          } else {
+            console.log(body);
             res.status(401).send({ body: "Bad token" });
           }
         }

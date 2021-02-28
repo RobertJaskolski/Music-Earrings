@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { Div } from "./style/style";
 import TextField from "@material-ui/core/TextField";
 import { withStyles } from "@material-ui/core/styles";
@@ -51,9 +50,5 @@ function SearchInput(props) {
     </Div>
   );
 }
-
-SearchInput.propTypes = {
-  handleOnChangeSearch: PropTypes.func,
-};
 
 export default SearchInput;

@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import PlayArrowIcon from "@material-ui/icons/PlayArrow";
 import PlaylistAddIcon from "@material-ui/icons/PlaylistAdd";
 import QueueIcon from "@material-ui/icons/Queue";
@@ -88,10 +87,5 @@ function TrackChip(props) {
     </ChipTrack>
   );
 }
-
-TrackChip.propTypes = {
-  name: PropTypes.string,
-  album: PropTypes.object,
-};
 
 export default TrackChip;
