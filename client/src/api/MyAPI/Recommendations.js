@@ -1,9 +1,9 @@
-import { LogoutUser, searchValue } from "../../utils/ApiUtils";
+import { LogoutUser } from "../../utils/ApiUtils";
 import { spotifyApiActions } from "../../reducers/spotifyApiResponses";
 import axios from "axios";
 
 const GetRecommendations = () => async (dispatch, getState) => {
-  const { tokens, filtrsGeneratePlaylist } = getState();
+  const { filtrsGeneratePlaylist } = getState();
   let seed = "";
   if (filtrsGeneratePlaylist["artistSeeds"].length > 0) {
     seed += "&seed_artists=";
@@ -28,10 +28,6 @@ const GetRecommendations = () => async (dispatch, getState) => {
   }&max_energy=${filtrsGeneratePlaylist["energy"][1] / 100}&min_danceability=${
     filtrsGeneratePlaylist["danceable"][0] / 100
   }&max_danceability=${filtrsGeneratePlaylist["danceable"][1] / 100}`;
-  const optionsAxios = options(
-    `/v1/recommendations?${filters}${seed}`,
-    tokens["accessToken"]
-  );
   await axios(
     `${process.env.REACT_APP_API_URL}/Recommendations?${filters}${seed}`
   )

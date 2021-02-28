@@ -17,12 +17,14 @@ function Filters(props) {
     changePopularity,
     changeDanceable,
     changeLimit,
+    auth,
   } = props;
   const handleChange = (name, newValue) => {
     if (name === "energy") changeEnergy(newValue);
     else if (name === "popularity") changePopularity(newValue);
     else if (name === "danceable") changeDanceable(newValue);
   };
+
   const handleChangeLimit = (e) => {
     changeLimit(e.target.value);
   };
@@ -46,7 +48,6 @@ function Filters(props) {
           <option value={100}>100</option>
         </Select>
       </FormControl>
-
       <Typography id='range-slider-Popularity' gutterBottom>
         Popularity
       </Typography>

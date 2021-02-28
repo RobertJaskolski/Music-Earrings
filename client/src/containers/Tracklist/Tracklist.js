@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { filtersActions } from "../../reducers/filtersForGeneratePlaylist";
 import { Filters, TracksAndArtists } from "../../components/Tracklist";
 import API from "../../api/SpotifyAPI";
-
+import MyAPI from "../../api/MyAPI";
 function Tracklist(props) {
   const {
     seedArtists,
@@ -12,7 +12,9 @@ function Tracklist(props) {
     deleteArtist,
     deleteTrack,
     filtersLength,
-    GetRecommendationsSpotify,
+    SpotifyGetRecommendations,
+    MyAPIGetRecommendations,
+    auth,
   } = props;
   const handleDeleteArtist = (artist) => {
     deleteArtist(artist);
@@ -22,7 +24,11 @@ function Tracklist(props) {
   };
   useEffect(() => {
     if (seedArtists.length > 0 || seedTracks.length > 0) {
-      GetRecommendationsSpotify();
+      if (auth) {
+        SpotifyGetRecommendations();
+      } else {
+        MyAPIGetRecommendations();
+      }
     }
   }, [seedArtists, seedTracks]);
   return (
@@ -30,7 +36,7 @@ function Tracklist(props) {
       <main style={{ width: "100%" }}>
         <H2>Tracklist</H2>
         <Line />
-        <Filters />
+        <Filters auth={auth} />
         {filtersLength ? (
           <TracksAndArtists
             handleDeleteArtist={handleDeleteArtist}
@@ -52,7 +58,8 @@ const mapDispatchToProps = (dispatch) => {
     deleteTrack: (item) => {
       dispatch(filtersActions.deleteTrack(item));
     },
-    GetRecommendationsSpotify: () => dispatch(API.GetRecommendations()),
+    SpotifyGetRecommendations: () => dispatch(API.GetRecommendations()),
+    MyAPIGetRecommendations: () => dispatch(MyAPI.GetRecommendations()),
   };
 };
 const mapStateToProps = (state) => {
