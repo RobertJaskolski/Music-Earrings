@@ -21,7 +21,6 @@ function FavArtists(props) {
     <Grid container>
       <Grid item xs={12}>
         <H2>Yours favs</H2>
-        <Line />
         <Div>
           {favs.map((item) => {
             return (

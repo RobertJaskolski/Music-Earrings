@@ -3,9 +3,9 @@ import { authActions } from "../../reducers/auth";
 import axios from "axios";
 import store from "../../index";
 
-async function RefreshToken(refreshToken) {
+const RefreshToken = (refreshToken) => async (dispatch) => {
   if (refreshToken) {
-    store.dispatch(authActions.checking());
+    dispatch(authActions.checking());
 
     await axios
       .get(
@@ -17,18 +17,18 @@ async function RefreshToken(refreshToken) {
             accessToken: response.data["access_token"],
             refreshToken: refreshToken,
           });
-          store.dispatch(authActions.login());
+          dispatch(authActions.login());
         } else {
-          store.dispatch(authActions.logout());
-          store.dispatch(tokensActions.clear());
+          dispatch(authActions.logout());
+          dispatch(tokensActions.clear());
         }
       })
       .catch((err) => {
-        store.dispatch(authActions.logout());
+        dispatch(authActions.logout());
       });
   } else {
-    store.dispatch(authActions.logout());
+    dispatch(authActions.logout());
   }
-}
+};
 
 export default RefreshToken;

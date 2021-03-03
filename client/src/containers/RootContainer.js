@@ -13,7 +13,7 @@ import { compose } from "recompose";
 import SearchResults from "./SearchResults/SearchResults";
 import FavArtists from "./FavArtists/FavArtists";
 import Tracklist from "./Tracklist/Tracklist";
-
+import Queue from "./Queue/Queue";
 const WithAuthorizedAndUserInfoFavArtists = compose(
   withAuthorizedState,
   withUserProfileState
@@ -30,10 +30,11 @@ function RootContainer({
   auth,
   refreshToken,
   getFavArtists,
+  getRefreshToken,
 }) {
   useEffect(() => {
     GetHash(refresh);
-    MyAPI.RefreshToken(refreshToken);
+    getRefreshToken(refreshToken);
     if (auth) {
       getUserProfile();
       getFavArtists();
@@ -41,20 +42,25 @@ function RootContainer({
   });
   return (
     <Container maxWidth='xl'>
-      <Grid item xs={12}>
-        <WithAuthorizedAndUserInfoNav />
-      </Grid>
-      <Grid item xs={12}>
-        <WithAuthorizedSearchResults data-test='searchResults' />
-      </Grid>
-      <Grid item xs={12}>
-        <WithAuthorizedAndUserInfoFavArtists />
-      </Grid>
-      <Grid item md={8} xs={12}>
-        <WithAuthorizedTracklist />
-      </Grid>
-      <Grid item xs={12}>
-        <Footer />
+      <Grid container spacing={1}>
+        <Grid item xs={12}>
+          <WithAuthorizedAndUserInfoNav />
+        </Grid>
+        <Grid item xs={12}>
+          <WithAuthorizedSearchResults data-test='searchResults' />
+        </Grid>
+        <Grid item xs={12}>
+          <WithAuthorizedAndUserInfoFavArtists />
+        </Grid>
+        <Grid item md={8} xs={12}>
+          <WithAuthorizedTracklist />
+        </Grid>
+        <Grid item md={4} xs={12}>
+          <Queue />
+        </Grid>
+        <Grid item xs={12}>
+          <Footer />
+        </Grid>
       </Grid>
     </Container>
   );
@@ -64,6 +70,7 @@ const mapDispatchToProps = (dispatch) => ({
   refresh: (tokens) => dispatch(tokensActions.refresh(tokens)),
   getUserProfile: () => dispatch(API.GetUserProfile()),
   getFavArtists: () => dispatch(API.GetUserFavArtists()),
+  getRefreshToken: (refreshToken) => dispatch(MyAPI.RefreshToken(refreshToken)),
 });
 const mapStateToProps = (state) => {
   return {

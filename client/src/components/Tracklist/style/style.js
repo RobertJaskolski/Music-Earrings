@@ -33,3 +33,8 @@ export const Chip = styled.span`
     }
   }
 `;
+export const Section = styled.section`
+  margin-top: 15px;
+  margin-left: 7px;
+  margin-bottom: 5px;
+`;
