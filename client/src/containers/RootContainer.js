@@ -30,10 +30,11 @@ function RootContainer({
   auth,
   refreshToken,
   getFavArtists,
+  getRefreshToken,
 }) {
   useEffect(() => {
     GetHash(refresh);
-    MyAPI.RefreshToken(refreshToken);
+    getRefreshToken(refreshToken);
     if (auth) {
       getUserProfile();
       getFavArtists();
@@ -64,6 +65,7 @@ const mapDispatchToProps = (dispatch) => ({
   refresh: (tokens) => dispatch(tokensActions.refresh(tokens)),
   getUserProfile: () => dispatch(API.GetUserProfile()),
   getFavArtists: () => dispatch(API.GetUserFavArtists()),
+  getRefreshToken: (refreshToken) => dispatch(MyAPI.RefreshToken(refreshToken)),
 });
 const mapStateToProps = (state) => {
   return {
