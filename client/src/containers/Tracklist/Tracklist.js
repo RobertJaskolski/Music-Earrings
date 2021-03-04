@@ -5,6 +5,7 @@ import { filtersActions } from "../../reducers/filtersForGeneratePlaylist";
 import { Filters, TracksAndArtists } from "../../components/Tracklist";
 import API from "../../api/SpotifyAPI";
 import MyAPI from "../../api/MyAPI";
+import Tracks from "../../components/Tracklist/Tracks";
 function Tracklist(props) {
   const {
     seedArtists,
@@ -15,6 +16,7 @@ function Tracklist(props) {
     SpotifyGetRecommendations,
     MyAPIGetRecommendations,
     auth,
+    recommendTracks,
   } = props;
   const handleDeleteArtist = (artist) => {
     deleteArtist(artist);
@@ -45,6 +47,10 @@ function Tracklist(props) {
             tracks={seedTracks}
           />
         ) : null}
+        {recommendTracks["tracks"]?.length > 0 &&
+          recommendTracks["tracks"]?.map((track) => {
+            return <Tracks track={track} />;
+          })}
       </main>
     </Div>
   );
@@ -66,6 +72,7 @@ const mapStateToProps = (state) => {
   return {
     seedArtists: state.filtrsGeneratePlaylist["artistSeeds"],
     seedTracks: state.filtrsGeneratePlaylist["trackSeeds"],
+    recommendTracks: state.SpotifyResponses["tracklist"],
     filtersLength:
       state.filtrsGeneratePlaylist["artistSeeds"].length +
       state.filtrsGeneratePlaylist["trackSeeds"].length,
