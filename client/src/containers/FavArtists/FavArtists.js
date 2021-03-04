@@ -1,7 +1,7 @@
 import React from "react";
 import { Grid } from "@material-ui/core";
 import FavArtist from "../../components/FavArtists/FavArtist";
-import { Div, H2, Line } from "./style/style";
+import { Div, H2 } from "./style/style";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { filtersActions } from "../../reducers/filtersForGeneratePlaylist";
 import { connect } from "react-redux";
