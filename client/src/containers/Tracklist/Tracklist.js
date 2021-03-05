@@ -1,11 +1,13 @@
 import React, { useEffect } from "react";
-import { Div, Line, H2 } from "./style/style";
+import { Div, Line, H2, Span } from "./style/style";
 import { connect } from "react-redux";
 import { filtersActions } from "../../reducers/filtersForGeneratePlaylist";
 import { Filters, TracksAndArtists } from "../../components/Tracklist";
 import API from "../../api/SpotifyAPI";
 import MyAPI from "../../api/MyAPI";
 import Tracks from "../../components/Tracklist/Tracks";
+import LinearProgress from "@material-ui/core/LinearProgress";
+import { spotifyApiActions } from "../../reducers/spotifyApiResponses";
 function Tracklist(props) {
   const {
     seedArtists,
@@ -17,12 +19,17 @@ function Tracklist(props) {
     MyAPIGetRecommendations,
     auth,
     recommendTracks,
+    loadingTracklist,
+    clearTracklist,
   } = props;
   const handleDeleteArtist = (artist) => {
     deleteArtist(artist);
+    if (filtersLength === 1) clearTracklist();
   };
   const handleDeleteTrack = (track) => {
     deleteTrack(track);
+
+    if (!filtersLength === 1) clearTracklist();
   };
   useEffect(() => {
     if (seedArtists.length > 0 || seedTracks.length > 0) {
@@ -32,7 +39,13 @@ function Tracklist(props) {
         MyAPIGetRecommendations();
       }
     }
-  }, [seedArtists, seedTracks]);
+  }, [
+    seedArtists,
+    seedTracks,
+    SpotifyGetRecommendations,
+    MyAPIGetRecommendations,
+    auth,
+  ]);
   return (
     <Div>
       <main style={{ width: "100%" }}>
@@ -47,9 +60,10 @@ function Tracklist(props) {
             tracks={seedTracks}
           />
         ) : null}
+        <Span>{loadingTracklist && <LinearProgress />}</Span>
         {recommendTracks["tracks"]?.length > 0 &&
           recommendTracks["tracks"]?.map((track) => {
-            return <Tracks track={track} />;
+            return <Tracks track={track} key={track.id} />;
           })}
       </main>
     </Div>
@@ -64,6 +78,9 @@ const mapDispatchToProps = (dispatch) => {
     deleteTrack: (item) => {
       dispatch(filtersActions.deleteTrack(item));
     },
+    clearTracklist: () => {
+      dispatch(spotifyApiActions.clearTracklist());
+    },
     SpotifyGetRecommendations: () => dispatch(API.GetRecommendations()),
     MyAPIGetRecommendations: () => dispatch(MyAPI.GetRecommendations()),
   };
@@ -76,6 +93,7 @@ const mapStateToProps = (state) => {
     filtersLength:
       state.filtrsGeneratePlaylist["artistSeeds"].length +
       state.filtrsGeneratePlaylist["trackSeeds"].length,
+    loadingTracklist: state.SpotifyResponses["loadingTracklist"],
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Tracklist);
