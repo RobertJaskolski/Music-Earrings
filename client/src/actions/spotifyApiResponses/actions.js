@@ -3,6 +3,7 @@ import types from "./types";
 const fetching = () => ({
   type: types.FETCHING_DATA,
 });
+const fetchingTracklist = () => ({ type: types.FETCHING_DATA_TRACKLIST });
 const clearSearch = () => ({ type: types.CLEAR_DATA_SEARCH });
 const saveSearch = (payload) => ({
   type: types.SAVE_RESPONSE_DATA_SEARCH,
@@ -19,6 +20,7 @@ const ex = {
   fetching,
   saveTracklist,
   clearTracklist,
+  fetchingTracklist,
 };
 
 export default ex;

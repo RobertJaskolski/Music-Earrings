@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import Typography from "@material-ui/core/Typography";
@@ -10,6 +10,9 @@ import MenuItem from "@material-ui/core/MenuItem";
 import InputBase from "@material-ui/core/InputBase";
 import { Grid } from "@material-ui/core";
 import { Section } from "./style/style";
+import API from "../../api/SpotifyAPI";
+import MyAPI from "../../api/MyAPI";
+
 const CustomInput = withStyles((theme) => ({
   root: {
     "label + &": {
@@ -64,24 +67,49 @@ const CustomSlider = withStyles({
 function Filters(props) {
   const {
     limit,
-    popularity,
-    energy,
-    danceable,
     changeEnergy,
     changePopularity,
     changeDanceable,
     changeLimit,
     auth,
+    trackSeeds,
+    artistSeeds,
+    SpotifyGetRecommendations,
+    MyAPIGetRecommendations,
   } = props;
+
   const handleChange = (name, newValue) => {
-    if (name === "energy") changeEnergy(newValue);
-    else if (name === "popularity") changePopularity(newValue);
-    else if (name === "danceable") changeDanceable(newValue);
+    if (name === "energy") {
+      setEnergy(newValue);
+    } else if (name === "popularity") {
+      setPopularity(newValue);
+    } else if (name === "danceable") {
+      setDanceable(newValue);
+    }
   };
 
   const handleChangeLimit = (e) => {
     changeLimit(e.target.value);
+    responseToApi();
   };
+
+  const responseToApi = () => {
+    changeEnergy(energy);
+    changeDanceable(danceable);
+    changePopularity(popularity);
+    if (artistSeeds.length || trackSeeds.length) {
+      if (auth) {
+        SpotifyGetRecommendations();
+      } else if (!auth) {
+        MyAPIGetRecommendations();
+      }
+    }
+  };
+  const [popularity, setPopularity] = useState([0, 100]);
+  const [danceable, setDanceable] = useState([0, 100]);
+  const [energy, setEnergy] = useState([0, 100]);
+  useEffect(() => {}, [popularity, danceable, energy]);
+
   return (
     <Section>
       <Grid container spacing={6}>
@@ -109,6 +137,7 @@ function Filters(props) {
             Popularity
           </Typography>
           <CustomSlider
+            onChangeCommitted={responseToApi}
             value={popularity}
             onChange={(_, newValue) => {
               handleChange("popularity", newValue);
@@ -125,6 +154,7 @@ function Filters(props) {
             onChange={(_, newValue) => {
               handleChange("energy", newValue);
             }}
+            onChangeCommitted={responseToApi}
             aria-labelledby='range-slider-Energy'
           />
         </Grid>
@@ -137,6 +167,7 @@ function Filters(props) {
             onChange={(_, newValue) => {
               handleChange("danceable", newValue);
             }}
+            onChangeCommitted={responseToApi}
             aria-labelledby='range-slider-Danceable'
           />
         </Grid>
@@ -148,9 +179,8 @@ function Filters(props) {
 const mapStateToProps = (state) => {
   return {
     limit: state.filtrsGeneratePlaylist["limit"],
-    popularity: state.filtrsGeneratePlaylist["popularity"],
-    energy: state.filtrsGeneratePlaylist["energy"],
-    danceable: state.filtrsGeneratePlaylist["danceable"],
+    artistSeeds: state.filtrsGeneratePlaylist["artistSeeds"],
+    trackSeeds: state.filtrsGeneratePlaylist["trackSeeds"],
   };
 };
 
@@ -168,6 +198,8 @@ const mapDispatchToProps = (dispatch) => {
     changeLimit: (item) => {
       dispatch(filtersActions.addLimit(item));
     },
+    SpotifyGetRecommendations: () => dispatch(API.GetRecommendations()),
+    MyAPIGetRecommendations: () => dispatch(MyAPI.GetRecommendations()),
   };
 };
 

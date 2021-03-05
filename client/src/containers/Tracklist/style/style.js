@@ -15,3 +15,8 @@ export const Line = styled.div`
   height: 1px;
   background-color: #1ed760;
 `;
+export const Span = styled.span`
+  width: 100%;
+  display: inline-block;
+  min-height: 10px;
+`;

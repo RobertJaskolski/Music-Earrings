@@ -28,6 +28,7 @@ const GetRecommendations = () => async (dispatch, getState) => {
   }&max_energy=${filtrsGeneratePlaylist["energy"][1] / 100}&min_danceability=${
     filtrsGeneratePlaylist["danceable"][0] / 100
   }&max_danceability=${filtrsGeneratePlaylist["danceable"][1] / 100}`;
+  dispatch(spotifyApiActions.fetchingTracklist());
   await axios(
     `${process.env.REACT_APP_API_URL}/Recommendations?${filters}${seed}`
   )

@@ -4,15 +4,18 @@ const INIT_STATE = {
   tracks: [],
   tracklist: [],
   loading: false,
+  loadingTracklist: false,
 };
 const spotifyApiReducer = (state = INIT_STATE, action) => {
   switch (action.type) {
     case types.FETCHING_DATA:
       return { ...state, loading: true };
+    case types.FETCHING_DATA_TRACKLIST:
+      return { ...state, loadingTracklist: true };
     case types.CLEAR_DATA_SEARCH:
       return { ...state, loading: false, tracks: [], artists: [] };
     case types.CLEAR_DATA_TRACKLIST:
-      return { ...state, loading: false, tracklist: [] };
+      return { ...state, loadingTracklist: false, tracklist: [] };
     case types.SAVE_RESPONSE_DATA_SEARCH:
       return {
         ...state,
@@ -24,7 +27,7 @@ const spotifyApiReducer = (state = INIT_STATE, action) => {
       return {
         ...state,
         tracklist: action.payload.tracklist,
-        loading: false,
+        loadingTracklist: false,
       };
     default:
       return state;
