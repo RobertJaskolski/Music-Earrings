@@ -18,5 +18,5 @@ export const Line = styled.div`
 export const Span = styled.span`
   width: 100%;
   display: inline-block;
-  height: 5px;
+  min-height: 10px;
 `;

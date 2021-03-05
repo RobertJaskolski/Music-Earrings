@@ -8,6 +8,19 @@ import MyAPI from "../../api/MyAPI";
 import Tracks from "../../components/Tracklist/Tracks";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import { spotifyApiActions } from "../../reducers/spotifyApiResponses";
+import { withStyles } from "@material-ui/core/styles";
+
+const CssLinearProgress = withStyles(() => ({
+  root: {
+    height: 7,
+    borderRadius: 5,
+  },
+  bar: {
+    borderRadius: 5,
+    backgroundColor: "#1ed760",
+  },
+}))(LinearProgress);
+
 function Tracklist(props) {
   const {
     seedArtists,
@@ -60,7 +73,7 @@ function Tracklist(props) {
             tracks={seedTracks}
           />
         ) : null}
-        <Span>{loadingTracklist && <LinearProgress />}</Span>
+        <Span>{loadingTracklist && <CssLinearProgress />}</Span>
         {recommendTracks["tracks"]?.length > 0 &&
           recommendTracks["tracks"]?.map((track) => {
             return <Tracks track={track} key={track.id} />;
