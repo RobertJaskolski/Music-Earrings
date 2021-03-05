@@ -32,6 +32,7 @@ const GetRecommendations = () => async (dispatch, getState) => {
     `/v1/recommendations?${filters}${seed}`,
     tokens["accessToken"]
   );
+  dispatch(spotifyApiActions.fetchingTracklist());
   await axios(optionsAxios)
     .then((response) => {
       if (response.status === 200) {
