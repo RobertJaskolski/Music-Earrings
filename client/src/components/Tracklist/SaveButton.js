@@ -3,6 +3,7 @@ import { Button } from "../../styles/Buttons";
 import TextField from "@material-ui/core/TextField";
 import { withStyles } from "@material-ui/core/styles";
 import { DivSave } from "./style/style";
+import LoginButton from "../Nav/LoginButton";
 
 const CssTextField = withStyles({
   root: {
@@ -37,11 +38,18 @@ const CssTextField = withStyles({
   },
 })(TextField);
 
-function SaveButton() {
+function SaveButton(props) {
+  const { auth } = props;
   return (
     <DivSave>
-      <CssTextField label='Name of tracklist' />
-      <Button>Save tracklist to spotify</Button>
+      {auth ? (
+        <div>
+          <CssTextField label='Name of tracklist' />
+          <Button>Save tracklist to spotify</Button>
+        </div>
+      ) : (
+        <LoginButton redirectLink={`${process.env.REACT_APP_API_URL}/login`} />
+      )}
     </DivSave>
   );
 }

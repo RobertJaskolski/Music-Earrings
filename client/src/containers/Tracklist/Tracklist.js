@@ -83,7 +83,7 @@ function Tracklist(props) {
             return <Tracks track={track} key={track.id} />;
           })}
 
-        <SaveButton />
+        <SaveButton auth={auth} />
       </main>
     </Div>
   );
