@@ -26,6 +26,13 @@ const deleteTrack = (track) => ({ type: types.DELETE_TRACK, payload: track });
 
 const clearFilters = () => ({ type: types.CLEAR_FILTERS });
 
+const addNameTracklist = (name) => ({
+  type: types.ADD_NAME_TRACKLIST,
+  payload: name,
+});
+
+const clearNameTracklist = () => ({ type: types.DELETE_NAME_TRACKLIST });
+
 const ex = {
   addLimit,
   deleteLimit,
@@ -40,6 +47,8 @@ const ex = {
   addTrack,
   deleteTrack,
   clearFilters,
+  addNameTracklist,
+  clearNameTracklist,
 };
 
 export default ex;

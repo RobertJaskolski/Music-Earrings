@@ -38,7 +38,12 @@ function Tracklist(props) {
     recommendTracks,
     loadingTracklist,
     clearTracklist,
+    changeTracklistName,
+    tracklistName,
   } = props;
+  const handleSavePlaylistButton = (event) => {
+    changeTracklistName(event.target.value);
+  };
   const handleDeleteArtist = (artist) => {
     deleteArtist(artist);
     if (filtersLength === 1) clearTracklist();
@@ -83,7 +88,12 @@ function Tracklist(props) {
             return <Tracks track={track} key={track.id} />;
           })}
 
-        <SaveButton auth={auth} />
+        <SaveButton
+          disabledName={!recommendTracks["tracks"]?.length && true}
+          disabledButton={!tracklistName && true}
+          handleTextField={handleSavePlaylistButton}
+          auth={auth}
+        />
       </main>
     </Div>
   );
@@ -100,6 +110,9 @@ const mapDispatchToProps = (dispatch) => {
     clearTracklist: () => {
       dispatch(spotifyApiActions.clearTracklist());
     },
+    changeTracklistName: (name) => {
+      dispatch(filtersActions.addNameTracklist(name));
+    },
     SpotifyGetRecommendations: () => dispatch(API.GetRecommendations()),
     MyAPIGetRecommendations: () => dispatch(MyAPI.GetRecommendations()),
   };
@@ -113,6 +126,7 @@ const mapStateToProps = (state) => {
       state.filtrsGeneratePlaylist["artistSeeds"].length +
       state.filtrsGeneratePlaylist["trackSeeds"].length,
     loadingTracklist: state.SpotifyResponses["loadingTracklist"],
+    tracklistName: state.filtrsGeneratePlaylist["tracklistName"],
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Tracklist);

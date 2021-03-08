@@ -18,7 +18,6 @@ const CssTextField = withStyles({
     "& .MuiInput-underline:after": {
       borderBottomColor: "#1ed760",
     },
-
     "& .MuiInput-underline:before": {
       borderBottom: "2px solid #1ed760",
     },
@@ -39,13 +38,19 @@ const CssTextField = withStyles({
 })(TextField);
 
 function SaveButton(props) {
-  const { auth } = props;
+  const { auth, handleTextField, disabledButton, disabledName } = props;
   return (
     <DivSave>
       {auth ? (
         <div>
-          <CssTextField label='Name of tracklist' />
-          <Button>Save tracklist to spotify</Button>
+          <CssTextField
+            disabled={disabledName}
+            onChange={handleTextField}
+            label={
+              disabledName ? "First, generate playlist" : "Name of playlist"
+            }
+          />
+          <Button disabled={disabledButton}>Save tracklist to spotify</Button>
         </div>
       ) : (
         <LoginButton redirectLink={`${process.env.REACT_APP_API_URL}/login`} />
