@@ -7,6 +7,7 @@ const INIT_STATE = {
   energy: [0, 100],
   popularity: [0, 100],
   danceable: [0, 100],
+  tracklistName: "",
 };
 const filterReducer = (state = INIT_STATE, action) => {
   switch (action.type) {
@@ -51,6 +52,12 @@ const filterReducer = (state = INIT_STATE, action) => {
         if (item !== action.payload) return item;
       });
       return { ...state, trackSeeds: newTrackSeeds };
+
+    case types.ADD_NAME_TRACKLIST:
+      return { ...state, tracklistName: action.payload };
+
+    case types.DELETE_NAME_TRACKLIST:
+      return { ...state, tracklistName: "" };
 
     case types.CLEAR_FILTERS:
       return INIT_STATE;

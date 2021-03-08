@@ -1,7 +1,7 @@
 import React from "react";
 import { Grid } from "@material-ui/core";
 import FavArtist from "../../components/FavArtists/FavArtist";
-import { Div, H2 } from "./style/style";
+import { Div, H2, GridContainer } from "./style/style";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { filtersActions } from "../../reducers/filtersForGeneratePlaylist";
 import { connect } from "react-redux";
@@ -18,7 +18,7 @@ function FavArtists(props) {
     return null;
   }
   return (
-    <Grid container>
+    <GridContainer container>
       <Grid item xs={12}>
         <H2>Yours favs</H2>
         <Div>
@@ -34,7 +34,7 @@ function FavArtists(props) {
           })}
         </Div>
       </Grid>
-    </Grid>
+    </GridContainer>
   );
 }
 
