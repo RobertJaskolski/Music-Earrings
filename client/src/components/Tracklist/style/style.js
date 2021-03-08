@@ -5,6 +5,12 @@ export const Div = styled.div`
   display: flex;
   flex-wrap: wrap;
 `;
+export const DivSave = styled.div`
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+`;
 
 export const Chip = styled.span`
   //font-size: 18px;

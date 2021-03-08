@@ -2,7 +2,11 @@ import React, { useEffect } from "react";
 import { Div, Line, H2, Span } from "./style/style";
 import { connect } from "react-redux";
 import { filtersActions } from "../../reducers/filtersForGeneratePlaylist";
-import { Filters, TracksAndArtists } from "../../components/Tracklist";
+import {
+  Filters,
+  TracksAndArtists,
+  SaveButton,
+} from "../../components/Tracklist";
 import API from "../../api/SpotifyAPI";
 import MyAPI from "../../api/MyAPI";
 import Tracks from "../../components/Tracklist/Tracks";
@@ -78,6 +82,8 @@ function Tracklist(props) {
           recommendTracks["tracks"]?.map((track) => {
             return <Tracks track={track} key={track.id} />;
           })}
+
+        <SaveButton />
       </main>
     </Div>
   );
