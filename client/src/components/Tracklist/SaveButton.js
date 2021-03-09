@@ -44,6 +44,7 @@ function SaveButton(props) {
     disabledButton,
     disabledName,
     tracklistName,
+    handleButton,
   } = props;
   return (
     <DivSave>
@@ -57,7 +58,15 @@ function SaveButton(props) {
               disabledName ? "First, generate playlist" : "Name of playlist"
             }
           />
-          <Button disabled={disabledButton}>Save tracklist to spotify</Button>
+          <Button
+            onClick={(event) => {
+              event.preventDefault();
+              handleButton();
+            }}
+            disabled={disabledButton}
+          >
+            Save tracklist to spotify
+          </Button>
         </div>
       ) : (
         <LoginButton redirectLink={`${process.env.REACT_APP_API_URL}/login`} />

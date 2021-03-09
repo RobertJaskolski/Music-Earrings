@@ -41,9 +41,16 @@ function Tracklist(props) {
     changeTracklistName,
     tracklistName,
     clearTracklistName,
+    SpotifyCreatePlaylist,
   } = props;
-  const handleSavePlaylistButton = (event) => {
+  const handleChangeTracklistName = (event) => {
     changeTracklistName(event.target.value);
+  };
+  const handleSaveTracklistName = () => {
+    if (tracklistName) {
+      SpotifyCreatePlaylist();
+      clearTracklistName();
+    }
   };
   const handleDeleteArtist = (artist) => {
     deleteArtist(artist);
@@ -99,7 +106,8 @@ function Tracklist(props) {
           disabledName={!recommendTracks["tracks"]?.length && true}
           disabledButton={!tracklistName && true}
           tracklistName={tracklistName}
-          handleTextField={handleSavePlaylistButton}
+          handleTextField={handleChangeTracklistName}
+          handleButton={handleSaveTracklistName}
           auth={auth}
         />
       </main>
@@ -126,6 +134,7 @@ const mapDispatchToProps = (dispatch) => {
     },
     SpotifyGetRecommendations: () => dispatch(API.GetRecommendations()),
     MyAPIGetRecommendations: () => dispatch(MyAPI.GetRecommendations()),
+    SpotifyCreatePlaylist: () => dispatch(API.CreatePlaylist()),
   };
 };
 const mapStateToProps = (state) => {
