@@ -2,12 +2,7 @@ import { LogoutUser, optionsPOST } from "../../utils/ApiUtils";
 import axios from "axios";
 
 const CreatePlaylist = () => async (dispatch, getState) => {
-  const {
-    filtrsGeneratePlaylist,
-    userInfo,
-    tokens,
-    SpotifyResponses,
-  } = getState();
+  const { filtrsGeneratePlaylist, userInfo, tokens, responses } = getState();
   const optionsAxios = optionsPOST(
     `/v1/users/${userInfo["data"].id}/playlists`,
     tokens["accessToken"],
@@ -21,7 +16,7 @@ const CreatePlaylist = () => async (dispatch, getState) => {
     .then((response) => {
       if (response.status === 201 || response.status === 200) {
         let query = "";
-        SpotifyResponses["tracklist"]?.tracks.map((track) => {
+        responses?.recommendedTracklist["tracklist"]?.map((track) => {
           query += track.uri + ",";
           return track;
         });

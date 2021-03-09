@@ -10,7 +10,7 @@ import {
 import { connect } from "react-redux";
 import { tokensActions } from "../../reducers/tokens";
 import { searchActions } from "../../reducers/search";
-import { spotifyApiActions } from "../../reducers/spotifyApiResponses";
+import { responseActions } from "../../reducers/responsesFromApi";
 import { authActions } from "../../reducers/auth";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import API from "../../api/SpotifyAPI";
@@ -23,10 +23,9 @@ const Nav = (props) => {
     auth,
     userProfile,
     search,
-    clearResponse,
+    clearArtistsAndTracks,
     SpotifyGetArtistAndTrack,
     MyAPIGetArtistAndTrack,
-    searchText,
   } = props;
   let time;
   const changeNav = useMediaQuery("(min-width:650px)");
@@ -45,7 +44,7 @@ const Nav = (props) => {
       } else if (event.target.value && !auth) {
         MyAPIGetArtistAndTrack();
       } else {
-        setTimeout(() => clearResponse(), 300);
+        setTimeout(() => clearArtistsAndTracks(), 300);
       }
     }, 700);
   };
@@ -128,8 +127,13 @@ const mapDispatchToProps = (dispatch) => {
     },
     SpotifyGetArtistAndTrack: () => dispatch(API.GetArtistAndTrack()),
     MyAPIGetArtistAndTrack: () => dispatch(MyAPI.GetArtistAndTrack()),
-    clearResponse: () => {
-      dispatch(spotifyApiActions.clearSearch());
+    clearArtistsAndTracks: () => {
+      dispatch(
+        responseActions.successArtistsAndTracks({
+          artists: [],
+          tracks: [],
+        })
+      );
     },
   };
 };

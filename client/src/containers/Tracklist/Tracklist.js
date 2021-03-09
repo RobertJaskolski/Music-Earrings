@@ -1,18 +1,21 @@
+// Import outside
 import React, { useEffect } from "react";
-import { Div, Line, H2, Span } from "./style/style";
 import { connect } from "react-redux";
+import LinearProgress from "@material-ui/core/LinearProgress";
+import { withStyles } from "@material-ui/core/styles";
+// Import utils, API's and etc.
+import API from "../../api/SpotifyAPI";
+import MyAPI from "../../api/MyAPI";
 import { filtersActions } from "../../reducers/filtersForGeneratePlaylist";
+// Import Components
 import {
   Filters,
   TracksAndArtists,
   SaveButton,
+  Tracks,
 } from "../../components/Tracklist";
-import API from "../../api/SpotifyAPI";
-import MyAPI from "../../api/MyAPI";
-import Tracks from "../../components/Tracklist/Tracks";
-import LinearProgress from "@material-ui/core/LinearProgress";
-import { spotifyApiActions } from "../../reducers/spotifyApiResponses";
-import { withStyles } from "@material-ui/core/styles";
+// Import Styles
+import { Div, Line, H2, Span } from "./style/style";
 
 const CssLinearProgress = withStyles(() => ({
   root: {
@@ -35,38 +38,42 @@ function Tracklist(props) {
     SpotifyGetRecommendations,
     MyAPIGetRecommendations,
     auth,
-    recommendTracks,
-    loadingTracklist,
-    clearTracklist,
+    recommendedTracks,
+    loadingRecommendedTracks,
+    clearRecommendedTracks,
     changeTracklistName,
     tracklistName,
     clearTracklistName,
     SpotifyCreatePlaylist,
   } = props;
+
   const handleChangeTracklistName = (event) => {
     changeTracklistName(event.target.value);
   };
+
   const handleSaveTracklistName = () => {
     if (tracklistName) {
       SpotifyCreatePlaylist();
       clearTracklistName();
     }
   };
+
   const handleDeleteArtist = (artist) => {
     deleteArtist(artist);
     if (filtersLength === 1) {
-      clearTracklist();
+      clearRecommendedTracks();
       clearTracklistName();
     }
   };
+
   const handleDeleteTrack = (track) => {
     deleteTrack(track);
-
     if (!filtersLength === 1) {
-      clearTracklist();
+      clearRecommendedTracks();
       clearTracklistName();
     }
   };
+
   useEffect(() => {
     if (seedArtists.length > 0 || seedTracks.length > 0) {
       if (auth) {
@@ -82,6 +89,7 @@ function Tracklist(props) {
     MyAPIGetRecommendations,
     auth,
   ]);
+
   return (
     <Div>
       <main style={{ width: "100%" }}>
@@ -96,14 +104,14 @@ function Tracklist(props) {
             tracks={seedTracks}
           />
         ) : null}
-        <Span>{loadingTracklist && <CssLinearProgress />}</Span>
-        {recommendTracks["tracks"]?.length > 0 &&
-          recommendTracks["tracks"]?.map((track) => {
+        <Span>{loadingRecommendedTracks && <CssLinearProgress />}</Span>
+        {recommendedTracks?.length > 0 &&
+          recommendedTracks?.map((track) => {
             return <Tracks track={track} key={track.id} />;
           })}
 
         <SaveButton
-          disabledName={!recommendTracks["tracks"]?.length && true}
+          disabledName={!recommendedTracks?.length && true}
           disabledButton={!tracklistName && true}
           tracklistName={tracklistName}
           handleTextField={handleChangeTracklistName}
@@ -123,9 +131,6 @@ const mapDispatchToProps = (dispatch) => {
     deleteTrack: (item) => {
       dispatch(filtersActions.deleteTrack(item));
     },
-    clearTracklist: () => {
-      dispatch(spotifyApiActions.clearTracklist());
-    },
     changeTracklistName: (name) => {
       dispatch(filtersActions.addNameTracklist(name));
     },
@@ -141,11 +146,9 @@ const mapStateToProps = (state) => {
   return {
     seedArtists: state.filtrsGeneratePlaylist["artistSeeds"],
     seedTracks: state.filtrsGeneratePlaylist["trackSeeds"],
-    recommendTracks: state.SpotifyResponses["tracklist"],
     filtersLength:
       state.filtrsGeneratePlaylist["artistSeeds"].length +
       state.filtrsGeneratePlaylist["trackSeeds"].length,
-    loadingTracklist: state.SpotifyResponses["loadingTracklist"],
     tracklistName: state.filtrsGeneratePlaylist["tracklistName"],
   };
 };

@@ -115,7 +115,7 @@ function Filters(props) {
       <Grid container spacing={6}>
         <Grid item xs={12} md={2}>
           <Typography id='range-slider-Popularity' gutterBottom>
-            Tracks
+            Max Tracks
           </Typography>
           <FormControl>
             <Select

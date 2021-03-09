@@ -1,5 +1,5 @@
 import { LogoutUser, options } from "../../utils/ApiUtils";
-import { spotifyApiActions } from "../../reducers/spotifyApiResponses";
+import { responseActions } from "../../reducers/responsesFromApi";
 import axios from "axios";
 
 const GetRecommendations = () => async (dispatch, getState) => {
@@ -10,6 +10,7 @@ const GetRecommendations = () => async (dispatch, getState) => {
     filtrsGeneratePlaylist["artistSeeds"].map((item) => {
       seed += item.id;
       seed += ",";
+      return item;
     });
     seed = seed.slice(0, -1);
   }
@@ -18,6 +19,7 @@ const GetRecommendations = () => async (dispatch, getState) => {
     filtrsGeneratePlaylist["trackSeeds"].map((item) => {
       seed += item.id;
       seed += ",";
+      return item;
     });
     seed = seed.slice(0, -1);
   }
@@ -32,24 +34,24 @@ const GetRecommendations = () => async (dispatch, getState) => {
     `/v1/recommendations?${filters}${seed}`,
     tokens["accessToken"]
   );
-  dispatch(spotifyApiActions.fetchingTracklist());
+  dispatch(responseActions.requestRecommendedTracks());
   await axios(optionsAxios)
     .then((response) => {
       if (response.status === 200) {
         dispatch(
-          spotifyApiActions.saveTracklist({
-            tracklist: response.data,
+          responseActions.successRecommendedTracks({
+            tracklist: response.data.tracks,
           })
         );
       } else {
         LogoutUser(dispatch);
-        dispatch(spotifyApiActions.clearTracklist());
+        dispatch(responseActions.failureResponse("error"));
         return undefined;
       }
     })
     .catch((err) => {
       LogoutUser(dispatch);
-      dispatch(spotifyApiActions.clearTracklist());
+      dispatch(responseActions.failureResponse(err.name));
       return undefined;
     });
 };

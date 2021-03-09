@@ -1,19 +1,29 @@
+// Import outside
 import React, { useEffect } from "react";
 import { Container, Grid } from "@material-ui/core";
-import Nav from "./Nav/Nav";
-import Footer from "../components/Footer/Footer";
 import { connect } from "react-redux";
+import { compose } from "recompose";
+
+// Import some utils, API's and etc.
 import { tokensActions } from "../reducers/tokens";
 import MyAPI from "../api/MyAPI";
 import GetHash from "../utils/GetHash";
+import API from "../api/SpotifyAPI";
+
+// Import HOC's
 import withAuthorizedState from "../components/shared/HOC/withAuthorized";
 import withUserProfileState from "../components/shared/HOC/withUserProfile";
-import API from "../api/SpotifyAPI";
-import { compose } from "recompose";
+import withResponseFromAPIState from "../components/shared/HOC/withResponsesFromAPI";
+
+// Import containers
 import SearchResults from "./SearchResults/SearchResults";
 import FavArtists from "./FavArtists/FavArtists";
 import Tracklist from "./Tracklist/Tracklist";
 import Queue from "./Queue/Queue";
+import Nav from "./Nav/Nav";
+import Footer from "../components/Footer/Footer";
+
+// Containers with HOC's
 const WithAuthorizedAndUserInfoFavArtists = compose(
   withAuthorizedState,
   withUserProfileState
@@ -22,8 +32,15 @@ const WithAuthorizedAndUserInfoNav = compose(
   withAuthorizedState,
   withUserProfileState
 )(Nav);
-const WithAuthorizedSearchResults = withAuthorizedState(SearchResults);
-const WithAuthorizedTracklist = withAuthorizedState(Tracklist);
+const WithAuthorizedAndResponseDataSearchResults = compose(
+  withAuthorizedState,
+  withResponseFromAPIState
+)(SearchResults);
+const WithAuthorizedAndResponseDataTracklist = compose(
+  withAuthorizedState,
+  withResponseFromAPIState
+)(Tracklist);
+
 function RootContainer({
   refresh,
   getUserProfile,
@@ -47,13 +64,13 @@ function RootContainer({
           <WithAuthorizedAndUserInfoNav />
         </Grid>
         <Grid item xs={12}>
-          <WithAuthorizedSearchResults data-test='searchResults' />
+          <WithAuthorizedAndResponseDataSearchResults />
         </Grid>
         <Grid item xs={12}>
           <WithAuthorizedAndUserInfoFavArtists />
         </Grid>
         <Grid item md={8} xs={12}>
-          <WithAuthorizedTracklist />
+          <WithAuthorizedAndResponseDataTracklist />
         </Grid>
         <Grid item md={4} xs={12}>
           <Queue />

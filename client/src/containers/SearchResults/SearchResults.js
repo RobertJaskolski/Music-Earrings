@@ -1,32 +1,36 @@
-import { Grid } from "@material-ui/core";
+// Import outside
 import React from "react";
 import { connect } from "react-redux";
+import { Grid } from "@material-ui/core";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
+import CancelPresentationIcon from "@material-ui/icons/CancelPresentation";
+// Import utils, API's and etc.
+import { filtersActions } from "../../reducers/filtersForGeneratePlaylist";
+import { searchActions } from "../../reducers/search";
+// Import Components
 import {
   ArtistChip,
   TrackChip,
   SkeletonArtist,
   SkieletonTrack,
 } from "../../components/SearchResults";
+// Import Styles
 import { Section, Div, H1, DivX, DivNoResults } from "./style/style";
-import CancelPresentationIcon from "@material-ui/icons/CancelPresentation";
-import { filtersActions } from "../../reducers/filtersForGeneratePlaylist";
-import { searchActions } from "../../reducers/search";
-import { spotifyApiActions } from "../../reducers/spotifyApiResponses";
 
 function SearchResults(props) {
   const {
-    searchTracks,
-    searchArtists,
-    loading,
+    artists,
+    tracks,
+    loadingArtistsAndTracks,
     search,
     auth,
     addTrackToFiltr,
     addArtistToFiltr,
     filtersLength,
     clearSearch,
-    responseClear,
+    clearArtistsAndTracks,
   } = props;
+
   let changeChip = useMediaQuery("(min-width:1000px)");
   const showSearch = search ? true : false;
   const addToFilters = (item) => {
@@ -37,7 +41,7 @@ function SearchResults(props) {
   };
   return (
     <Section id='searchBox' active={showSearch}>
-      {loading ? (
+      {loadingArtistsAndTracks ? (
         <Grid container>
           <Grid item lg={6} xs={12}>
             <H1 active={showSearch}>Artists</H1>
@@ -71,7 +75,7 @@ function SearchResults(props) {
               <CancelPresentationIcon
                 onClick={() => {
                   clearSearch();
-                  responseClear();
+                  clearArtistsAndTracks();
                 }}
               />
             </DivX>
@@ -81,9 +85,9 @@ function SearchResults(props) {
         <Grid container>
           <Grid item lg={6} xs={12}>
             <H1 active={showSearch}>Artists</H1>
-            {searchArtists.length ? (
+            {artists.length ? (
               <Div>
-                {searchArtists.map((item) => {
+                {artists.map((item) => {
                   return (
                     !item.name.includes("feat") && (
                       <ArtistChip
@@ -105,9 +109,9 @@ function SearchResults(props) {
           </Grid>
           <Grid item lg={6} xs={12}>
             <H1 active={showSearch}>Tracks</H1>
-            {searchTracks.length ? (
+            {tracks.length ? (
               <Div>
-                {searchTracks.map((item) => {
+                {tracks.map((item) => {
                   return (
                     <TrackChip
                       key={item.id}
@@ -131,7 +135,7 @@ function SearchResults(props) {
               <CancelPresentationIcon
                 onClick={() => {
                   clearSearch();
-                  responseClear();
+                  clearArtistsAndTracks();
                 }}
               />
             </DivX>
@@ -144,9 +148,6 @@ function SearchResults(props) {
 
 const mapStateToProps = (state) => {
   return {
-    searchTracks: state.SpotifyResponses["tracks"],
-    searchArtists: state.SpotifyResponses["artists"],
-    loading: state.SpotifyResponses["loading"],
     search: state.search["searchText"],
     filtersLength:
       state.filtrsGeneratePlaylist["artistSeeds"].length +
@@ -163,9 +164,6 @@ const mapDispatchToProps = (dispatch) => {
     },
     clearSearch: () => {
       dispatch(searchActions.clear());
-    },
-    responseClear: () => {
-      dispatch(spotifyApiActions.clearSearch());
     },
   };
 };
