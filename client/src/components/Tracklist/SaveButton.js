@@ -38,12 +38,19 @@ const CssTextField = withStyles({
 })(TextField);
 
 function SaveButton(props) {
-  const { auth, handleTextField, disabledButton, disabledName } = props;
+  const {
+    auth,
+    handleTextField,
+    disabledButton,
+    disabledName,
+    tracklistName,
+  } = props;
   return (
     <DivSave>
       {auth ? (
         <div>
           <CssTextField
+            value={tracklistName}
             disabled={disabledName}
             onChange={handleTextField}
             label={

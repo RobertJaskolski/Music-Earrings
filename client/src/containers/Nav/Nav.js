@@ -26,6 +26,7 @@ const Nav = (props) => {
     clearResponse,
     SpotifyGetArtistAndTrack,
     MyAPIGetArtistAndTrack,
+    searchText,
   } = props;
   let time;
   const changeNav = useMediaQuery("(min-width:650px)");
@@ -133,4 +134,10 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(null, mapDispatchToProps)(Nav);
+const mapStateToProps = (state) => {
+  return {
+    searchText: state.search["searchText"],
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Nav);

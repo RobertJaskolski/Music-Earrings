@@ -40,18 +40,25 @@ function Tracklist(props) {
     clearTracklist,
     changeTracklistName,
     tracklistName,
+    clearTracklistName,
   } = props;
   const handleSavePlaylistButton = (event) => {
     changeTracklistName(event.target.value);
   };
   const handleDeleteArtist = (artist) => {
     deleteArtist(artist);
-    if (filtersLength === 1) clearTracklist();
+    if (filtersLength === 1) {
+      clearTracklist();
+      clearTracklistName();
+    }
   };
   const handleDeleteTrack = (track) => {
     deleteTrack(track);
 
-    if (!filtersLength === 1) clearTracklist();
+    if (!filtersLength === 1) {
+      clearTracklist();
+      clearTracklistName();
+    }
   };
   useEffect(() => {
     if (seedArtists.length > 0 || seedTracks.length > 0) {
@@ -91,6 +98,7 @@ function Tracklist(props) {
         <SaveButton
           disabledName={!recommendTracks["tracks"]?.length && true}
           disabledButton={!tracklistName && true}
+          tracklistName={tracklistName}
           handleTextField={handleSavePlaylistButton}
           auth={auth}
         />
@@ -112,6 +120,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     changeTracklistName: (name) => {
       dispatch(filtersActions.addNameTracklist(name));
+    },
+    clearTracklistName: () => {
+      dispatch(filtersActions.clearNameTracklist());
     },
     SpotifyGetRecommendations: () => dispatch(API.GetRecommendations()),
     MyAPIGetRecommendations: () => dispatch(MyAPI.GetRecommendations()),
