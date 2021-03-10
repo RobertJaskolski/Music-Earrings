@@ -14,6 +14,7 @@ import API from "../api/SpotifyAPI";
 import withAuthorizedState from "../components/shared/HOC/withAuthorized";
 import withUserResponsesFromAPIState from "../components/shared/HOC/withUserResponsesFormAPI";
 import withResponseFromAPIState from "../components/shared/HOC/withResponsesFromAPI";
+import withSettingsState from "../components/shared/HOC/withSettings";
 
 // Import containers
 import SearchResults from "./SearchResults/SearchResults";
@@ -24,22 +25,26 @@ import Nav from "./Nav/Nav";
 import Footer from "../components/Footer/Footer";
 
 // Containers with HOC's
-const WithAuthorizedAndUserResponseFavArtists = compose(
-  withAuthorizedState,
-  withUserResponsesFromAPIState
-)(FavArtists);
-const WithAuthorizedAndUserAndDataResponseNav = compose(
+const WithAuthorizedAndUserResponseAndSettingsFavArtists = compose(
   withAuthorizedState,
   withUserResponsesFromAPIState,
-  withResponseFromAPIState
+  withSettingsState
+)(FavArtists);
+const WithAuthorizedAndUserAndDataResponseAndSettingsNav = compose(
+  withAuthorizedState,
+  withUserResponsesFromAPIState,
+  withResponseFromAPIState,
+  withSettingsState
 )(Nav);
-const WithAuthorizedAndResponseDataSearchResults = compose(
+const WithAuthorizedAndResponseDataAndSettingsSearchResults = compose(
   withAuthorizedState,
-  withResponseFromAPIState
+  withResponseFromAPIState,
+  withSettingsState
 )(SearchResults);
-const WithAuthorizedAndResponseDataTracklist = compose(
+const WithAuthorizedAndResponseDataAndSettingsTracklist = compose(
   withAuthorizedState,
-  withResponseFromAPIState
+  withResponseFromAPIState,
+  withSettingsState
 )(Tracklist);
 
 function RootContainer({
@@ -62,16 +67,16 @@ function RootContainer({
     <Container maxWidth='xl'>
       <Grid container spacing={1}>
         <Grid item xs={12}>
-          <WithAuthorizedAndUserAndDataResponseNav />
+          <WithAuthorizedAndUserAndDataResponseAndSettingsNav />
         </Grid>
         <Grid item xs={12}>
-          <WithAuthorizedAndResponseDataSearchResults />
+          <WithAuthorizedAndResponseDataAndSettingsSearchResults />
         </Grid>
         <Grid item xs={12}>
-          <WithAuthorizedAndUserResponseFavArtists />
+          <WithAuthorizedAndUserResponseAndSettingsFavArtists />
         </Grid>
         <Grid item md={8} xs={12}>
-          <WithAuthorizedAndResponseDataTracklist />
+          <WithAuthorizedAndResponseDataAndSettingsTracklist />
         </Grid>
         <Grid item md={4} xs={12}>
           <Queue />

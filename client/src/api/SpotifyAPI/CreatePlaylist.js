@@ -2,12 +2,12 @@ import { LogoutUser, optionsPOST } from "../../utils/ApiUtils";
 import axios from "axios";
 
 const CreatePlaylist = () => async (dispatch, getState) => {
-  const { filtrsGeneratePlaylist, userInfo, tokens, responses } = getState();
+  const { settings, userResponses, tokens, responses } = getState();
   const optionsAxios = optionsPOST(
-    `/v1/users/${userInfo["data"].id}/playlists`,
+    `/v1/users/${userResponses.userProfile["info"].id}/playlists`,
     tokens["accessToken"],
     {
-      name: filtrsGeneratePlaylist["tracklistName"],
+      name: settings.texts["tracklistName"],
       description: "Playlist created by Music Earrings",
       public: true,
     }

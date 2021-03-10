@@ -4,7 +4,6 @@ import Select from "@material-ui/core/Select";
 import Typography from "@material-ui/core/Typography";
 import Slider from "@material-ui/core/Slider";
 import { connect } from "react-redux";
-import { filtersActions } from "../../reducers/filtersForGeneratePlaylist";
 import { withStyles } from "@material-ui/core/styles";
 import MenuItem from "@material-ui/core/MenuItem";
 import InputBase from "@material-ui/core/InputBase";
@@ -66,37 +65,37 @@ const CustomSlider = withStyles({
 
 function Filters(props) {
   const {
-    limit,
-    changeEnergy,
-    changePopularity,
-    changeDanceable,
-    changeLimit,
     auth,
-    trackSeeds,
-    artistSeeds,
     SpotifyGetRecommendations,
     MyAPIGetRecommendations,
+    setDanceable,
+    setEnergy,
+    setPopularity,
+    setLimit,
+    limit,
+    trackSeeds,
+    artistSeeds,
   } = props;
 
   const handleChange = (name, newValue) => {
     if (name === "energy") {
-      setEnergy(newValue);
+      setEnergyState(newValue);
     } else if (name === "popularity") {
-      setPopularity(newValue);
+      setPopularityState(newValue);
     } else if (name === "danceable") {
-      setDanceable(newValue);
+      setDanceableState(newValue);
     }
   };
 
   const handleChangeLimit = (e) => {
-    changeLimit(e.target.value);
+    setLimit(e.target.value);
     responseToApi();
   };
 
   const responseToApi = () => {
-    changeEnergy(energy);
-    changeDanceable(danceable);
-    changePopularity(popularity);
+    setEnergy(energy);
+    setDanceable(danceable);
+    setPopularity(popularity);
     if (artistSeeds.length || trackSeeds.length) {
       if (auth) {
         SpotifyGetRecommendations();
@@ -105,9 +104,9 @@ function Filters(props) {
       }
     }
   };
-  const [popularity, setPopularity] = useState([0, 100]);
-  const [danceable, setDanceable] = useState([0, 100]);
-  const [energy, setEnergy] = useState([0, 100]);
+  const [popularity, setPopularityState] = useState([0, 100]);
+  const [danceable, setDanceableState] = useState([0, 100]);
+  const [energy, setEnergyState] = useState([0, 100]);
   useEffect(() => {}, [popularity, danceable, energy]);
 
   return (
@@ -176,31 +175,11 @@ function Filters(props) {
   );
 }
 
-const mapStateToProps = (state) => {
-  return {
-    limit: state.filtrsGeneratePlaylist["limit"],
-    artistSeeds: state.filtrsGeneratePlaylist["artistSeeds"],
-    trackSeeds: state.filtrsGeneratePlaylist["trackSeeds"],
-  };
-};
-
 const mapDispatchToProps = (dispatch) => {
   return {
-    changeEnergy: (item) => {
-      dispatch(filtersActions.addEnergy(item));
-    },
-    changePopularity: (item) => {
-      dispatch(filtersActions.addPopularity(item));
-    },
-    changeDanceable: (item) => {
-      dispatch(filtersActions.addDanceable(item));
-    },
-    changeLimit: (item) => {
-      dispatch(filtersActions.addLimit(item));
-    },
     SpotifyGetRecommendations: () => dispatch(API.GetRecommendations()),
     MyAPIGetRecommendations: () => dispatch(MyAPI.GetRecommendations()),
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Filters);
+export default connect(null, mapDispatchToProps)(Filters);

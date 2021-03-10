@@ -3,9 +3,10 @@ import { responseActions } from "../../reducers/responsesFromApi";
 import axios from "axios";
 
 const GetArtistAndTrack = () => async (dispatch, getState) => {
-  const { tokens, search } = getState();
+  const { tokens, settings } = getState();
+  const { texts } = settings;
   const queryString = `?q=${searchValue(
-    search["searchText"]
+    texts["searchText"]
   )}&type=track%2Cartist&limit=10`;
   const optionsAxios = options(
     "/v1/search" + queryString,

@@ -3,35 +3,36 @@ import { responseActions } from "../../reducers/responsesFromApi";
 import axios from "axios";
 
 const GetRecommendations = () => async (dispatch, getState) => {
-  const { tokens, filtrsGeneratePlaylist } = getState();
+  const { tokens, settings } = getState();
+  const { filters } = settings;
   let seed = "";
-  if (filtrsGeneratePlaylist["artistSeeds"].length > 0) {
+  if (filters["artistSeeds"].length > 0) {
     seed += "&seed_artists=";
-    filtrsGeneratePlaylist["artistSeeds"].map((item) => {
+    filters["artistSeeds"].map((item) => {
       seed += item.id;
       seed += ",";
       return item;
     });
     seed = seed.slice(0, -1);
   }
-  if (filtrsGeneratePlaylist["trackSeeds"].length > 0) {
+  if (filters["trackSeeds"].length > 0) {
     seed += "&seed_tracks=";
-    filtrsGeneratePlaylist["trackSeeds"].map((item) => {
+    filters["trackSeeds"].map((item) => {
       seed += item.id;
       seed += ",";
       return item;
     });
     seed = seed.slice(0, -1);
   }
-  const filters = `limit=${filtrsGeneratePlaylist["limit"]}&min_popularity=${
-    filtrsGeneratePlaylist["popularity"][0]
-  }&max_popularity=${filtrsGeneratePlaylist["popularity"][1]}&min_energy=${
-    filtrsGeneratePlaylist["energy"][0] / 100
-  }&max_energy=${filtrsGeneratePlaylist["energy"][1] / 100}&min_danceability=${
-    filtrsGeneratePlaylist["danceable"][0] / 100
-  }&max_danceability=${filtrsGeneratePlaylist["danceable"][1] / 100}`;
+  const filtersQuery = `limit=${filters["limit"]}&min_popularity=${
+    filters["popularity"][0]
+  }&max_popularity=${filters["popularity"][1]}&min_energy=${
+    filters["energy"][0] / 100
+  }&max_energy=${filters["energy"][1] / 100}&min_danceability=${
+    filters["danceable"][0] / 100
+  }&max_danceability=${filters["danceable"][1] / 100}`;
   const optionsAxios = options(
-    `/v1/recommendations?${filters}${seed}`,
+    `/v1/recommendations?${filtersQuery}${seed}`,
     tokens["accessToken"]
   );
   dispatch(responseActions.requestRecommendedTracks());

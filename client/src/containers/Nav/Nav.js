@@ -5,7 +5,6 @@ import { connect } from "react-redux";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 // Import utils, API's and etc.
 import { tokensActions } from "../../reducers/tokens";
-import { searchActions } from "../../reducers/search";
 import { authActions } from "../../reducers/auth";
 import API from "../../api/SpotifyAPI";
 import MyAPI from "../../api/MyAPI";
@@ -24,7 +23,7 @@ const Nav = ({
   userProfileLoading,
   auth,
   userProfile,
-  search,
+  setSearchText,
   clearArtistsAndTracks,
   SpotifyGetArtistAndTrack,
   MyAPIGetArtistAndTrack,
@@ -40,7 +39,7 @@ const Nav = ({
       clearTimeout(time);
     }
     time = setTimeout(() => {
-      search({ searchText: event.target.value });
+      setSearchText(event.target.value);
       if (event.target.value && auth) {
         SpotifyGetArtistAndTrack();
       } else if (event.target.value && !auth) {
@@ -124,18 +123,9 @@ const mapDispatchToProps = (dispatch) => {
     clearTokens: () => {
       dispatch(tokensActions.clear());
     },
-    search: (item) => {
-      dispatch(searchActions.change(item));
-    },
     SpotifyGetArtistAndTrack: () => dispatch(API.GetArtistAndTrack()),
     MyAPIGetArtistAndTrack: () => dispatch(MyAPI.GetArtistAndTrack()),
   };
 };
 
-const mapStateToProps = (state) => {
-  return {
-    searchText: state.search["searchText"],
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Nav);
+export default connect(null, mapDispatchToProps)(Nav);
