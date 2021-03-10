@@ -1,14 +1,22 @@
+// Import outside
 import React from "react";
 import { Grid } from "@material-ui/core";
-import FavArtist from "../../components/FavArtists/FavArtist";
-import { Div, H2, GridContainer } from "./style/style";
-import useMediaQuery from "@material-ui/core/useMediaQuery";
-import { filtersActions } from "../../reducers/filtersForGeneratePlaylist";
 import { connect } from "react-redux";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
+// Import utils, API's and etc.
+import { filtersActions } from "../../reducers/filtersForGeneratePlaylist";
+// Import Components
+import FavArtist from "../../components/FavArtists/FavArtist";
+// Import Styles
+import { Div, H2, GridContainer } from "./style/style";
 
-function FavArtists(props) {
+function FavArtists({
+  auth,
+  userFavoriteArtists,
+  addArtistToFiltr,
+  filtersLength,
+}) {
   const changeFav = useMediaQuery("(min-width:500px)");
-  const { auth, favs, addArtistToFiltr, filtersLength } = props;
   const addToFilters = (item) => {
     if (filtersLength < 5) {
       addArtistToFiltr(item);
@@ -22,7 +30,7 @@ function FavArtists(props) {
       <Grid item xs={12}>
         <H2>Yours favs</H2>
         <Div>
-          {favs.map((item) => {
+          {userFavoriteArtists.map((item) => {
             return (
               <FavArtist
                 addToFilters={addToFilters}

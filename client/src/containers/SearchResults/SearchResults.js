@@ -17,20 +17,18 @@ import {
 // Import Styles
 import { Section, Div, H1, DivX, DivNoResults } from "./style/style";
 
-function SearchResults(props) {
-  const {
-    artists,
-    tracks,
-    loadingArtistsAndTracks,
-    search,
-    auth,
-    addTrackToFiltr,
-    addArtistToFiltr,
-    filtersLength,
-    clearSearch,
-    clearArtistsAndTracks,
-  } = props;
-
+function SearchResults({
+  artists,
+  tracks,
+  loadingArtistsAndTracks,
+  search,
+  auth,
+  addTrackToFiltr,
+  addArtistToFiltr,
+  filtersLength,
+  clearSearch,
+  clearArtistsAndTracks,
+}) {
   let changeChip = useMediaQuery("(min-width:1000px)");
   const showSearch = search ? true : false;
   const addToFilters = (item) => {

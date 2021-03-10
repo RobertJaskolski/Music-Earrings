@@ -6,12 +6,25 @@ import { compose } from "redux";
 const withResponsesFromAPI = (WrappedComponent) => {
   class HOC extends Component {
     render() {
-      const { artists, tracks, recommendedTracks, ...rest } = this.props;
+      const {
+        artists,
+        tracks,
+        recommendedTracks,
+        loadingArtistsAndTracks,
+        loadingRecommendedTracks,
+        clearArtistsAndTracks,
+        clearRecommendedTracks,
+        ...rest
+      } = this.props;
       return (
         <WrappedComponent
           {...rest}
           artists={artists}
+          loadingArtistsAndTracks={loadingArtistsAndTracks}
+          loadingRecommendedTracks={loadingRecommendedTracks}
           tracks={tracks}
+          clearArtistsAndTracks={clearArtistsAndTracks}
+          clearRecommendedTracks={clearRecommendedTracks}
           recommendedTracks={recommendedTracks}
         />
       );

@@ -28,25 +28,23 @@ const CssLinearProgress = withStyles(() => ({
   },
 }))(LinearProgress);
 
-function Tracklist(props) {
-  const {
-    seedArtists,
-    seedTracks,
-    deleteArtist,
-    deleteTrack,
-    filtersLength,
-    SpotifyGetRecommendations,
-    MyAPIGetRecommendations,
-    auth,
-    recommendedTracks,
-    loadingRecommendedTracks,
-    clearRecommendedTracks,
-    changeTracklistName,
-    tracklistName,
-    clearTracklistName,
-    SpotifyCreatePlaylist,
-  } = props;
-
+function Tracklist({
+  seedArtists,
+  seedTracks,
+  deleteArtist,
+  deleteTrack,
+  filtersLength,
+  SpotifyGetRecommendations,
+  MyAPIGetRecommendations,
+  auth,
+  recommendedTracks,
+  loadingRecommendedTracks,
+  clearRecommendedTracks,
+  changeTracklistName,
+  tracklistName,
+  clearTracklistName,
+  SpotifyCreatePlaylist,
+}) {
   const handleChangeTracklistName = (event) => {
     changeTracklistName(event.target.value);
   };

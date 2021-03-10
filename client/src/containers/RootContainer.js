@@ -12,7 +12,7 @@ import API from "../api/SpotifyAPI";
 
 // Import HOC's
 import withAuthorizedState from "../components/shared/HOC/withAuthorized";
-import withUserProfileState from "../components/shared/HOC/withUserProfile";
+import withUserResponsesFromAPIState from "../components/shared/HOC/withUserResponsesFormAPI";
 import withResponseFromAPIState from "../components/shared/HOC/withResponsesFromAPI";
 
 // Import containers
@@ -24,13 +24,14 @@ import Nav from "./Nav/Nav";
 import Footer from "../components/Footer/Footer";
 
 // Containers with HOC's
-const WithAuthorizedAndUserInfoFavArtists = compose(
+const WithAuthorizedAndUserResponseFavArtists = compose(
   withAuthorizedState,
-  withUserProfileState
+  withUserResponsesFromAPIState
 )(FavArtists);
-const WithAuthorizedAndUserInfoNav = compose(
+const WithAuthorizedAndUserAndDataResponseNav = compose(
   withAuthorizedState,
-  withUserProfileState
+  withUserResponsesFromAPIState,
+  withResponseFromAPIState
 )(Nav);
 const WithAuthorizedAndResponseDataSearchResults = compose(
   withAuthorizedState,
@@ -61,13 +62,13 @@ function RootContainer({
     <Container maxWidth='xl'>
       <Grid container spacing={1}>
         <Grid item xs={12}>
-          <WithAuthorizedAndUserInfoNav />
+          <WithAuthorizedAndUserAndDataResponseNav />
         </Grid>
         <Grid item xs={12}>
           <WithAuthorizedAndResponseDataSearchResults />
         </Grid>
         <Grid item xs={12}>
-          <WithAuthorizedAndUserInfoFavArtists />
+          <WithAuthorizedAndUserResponseFavArtists />
         </Grid>
         <Grid item md={8} xs={12}>
           <WithAuthorizedAndResponseDataTracklist />
