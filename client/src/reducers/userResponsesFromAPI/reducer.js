@@ -17,7 +17,7 @@ const INIT_STATE = {
 const userResponse = (state = INIT_STATE, action) => {
   switch (action.type) {
     case types.GET_USER_RESPONSE_FAILURE:
-      return { ...state, error: action.payload };
+      return { ...INIT_STATE, error: action.payload };
     case types.GET_USER_PROFILE_REQUEST:
       return {
         ...state,

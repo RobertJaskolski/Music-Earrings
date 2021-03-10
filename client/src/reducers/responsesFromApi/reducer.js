@@ -14,7 +14,7 @@ const INIT_STATE = {
 const responseReducer = (state = INIT_STATE, action) => {
   switch (action.type) {
     case types.GET_RESPONSE_FAILURE:
-      return { ...state, error: action.payload };
+      return { ...INIT_STATE, error: action.payload };
     case types.GET_ARTISTS_AND_TRACK_REQUEST:
       return {
         ...state,
