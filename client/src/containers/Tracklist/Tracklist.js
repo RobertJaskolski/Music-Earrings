@@ -123,7 +123,7 @@ function Tracklist({
           })}
 
         <SaveButton
-          disabledName={!recommendedTracks?.length && true}
+          disabledName={!seedsLength && true}
           disabledButton={!tracklistName && true}
           tracklistName={tracklistName}
           handleTextField={handleChangeTracklistName}
