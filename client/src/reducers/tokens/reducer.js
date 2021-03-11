@@ -1,4 +1,4 @@
-import types from "../../actions/tokens/types";
+import types from "./types";
 const INIT_STATE = {
   accessToken: "",
   refreshToken: "",

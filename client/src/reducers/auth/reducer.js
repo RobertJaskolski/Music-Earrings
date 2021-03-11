@@ -1,4 +1,4 @@
-import types from "../../actions/auth/types";
+import types from "./types";
 const INIT_STATE = {
   isAuthorized: false,
   checking: true,

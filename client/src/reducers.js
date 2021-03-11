@@ -4,7 +4,6 @@ import authReducer from "./reducers/auth/";
 import responseReducer from "./reducers/responsesFromApi";
 import userResponseReducer from "./reducers/userResponsesFromAPI";
 import clientSettingsReducer from "./reducers/clientSettings";
-import authorizationReducer from "./reducers/authorization";
 
 const rootReducer = combineReducers({
   tokens: tokensReducer,
@@ -12,7 +11,6 @@ const rootReducer = combineReducers({
   responses: responseReducer,
   userResponses: userResponseReducer,
   settings: clientSettingsReducer,
-  authorization: authorizationReducer,
 });
 
 export default rootReducer;
