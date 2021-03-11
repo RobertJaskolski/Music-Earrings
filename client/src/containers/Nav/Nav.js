@@ -1,5 +1,14 @@
+// Import outside
 import React from "react";
 import { Grid } from "@material-ui/core";
+import { connect } from "react-redux";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
+// Import utils, API's and etc.
+import { tokensActions } from "../../reducers/tokens";
+import { authActions } from "../../reducers/auth";
+import API from "../../api/SpotifyAPI";
+import MyAPI from "../../api/MyAPI";
+// Import Components
 import {
   LoginButton,
   Logo,
@@ -7,26 +16,18 @@ import {
   LogoutButton,
   SkieletonNav,
 } from "../../components/Nav";
-import { connect } from "react-redux";
-import { tokensActions } from "../../reducers/tokens";
-import { searchActions } from "../../reducers/search";
-import { spotifyApiActions } from "../../reducers/spotifyApiResponses";
-import { authActions } from "../../reducers/auth";
-import useMediaQuery from "@material-ui/core/useMediaQuery";
-import API from "../../api/SpotifyAPI";
-import MyAPI from "../../api/MyAPI";
-const Nav = (props) => {
-  const {
-    logout,
-    clearTokens,
-    loading,
-    auth,
-    userProfile,
-    search,
-    clearResponse,
-    SpotifyGetArtistAndTrack,
-    MyAPIGetArtistAndTrack,
-  } = props;
+
+const Nav = ({
+  logout,
+  clearTokens,
+  userProfileLoading,
+  auth,
+  userProfile,
+  setSearchText,
+  clearArtistsAndTracks,
+  SpotifyGetArtistAndTrack,
+  MyAPIGetArtistAndTrack,
+}) => {
   let time;
   const changeNav = useMediaQuery("(min-width:650px)");
   const handleLogout = () => {
@@ -38,13 +39,13 @@ const Nav = (props) => {
       clearTimeout(time);
     }
     time = setTimeout(() => {
-      search({ searchText: event.target.value });
+      setSearchText(event.target.value);
       if (event.target.value && auth) {
         SpotifyGetArtistAndTrack();
       } else if (event.target.value && !auth) {
         MyAPIGetArtistAndTrack();
       } else {
-        setTimeout(() => clearResponse(), 300);
+        setTimeout(() => clearArtistsAndTracks(), 300);
       }
     }, 700);
   };
@@ -63,7 +64,7 @@ const Nav = (props) => {
               />
             </Grid>
             <Grid item lg={3} md={4} sm={5}>
-              {loading ? (
+              {userProfileLoading ? (
                 <SkieletonNav data-test='skielton' />
               ) : auth ? (
                 <LogoutButton
@@ -86,7 +87,7 @@ const Nav = (props) => {
               <Logo widthLogo='50px' heightLogo='50px' data-test='logo' />
             </Grid>
             <Grid item xs={10}>
-              {loading ? (
+              {userProfileLoading ? (
                 <SkieletonNav data-test='skielton' />
               ) : auth ? (
                 <LogoutButton
@@ -122,14 +123,8 @@ const mapDispatchToProps = (dispatch) => {
     clearTokens: () => {
       dispatch(tokensActions.clear());
     },
-    search: (item) => {
-      dispatch(searchActions.change(item));
-    },
     SpotifyGetArtistAndTrack: () => dispatch(API.GetArtistAndTrack()),
     MyAPIGetArtistAndTrack: () => dispatch(MyAPI.GetArtistAndTrack()),
-    clearResponse: () => {
-      dispatch(spotifyApiActions.clearSearch());
-    },
   };
 };
 

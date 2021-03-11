@@ -1,43 +1,42 @@
-import { Grid } from "@material-ui/core";
+// Import outside
 import React from "react";
-import { connect } from "react-redux";
+import { Grid } from "@material-ui/core";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
+import CancelPresentationIcon from "@material-ui/icons/CancelPresentation";
+// Import Components
 import {
   ArtistChip,
   TrackChip,
   SkeletonArtist,
   SkieletonTrack,
 } from "../../components/SearchResults";
+// Import Styles
 import { Section, Div, H1, DivX, DivNoResults } from "./style/style";
-import CancelPresentationIcon from "@material-ui/icons/CancelPresentation";
-import { filtersActions } from "../../reducers/filtersForGeneratePlaylist";
-import { searchActions } from "../../reducers/search";
-import { spotifyApiActions } from "../../reducers/spotifyApiResponses";
 
-function SearchResults(props) {
-  const {
-    searchTracks,
-    searchArtists,
-    loading,
-    search,
-    auth,
-    addTrackToFiltr,
-    addArtistToFiltr,
-    filtersLength,
-    clearSearch,
-    responseClear,
-  } = props;
+function SearchResults({
+  artists,
+  tracks,
+  loadingArtistsAndTracks,
+  auth,
+  clearArtistsAndTracks,
+  searchText,
+  artistSeeds,
+  trackSeeds,
+  addTrackToSeeds,
+  addArtistToSeeds,
+  setSearchText,
+}) {
   let changeChip = useMediaQuery("(min-width:1000px)");
-  const showSearch = search ? true : false;
+  const showSearch = searchText ? true : false;
   const addToFilters = (item) => {
-    if (filtersLength < 5) {
-      if (item.type === "track") addTrackToFiltr(item);
-      else if (item.type === "artist") addArtistToFiltr(item);
+    if (trackSeeds.length + artistSeeds.length < 5) {
+      if (item.type === "track") addTrackToSeeds(item);
+      else if (item.type === "artist") addArtistToSeeds(item);
     }
   };
   return (
     <Section id='searchBox' active={showSearch}>
-      {loading ? (
+      {loadingArtistsAndTracks ? (
         <Grid container>
           <Grid item lg={6} xs={12}>
             <H1 active={showSearch}>Artists</H1>
@@ -70,8 +69,8 @@ function SearchResults(props) {
             <DivX>
               <CancelPresentationIcon
                 onClick={() => {
-                  clearSearch();
-                  responseClear();
+                  setSearchText("");
+                  clearArtistsAndTracks();
                 }}
               />
             </DivX>
@@ -81,9 +80,9 @@ function SearchResults(props) {
         <Grid container>
           <Grid item lg={6} xs={12}>
             <H1 active={showSearch}>Artists</H1>
-            {searchArtists.length ? (
+            {artists.length ? (
               <Div>
-                {searchArtists.map((item) => {
+                {artists.map((item) => {
                   return (
                     !item.name.includes("feat") && (
                       <ArtistChip
@@ -105,9 +104,9 @@ function SearchResults(props) {
           </Grid>
           <Grid item lg={6} xs={12}>
             <H1 active={showSearch}>Tracks</H1>
-            {searchTracks.length ? (
+            {tracks.length ? (
               <Div>
-                {searchTracks.map((item) => {
+                {tracks.map((item) => {
                   return (
                     <TrackChip
                       key={item.id}
@@ -130,8 +129,8 @@ function SearchResults(props) {
             <DivX>
               <CancelPresentationIcon
                 onClick={() => {
-                  clearSearch();
-                  responseClear();
+                  setSearchText("");
+                  clearArtistsAndTracks();
                 }}
               />
             </DivX>
@@ -142,32 +141,4 @@ function SearchResults(props) {
   );
 }
 
-const mapStateToProps = (state) => {
-  return {
-    searchTracks: state.SpotifyResponses["tracks"],
-    searchArtists: state.SpotifyResponses["artists"],
-    loading: state.SpotifyResponses["loading"],
-    search: state.search["searchText"],
-    filtersLength:
-      state.filtrsGeneratePlaylist["artistSeeds"].length +
-      state.filtrsGeneratePlaylist["trackSeeds"].length,
-  };
-};
-const mapDispatchToProps = (dispatch) => {
-  return {
-    addTrackToFiltr: (track) => {
-      dispatch(filtersActions.addTrack(track));
-    },
-    addArtistToFiltr: (artist) => {
-      dispatch(filtersActions.addArtist(artist));
-    },
-    clearSearch: () => {
-      dispatch(searchActions.clear());
-    },
-    responseClear: () => {
-      dispatch(spotifyApiActions.clearSearch());
-    },
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(SearchResults);
+export default SearchResults;

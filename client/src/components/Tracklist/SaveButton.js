@@ -38,19 +38,35 @@ const CssTextField = withStyles({
 })(TextField);
 
 function SaveButton(props) {
-  const { auth, handleTextField, disabledButton, disabledName } = props;
+  const {
+    auth,
+    handleTextField,
+    disabledButton,
+    disabledName,
+    tracklistName,
+    handleButton,
+  } = props;
   return (
     <DivSave>
       {auth ? (
         <div>
           <CssTextField
+            value={tracklistName}
             disabled={disabledName}
             onChange={handleTextField}
             label={
               disabledName ? "First, generate playlist" : "Name of playlist"
             }
           />
-          <Button disabled={disabledButton}>Save tracklist to spotify</Button>
+          <Button
+            onClick={(event) => {
+              event.preventDefault();
+              handleButton();
+            }}
+            disabled={disabledButton}
+          >
+            Save tracklist to spotify
+          </Button>
         </div>
       ) : (
         <LoginButton redirectLink={`${process.env.REACT_APP_API_URL}/login`} />

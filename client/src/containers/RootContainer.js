@@ -1,29 +1,52 @@
+// Import outside
 import React, { useEffect } from "react";
 import { Container, Grid } from "@material-ui/core";
-import Nav from "./Nav/Nav";
-import Footer from "../components/Footer/Footer";
 import { connect } from "react-redux";
+import { compose } from "recompose";
+
+// Import some utils, API's and etc.
 import { tokensActions } from "../reducers/tokens";
 import MyAPI from "../api/MyAPI";
 import GetHash from "../utils/GetHash";
-import withAuthorizedState from "../components/shared/HOC/withAuthorized";
-import withUserProfileState from "../components/shared/HOC/withUserProfile";
 import API from "../api/SpotifyAPI";
-import { compose } from "recompose";
+
+// Import HOC's
+import withAuthorizedState from "../components/shared/HOC/withAuthorized";
+import withUserResponsesFromAPIState from "../components/shared/HOC/withUserResponsesFormAPI";
+import withResponseFromAPIState from "../components/shared/HOC/withResponsesFromAPI";
+import withSettingsState from "../components/shared/HOC/withSettings";
+
+// Import containers
 import SearchResults from "./SearchResults/SearchResults";
 import FavArtists from "./FavArtists/FavArtists";
 import Tracklist from "./Tracklist/Tracklist";
 import Queue from "./Queue/Queue";
-const WithAuthorizedAndUserInfoFavArtists = compose(
+import Nav from "./Nav/Nav";
+import Footer from "../components/Footer/Footer";
+
+// Containers with HOC's
+const WithAuthorizedAndUserResponseAndSettingsFavArtists = compose(
   withAuthorizedState,
-  withUserProfileState
+  withUserResponsesFromAPIState,
+  withSettingsState
 )(FavArtists);
-const WithAuthorizedAndUserInfoNav = compose(
+const WithAuthorizedAndUserAndDataResponseAndSettingsNav = compose(
   withAuthorizedState,
-  withUserProfileState
+  withUserResponsesFromAPIState,
+  withResponseFromAPIState,
+  withSettingsState
 )(Nav);
-const WithAuthorizedSearchResults = withAuthorizedState(SearchResults);
-const WithAuthorizedTracklist = withAuthorizedState(Tracklist);
+const WithAuthorizedAndResponseDataAndSettingsSearchResults = compose(
+  withAuthorizedState,
+  withResponseFromAPIState,
+  withSettingsState
+)(SearchResults);
+const WithAuthorizedAndResponseDataAndSettingsTracklist = compose(
+  withAuthorizedState,
+  withResponseFromAPIState,
+  withSettingsState
+)(Tracklist);
+
 function RootContainer({
   refresh,
   getUserProfile,
@@ -44,16 +67,16 @@ function RootContainer({
     <Container maxWidth='xl'>
       <Grid container spacing={1}>
         <Grid item xs={12}>
-          <WithAuthorizedAndUserInfoNav />
+          <WithAuthorizedAndUserAndDataResponseAndSettingsNav />
         </Grid>
         <Grid item xs={12}>
-          <WithAuthorizedSearchResults data-test='searchResults' />
+          <WithAuthorizedAndResponseDataAndSettingsSearchResults />
         </Grid>
         <Grid item xs={12}>
-          <WithAuthorizedAndUserInfoFavArtists />
+          <WithAuthorizedAndUserResponseAndSettingsFavArtists />
         </Grid>
         <Grid item md={8} xs={12}>
-          <WithAuthorizedTracklist />
+          <WithAuthorizedAndResponseDataAndSettingsTracklist />
         </Grid>
         <Grid item md={4} xs={12}>
           <Queue />

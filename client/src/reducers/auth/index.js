@@ -1,4 +1,4 @@
 import authReducer from "./reducer";
-export { default as authTypes } from "../../actions/auth/types";
-export { default as authActions } from "../../actions/auth/actions";
+export { default as authTypes } from "./types";
+export { default as authActions } from "./actions";
 export default authReducer;

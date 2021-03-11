@@ -1,36 +1,37 @@
 import { LogoutUser, searchValue, options } from "../../utils/ApiUtils";
-import { spotifyApiActions } from "../../reducers/spotifyApiResponses";
+import { responseActions } from "../../reducers/responsesFromApi";
 import axios from "axios";
 
 const GetArtistAndTrack = () => async (dispatch, getState) => {
-  const { tokens, search } = getState();
+  const { tokens, settings } = getState();
+  const { texts } = settings;
   const queryString = `?q=${searchValue(
-    search["searchText"]
+    texts["searchText"]
   )}&type=track%2Cartist&limit=10`;
   const optionsAxios = options(
     "/v1/search" + queryString,
     tokens["accessToken"]
   );
-  dispatch(spotifyApiActions.fetching());
+  dispatch(responseActions.requestArtistsAndTracks());
   await axios(optionsAxios)
     .then((response) => {
       if (response.status === 200) {
         const artists = response.data.artists.items.slice(0, 6);
         dispatch(
-          spotifyApiActions.saveSearch({
+          responseActions.successArtistsAndTracks({
             artists: artists,
             tracks: response.data.tracks.items,
           })
         );
       } else {
         LogoutUser(dispatch);
-        dispatch(spotifyApiActions.clearSearch());
+        dispatch(responseActions.failureResponse("error"));
         return undefined;
       }
     })
-    .catch(() => {
+    .catch((err) => {
       LogoutUser(dispatch);
-      dispatch(spotifyApiActions.clearSearch());
+      dispatch(responseActions.failureResponse(err.name));
       return undefined;
     });
 };

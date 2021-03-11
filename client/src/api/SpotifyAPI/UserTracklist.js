@@ -2,19 +2,19 @@ import { userResponseActions } from "../../reducers/userResponsesFromAPI";
 import { LogoutUser, options } from "../../utils/ApiUtils";
 import axios from "axios";
 
-const GetUserFavArtists = () => async (dispatch, getState) => {
+const GetUserTracklist = () => async (dispatch, getState) => {
   const { tokens } = getState();
-  dispatch(userResponseActions.requestUserFavoriteArtists());
+  dispatch(userResponseActions.requestUserTracklists());
   const optionsAxios = options(
-    `/v1/me/top/artists?limit=5`,
+    "/v1/me/playlists?limit=50",
     tokens["accessToken"]
   );
   await axios(optionsAxios)
     .then((response) => {
       if (response.status === 200) {
         dispatch(
-          userResponseActions.successUserFavoriteArtists({
-            artists: response.data.items,
+          userResponseActions.successUserTracklists({
+            tracklists: response.data,
           })
         );
       } else {
@@ -27,4 +27,4 @@ const GetUserFavArtists = () => async (dispatch, getState) => {
     });
 };
 
-export default GetUserFavArtists;
+export default GetUserTracklist;
