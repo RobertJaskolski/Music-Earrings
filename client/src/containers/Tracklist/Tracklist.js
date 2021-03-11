@@ -117,7 +117,9 @@ function Tracklist({
         <Span>{loadingRecommendedTracks && <CssLinearProgress />}</Span>
         {recommendedTracks?.length > 0 &&
           recommendedTracks?.map((track) => {
-            return <Tracks track={track} key={track.id} />;
+            return (
+              <Tracks track={track} key={track.id} seedsLength={seedsLength} />
+            );
           })}
 
         <SaveButton

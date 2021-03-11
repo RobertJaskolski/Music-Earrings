@@ -3,8 +3,8 @@ import { responseActions } from "../../reducers/responsesFromApi";
 import axios from "axios";
 
 const GetArtistAndTrack = () => async (dispatch, getState) => {
-  const { search } = getState();
-  const queryString = `?search=${searchValue(search["searchText"])}`;
+  const { settings } = getState();
+  const queryString = `?search=${searchValue(settings.texts["searchText"])}`;
   dispatch(responseActions.requestArtistsAndTracks());
   await axios(`${process.env.REACT_APP_API_URL}/ArtistsAndTracks${queryString}`)
     .then((response) => {
