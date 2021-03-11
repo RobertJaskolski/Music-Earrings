@@ -32,11 +32,11 @@ The project is in the process of designing views.
 **Features:**
 
 - OAuth with spotifyApi **(Done)**
-- Standard search for songs/artists/albums **(Almost done)**
+- Standard search for songs/artists/albums **(Done)**
 - Standard music player **(In progress)**
-- Generating a playlist based on given artists, the ability to save it on your Spotify account **(In progress)**
+- Generating a playlist based on given artists, the ability to save it on your Spotify account **(Done)**
 - Create a queue of songs **(In progress)**
-- Check out our current favorites **(In progress)**
+- Check out our current favorites artists **(Done)**
 - And other features...
 
 # Installation and Setup Instructions
@@ -81,3 +81,19 @@ Run development server:
 ### Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+## Application views
+![navbar](./ss/Navbar.jpg)
+Navbar
+
+![navbar  logged in](./ss/NavbarLogged.jpg)
+Navbar while logged in
+
+![Search Results](./ss/Search.jpg)
+Search results
+
+![Search Results  logged in](./ss/SearchLogged.jpg)
+Search results while logged in
+
+![favorite artists](./ss/Favs.jpg)
+Our favorite artists while logged in
