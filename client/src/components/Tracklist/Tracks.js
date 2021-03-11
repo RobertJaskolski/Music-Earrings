@@ -9,7 +9,11 @@ import {
 import PlayArrowIcon from "@material-ui/icons/PlayArrow";
 import PlaylistAddIcon from "@material-ui/icons/PlaylistAdd";
 function Tracks(props) {
-  const { name, album } = props.track;
+  const { track, seedsLength } = props;
+  const { name, album } = track;
+  if (!seedsLength) {
+    return null;
+  }
   return (
     <ChipTrack data-test='chipComponent'>
       <DivTrack>
