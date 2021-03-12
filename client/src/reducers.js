@@ -4,13 +4,14 @@ import authReducer from "./reducers/auth/";
 import responseReducer from "./reducers/responsesFromApi";
 import userResponseReducer from "./reducers/userResponsesFromAPI";
 import clientSettingsReducer from "./reducers/clientSettings";
-
+import queueReducer from "./reducers/queue";
 const rootReducer = combineReducers({
   tokens: tokensReducer,
   auth: authReducer,
   responses: responseReducer,
   userResponses: userResponseReducer,
   settings: clientSettingsReducer,
+  queue: queueReducer,
 });
 
 export default rootReducer;
