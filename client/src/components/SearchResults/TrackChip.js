@@ -6,7 +6,7 @@ import Tooltip from "@material-ui/core/Tooltip";
 import { ChipTrack, DivTrack, IMGTrack } from "./style/style";
 import { DivTrackPhone, Line, TextTrackPhone } from "./style/phone.style";
 function TrackChip(props) {
-  const { track, addToFilters, auth, changeChip } = props;
+  const { track, addToFilters, auth, changeChip, addToQueue } = props;
   const { name, album, external_urls } = track;
   if (!name) {
     return null;
@@ -33,7 +33,7 @@ function TrackChip(props) {
                 }
                 title='Add to quequ'
               >
-                <PlaylistAddIcon />
+                <PlaylistAddIcon onClick={() => addToQueue(track)} />
               </Tooltip>
             ) : (
               <Tooltip title='Listen on Spotify'>
@@ -67,7 +67,7 @@ function TrackChip(props) {
           <span>
             <div>
               {auth ? (
-                <PlaylistAddIcon />
+                <PlaylistAddIcon onClick={() => addToQueue(track)} />
               ) : (
                 <a target='_blank' href={external_urls["spotify"] || ""}>
                   <img

@@ -15,6 +15,7 @@ import withAuthorizedState from "../components/shared/HOC/withAuthorized";
 import withUserResponsesFromAPIState from "../components/shared/HOC/withUserResponsesFormAPI";
 import withResponseFromAPIState from "../components/shared/HOC/withResponsesFromAPI";
 import withSettingsState from "../components/shared/HOC/withSettings";
+import withQueueState from "../components/shared/HOC/withQueue";
 
 // Import containers
 import SearchResults from "./SearchResults/SearchResults";
@@ -36,16 +37,19 @@ const WithAuthorizedAndUserAndDataResponseAndSettingsNav = compose(
   withResponseFromAPIState,
   withSettingsState
 )(Nav);
-const WithAuthorizedAndResponseDataAndSettingsSearchResults = compose(
+const WithAuthorizedAndResponseDataAndSettingsAndQueueSearchResults = compose(
   withAuthorizedState,
   withResponseFromAPIState,
-  withSettingsState
+  withSettingsState,
+  withQueueState
 )(SearchResults);
-const WithAuthorizedAndResponseDataAndSettingsTracklist = compose(
+const WithAuthorizedAndResponseDataAndSettingsAndQueueTracklist = compose(
   withAuthorizedState,
   withResponseFromAPIState,
-  withSettingsState
+  withSettingsState,
+  withQueueState
 )(Tracklist);
+const WithQueueStateQueue = compose(withQueueState)(Queue);
 
 function RootContainer({
   refresh,
@@ -70,16 +74,16 @@ function RootContainer({
           <WithAuthorizedAndUserAndDataResponseAndSettingsNav />
         </Grid>
         <Grid item xs={12}>
-          <WithAuthorizedAndResponseDataAndSettingsSearchResults />
+          <WithAuthorizedAndResponseDataAndSettingsAndQueueSearchResults />
         </Grid>
         <Grid item xs={12}>
           <WithAuthorizedAndUserResponseAndSettingsFavArtists />
         </Grid>
         <Grid item md={8} xs={12}>
-          <WithAuthorizedAndResponseDataAndSettingsTracklist />
+          <WithAuthorizedAndResponseDataAndSettingsAndQueueTracklist />
         </Grid>
         <Grid item md={4} xs={12}>
-          <Queue />
+          <WithQueueStateQueue auth={auth} />
         </Grid>
         <Grid item xs={12}>
           <Footer />
