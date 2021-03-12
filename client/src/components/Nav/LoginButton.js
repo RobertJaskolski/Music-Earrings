@@ -3,7 +3,7 @@ import React from "react";
 import { Button } from "../../styles/Buttons";
 import { Div, Span } from "../../styles/GridElements";
 
-const LoginButton = ({ redirectLink }) => {
+const LoginButton = ({ redirectLink, children }) => {
   if (!redirectLink) {
     return null;
   }
@@ -21,7 +21,7 @@ const LoginButton = ({ redirectLink }) => {
               height='25px'
             />
           </Span>
-          <Span>Connect with Spotify</Span>
+          <Span>{children}</Span>
         </Button>
       </a>
     </Div>
