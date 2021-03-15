@@ -6,11 +6,13 @@ import React from "react";
 import {
   InformationAndConnectButton,
   QueueTrack,
+  NowPlaying,
+  PlayQueue,
 } from "../../components/Queue";
-import { DivTrack } from "../../components/Queue/style/style";
 
 // Import Styles
-import { Div, Line, H2, DivTracks } from "./style/style";
+import { Div, Line, H2, DivTracks, H4 } from "./style/style";
+import { DivTrack } from "../../components/Queue/style/style";
 
 function Queue({ auth, queueTracks }) {
   return (
@@ -19,15 +21,25 @@ function Queue({ auth, queueTracks }) {
         <H2>Queue</H2>
         <Line />
         {auth ? (
-          queueTracks?.length ? (
-            <DivTrack>
-              {queueTracks?.map((track) => (
-                <QueueTrack key={track.id} track={track} />
-              ))}
-            </DivTrack>
-          ) : (
-            <h2>Empty queue</h2>
-          )
+          <DivTracks>
+            {queueTracks?.length ? (
+              <DivTracks>
+                {true ? (
+                  <DivTracks>
+                    <H4>Now Playing</H4>
+                    <NowPlaying track={queueTracks[0]} />
+                  </DivTracks>
+                ) : (
+                  <PlayQueue />
+                )}
+                {queueTracks?.map((track) => (
+                  <QueueTrack key={track.id} track={track} />
+                ))}
+              </DivTracks>
+            ) : (
+              <h2>Empty queue</h2>
+            )}
+          </DivTracks>
         ) : (
           <InformationAndConnectButton />
         )}

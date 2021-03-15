@@ -1,0 +1,49 @@
+@-webkit-keyframes slide {
+  0% {
+    left: 101%;
+  }
+  100% {
+    left: -101%;
+  }
+}
+@-moz-keyframes slide {
+  0% {
+    left: 101%;
+  }
+  100% {
+    left: -101%;
+  }
+}
+@keyframes slide {
+  0% {
+    left: 101%;
+  }
+  100% {
+    left: -101%;
+  }
+}
+
+@-webkit-keyframes slide {
+  0% {
+    left: 201%;
+  }
+  100% {
+    left: -201%;
+  }
+}
+@-moz-keyframes slide {
+  0% {
+    left: 201%;
+  }
+  100% {
+    left: -201%;
+  }
+}
+@keyframes slide {
+  0% {
+    left: 201%;
+  }
+  100% {
+    left: -201%;
+  }
+}
