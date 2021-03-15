@@ -69,7 +69,9 @@ function SaveButton(props) {
           </Button>
         </div>
       ) : (
-        <LoginButton redirectLink={`${process.env.REACT_APP_API_URL}/login`} />
+        <LoginButton redirectLink={`${process.env.REACT_APP_API_URL}/login`}>
+          You must login in to save playlist to Spotify{" "}
+        </LoginButton>
       )}
     </DivSave>
   );

@@ -9,7 +9,7 @@ import {
 import PlayArrowIcon from "@material-ui/icons/PlayArrow";
 import PlaylistAddIcon from "@material-ui/icons/PlaylistAdd";
 function Tracks(props) {
-  const { track, seedsLength } = props;
+  const { track, seedsLength, addToQueue } = props;
   const { name, album } = track;
   if (!seedsLength) {
     return null;
@@ -29,7 +29,11 @@ function Tracks(props) {
         </span>
         <span>
           <div>
-            <PlaylistAddIcon />
+            <PlaylistAddIcon
+              onClick={() => {
+                addToQueue(track);
+              }}
+            />
           </div>
           <PlayArrowIcon />
         </span>

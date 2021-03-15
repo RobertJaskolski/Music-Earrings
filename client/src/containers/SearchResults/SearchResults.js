@@ -25,6 +25,7 @@ function SearchResults({
   addTrackToSeeds,
   addArtistToSeeds,
   setSearchText,
+  addTrackToQueue,
 }) {
   let changeChip = useMediaQuery("(min-width:1000px)");
   const showSearch = searchText ? true : false;
@@ -33,6 +34,9 @@ function SearchResults({
       if (item.type === "track") addTrackToSeeds(item);
       else if (item.type === "artist") addArtistToSeeds(item);
     }
+  };
+  const addToQueue = (item) => {
+    addTrackToQueue(item);
   };
   return (
     <Section id='searchBox' active={showSearch}>
@@ -112,6 +116,7 @@ function SearchResults({
                       key={item.id}
                       track={item}
                       auth={auth}
+                      addToQueue={addToQueue}
                       addToFilters={addToFilters}
                       changeChip={changeChip}
                     />

@@ -46,6 +46,7 @@ function Tracklist({
   setPopularity,
   setLimit,
   limit,
+  addTrackToQueue,
 }) {
   const seedsLength = artistSeeds.length + trackSeeds.length;
   const handleChangeTracklistName = (event) => {
@@ -57,6 +58,10 @@ function Tracklist({
       SpotifyCreatePlaylist();
       setTracklistName("");
     }
+  };
+
+  const addToQueue = (item) => {
+    addTrackToQueue(item);
   };
 
   const handleDeleteArtist = (artist) => {
@@ -118,7 +123,12 @@ function Tracklist({
         {recommendedTracks?.length > 0 &&
           recommendedTracks?.map((track) => {
             return (
-              <Tracks track={track} key={track.id} seedsLength={seedsLength} />
+              <Tracks
+                track={track}
+                key={track.id}
+                seedsLength={seedsLength}
+                addToQueue={addToQueue}
+              />
             );
           })}
 

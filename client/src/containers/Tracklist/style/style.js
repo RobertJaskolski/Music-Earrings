@@ -7,6 +7,7 @@ export const Div = styled.div`
   padding: 15px;
   border-radius: 3px;
   box-shadow: 5px -5px rgba(20, 17, 17, 0.5);
+  min-height: 250px;
 `;
 
 export const H2 = styled.h2`

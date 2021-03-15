@@ -77,7 +77,9 @@ const Nav = ({
                 <LoginButton
                   data-test='login'
                   redirectLink={`${process.env.REACT_APP_API_URL}/login`}
-                />
+                >
+                  Connect with Spotify
+                </LoginButton>
               )}
             </Grid>
           </Grid>
@@ -100,7 +102,9 @@ const Nav = ({
                 <LoginButton
                   data-test='login'
                   redirectLink={`${process.env.REACT_APP_API_URL}/login`}
-                />
+                >
+                  Connect with Spotify
+                </LoginButton>
               )}
             </Grid>
             <Grid item xs={12}>
