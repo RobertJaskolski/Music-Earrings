@@ -28,6 +28,7 @@ function Queue({ auth, queueTracks }) {
                   <DivTracks>
                     <H4>Now Playing</H4>
                     <NowPlaying track={queueTracks[0]} />
+                    <H4>Next In Queue</H4>
                   </DivTracks>
                 ) : (
                   <PlayQueue />
@@ -37,7 +38,7 @@ function Queue({ auth, queueTracks }) {
                 ))}
               </DivTracks>
             ) : (
-              <h2>Empty queue</h2>
+              <H4>Empty queue</H4>
             )}
           </DivTracks>
         ) : (

@@ -16,7 +16,7 @@ function NowPlaying(props) {
         alt={"name"}
       />
       <Name
-        className={changeWidth ? "slide" : "slide2"}
+        className={"slide"}
         nameAndArtist={`${track?.artists[0]?.name} - ${track?.name}`}
         changeWidth={changeWidth}
       ></Name>

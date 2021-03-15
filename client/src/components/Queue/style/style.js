@@ -39,13 +39,13 @@ export const Name = styled.div`
     ${({ changeWidth }) =>
       !changeWidth &&
       css`
-        width: 200%;
+        width: 250%;
+        -webkit-animation: slide 7s linear infinite;
+        -moz-animation: slide 7s linear infinite;
+        animation: slide 7s linear infinite;
       `}
     height: 100%;
     z-index: 10;
-    -webkit-animation: slide 7s linear infinite;
-    -moz-animation: slide 7s linear infinite;
-    animation: slide 7s linear infinite;
   }
 `;
 export const Img = styled.img`
