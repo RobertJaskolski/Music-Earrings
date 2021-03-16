@@ -1,7 +1,6 @@
 import { tokensActions } from "../../reducers/tokens";
 import { authActions } from "../../reducers/auth";
 import axios from "axios";
-import store from "../../index";
 
 const RefreshToken = (refreshToken) => async (dispatch) => {
   if (refreshToken) {
