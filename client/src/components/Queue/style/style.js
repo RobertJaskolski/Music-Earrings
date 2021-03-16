@@ -94,7 +94,7 @@ export const Img = styled.img`
     `}
 `;
 
-// QUEUE PLAY
+// QUEUE PLAY BUTTON
 export const DivPlay = styled.div`
   flex-basis: 50%;
   display: flex;
@@ -110,7 +110,7 @@ export const DivPlay = styled.div`
     color: black;
   }
   background-color: #1ed760;
-  margin-bottom: 10px;
+  margin: 10px 0px;
   border-radius: 5px;
   svg {
     font-size: 40px;

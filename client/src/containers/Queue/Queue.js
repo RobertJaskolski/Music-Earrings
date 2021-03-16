@@ -12,7 +12,6 @@ import {
 
 // Import Styles
 import { Div, Line, H2, DivTracks, H4 } from "./style/style";
-import { DivTrack } from "../../components/Queue/style/style";
 
 function Queue({ auth, queueTracks }) {
   return (
@@ -24,7 +23,7 @@ function Queue({ auth, queueTracks }) {
           <DivTracks>
             {queueTracks?.length ? (
               <DivTracks>
-                {true ? (
+                {false ? (
                   <DivTracks>
                     <H4>Now Playing</H4>
                     <NowPlaying track={queueTracks[0]} />
