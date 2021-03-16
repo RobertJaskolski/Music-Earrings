@@ -21,6 +21,7 @@ export const H4 = styled.h4`
   flex-basis: 100%;
   margin-top: 10px;
   font-size: 20px;
+  text-align: center;
 `;
 export const Line = styled.div`
   width: 100%;

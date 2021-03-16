@@ -3,7 +3,7 @@ import { DivTrack, ImgRadius, Line } from "./style/style";
 import ClearIcon from "@material-ui/icons/Clear";
 
 function QueueTrack(props) {
-  const { track } = props;
+  const { track, handleDeleteTrackFormQueue } = props;
   return (
     <DivTrack>
       <Line></Line>
@@ -15,7 +15,11 @@ function QueueTrack(props) {
       />
       <div>
         <p>{`${track.artists[0]?.name} - ${track.name}`}</p>
-        <ClearIcon />
+        <ClearIcon
+          onClick={() => {
+            handleDeleteTrackFormQueue(track);
+          }}
+        />
       </div>
     </DivTrack>
   );
