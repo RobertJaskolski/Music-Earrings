@@ -1,24 +1,24 @@
 @-webkit-keyframes slide {
   0% {
-    left: 251%;
+    left: 101%;
   }
   100% {
-    left: -251%;
+    left: -401%;
   }
 }
 @-moz-keyframes slide {
   0% {
-    left: 251%;
+    left: 101%;
   }
   100% {
-    left: -251%;
+    left: -401%;
   }
 }
 @keyframes slide {
   0% {
-    left: 251%;
+    left: 101%;
   }
   100% {
-    left: -251%;
+    left: -401%;
   }
 }

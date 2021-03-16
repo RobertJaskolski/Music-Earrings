@@ -6,13 +6,12 @@ import { DivNow, Name, Img } from "./style/style";
 
 function NowPlaying(props) {
   const { track } = props;
-  const changeWidth = useMediaQuery("(min-width:700px)");
+  const changeWidth = useMediaQuery("(min-width:960px)");
   return (
-    <DivNow>
+    <DivNow changeWidth={changeWidth}>
       <Img
-        src={track?.album?.images[0]?.url}
-        width={45}
-        height={45}
+        src={track?.album?.images[0]?.url || "/images/wrapper.jpg"}
+        changeWidth={changeWidth}
         alt={"name"}
       />
       <Name

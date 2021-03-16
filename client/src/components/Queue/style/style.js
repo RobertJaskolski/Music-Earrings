@@ -14,20 +14,47 @@ export const DivInfo = styled.div`
 export const DivNow = styled.div`
   flex-basis: 100%;
   display: flex;
-  padding: 0px 15px;
-  justify-content: space-between;
+  padding: 10px 10px;
+  border-radius: 5px;
   align-items: center;
   flex-wrap: wrap;
-  padding-bottom: 10px;
+  ${({ changeWidth }) =>
+    !changeWidth &&
+    css`
+      justify-content: center;
+    `}
+  ${({ changeWidth }) =>
+    changeWidth &&
+    css`
+      background-color: #1ed760;
+      justify-content: flex-start;
+    `}
+    opacity: 0.85;
 `;
 
 export const Name = styled.div`
   position: relative;
-  font-size: 15px;
+  margin-left: 15px;
+  ${({ changeWidth }) =>
+    !changeWidth &&
+    css`
+      font-size: 25px;
+      height: 60px;
+      flex-basis: 100%;
+    `}
+  ${({ changeWidth }) =>
+    changeWidth &&
+    css`
+      font-size: 15px;
+      height: 50px;
+      flex-basis: 70%;
+    `}
   font-weight: 900;
-  height: 15px;
-  flex-basis: 80%;
-  overflow: hidden;
+  ${({ changeWidth }) =>
+    !changeWidth &&
+    css`
+      overflow: hidden;
+    `}
   &:before {
     content: "${(props) => props.nameAndArtist}";
     position: absolute;
@@ -39,17 +66,32 @@ export const Name = styled.div`
     ${({ changeWidth }) =>
       !changeWidth &&
       css`
-        width: 250%;
-        -webkit-animation: slide 7s linear infinite;
-        -moz-animation: slide 7s linear infinite;
-        animation: slide 7s linear infinite;
+        width: 100%;
+        white-space: nowrap;
+        -webkit-animation: slide 17s linear infinite;
+        -moz-animation: slide 17s linear infinite;
+        animation: slide 17s linear infinite;
       `}
     height: 100%;
     z-index: 10;
   }
 `;
 export const Img = styled.img`
-  border-radius: 2px;
+  ${({ changeWidth }) =>
+    !changeWidth &&
+    css`
+      border-radius: 10px;
+      margin-bottom: 10px;
+      width: 150px;
+      height: 150px;
+    `}
+  ${({ changeWidth }) =>
+    changeWidth &&
+    css`
+      border-radius: 2px;
+      width: 50px;
+      height: 50px;
+    `}
 `;
 
 // QUEUE PLAY
@@ -78,5 +120,48 @@ export const DivPlay = styled.div`
 // QUEUE TRACK
 export const DivTrack = styled.div`
   flex-basis: 100%;
-  background-color: red;
+  opacity: 0.85;
+  position: relative;
+  min-height: 60px;
+  transition-duration: 300ms;
+  :hover {
+    opacity: 1;
+  }
+  div:last-of-type {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-around;
+    margin-left: 55px;
+  }
+  img {
+    position: absolute;
+  }
+  p {
+    font-size: 16px;
+    flex-basis: 80%;
+    font-weight: 700;
+    margin: 0px 0px;
+    padding: 0px 0px;
+  }
+  svg {
+    flex-basis: 15%;
+    font-size: 35px;
+    transition: all 300ms ease-out;
+    :hover {
+      color: black;
+      cursor: pointer;
+    }
+  }
+`;
+
+export const Line = styled.div`
+  height: 1px;
+  background-color: #1ed760;
+  margin: 5px 0px;
+  flex-basis: 100%;
+`;
+
+export const ImgRadius = styled.img`
+  border-radius: 2px;
 `;

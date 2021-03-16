@@ -17,15 +17,15 @@ export const H2 = styled.h2`
 export const H4 = styled.h4`
   margin: 0px 0px;
   margin-bottom: 5px;
-  padding: 0px 15px;
+  padding: 0px 0px;
   flex-basis: 100%;
   margin-top: 10px;
+  font-size: 20px;
 `;
 export const Line = styled.div`
   width: 100%;
   height: 1px;
   background-color: #1ed760;
-  margin-bottom: 15px;
 `;
 
 export const DivTracks = styled.div`
