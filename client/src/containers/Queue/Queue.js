@@ -8,13 +8,19 @@ import {
   QueueTrack,
   NowPlaying,
   PlayQueue,
+  ClearButton,
 } from "../../components/Queue";
 
 // Import Styles
-import { Div, Line, H2, DivTracks, H4 } from "./style/style";
-import { DivTrack } from "../../components/Queue/style/style";
+import { Div, Line, H2, DivTracks, H4, H4Empty } from "./style/style";
 
-function Queue({ auth, queueTracks }) {
+function Queue({ auth, queueTracks, deleteTrackFromQueue, clearQueue }) {
+  const handleDeleteTrackFormQueue = (track) => {
+    deleteTrackFromQueue(track);
+  };
+  const handleClearQueue = () => {
+    clearQueue();
+  };
   return (
     <Div>
       <main style={{ width: "100%" }}>
@@ -34,11 +40,16 @@ function Queue({ auth, queueTracks }) {
                   <PlayQueue />
                 )}
                 {queueTracks?.map((track) => (
-                  <QueueTrack key={track.id} track={track} />
+                  <QueueTrack
+                    key={track.id}
+                    track={track}
+                    handleDeleteTrackFormQueue={handleDeleteTrackFormQueue}
+                  />
                 ))}
+                <ClearButton handleClearQueue={handleClearQueue} />
               </DivTracks>
             ) : (
-              <H4>Empty queue</H4>
+              <H4Empty>Empty queue</H4Empty>
             )}
           </DivTracks>
         ) : (

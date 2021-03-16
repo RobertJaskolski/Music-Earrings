@@ -71,7 +71,9 @@ const Nav = ({
                   data-test='logout'
                   logout={handleLogout}
                   name={userProfile?.display_name || "Avatar"}
-                  imageURL={userProfile?.images[0]?.url || ""}
+                  imageURL={
+                    userProfile?.images ? userProfile?.images[0]?.url : ""
+                  }
                 />
               ) : (
                 <LoginButton
@@ -96,7 +98,9 @@ const Nav = ({
                   data-test='logout'
                   logout={handleLogout}
                   name={userProfile?.display_name || "Avatar"}
-                  imageURL={userProfile?.images[0]?.url || ""}
+                  imageURL={
+                    userProfile?.images ? userProfile?.images[0]?.url : ""
+                  }
                 />
               ) : (
                 <LoginButton
