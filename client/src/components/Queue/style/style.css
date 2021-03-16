@@ -2,23 +2,32 @@
   0% {
     left: 101%;
   }
+  80% {
+    left: -151%;
+  }
   100% {
-    left: -401%;
+    left: -301%;
   }
 }
 @-moz-keyframes slide {
   0% {
     left: 101%;
   }
+  80% {
+    left: -151%;
+  }
   100% {
-    left: -401%;
+    left: -301%;
   }
 }
 @keyframes slide {
   0% {
-    left: 101%;
+    left: 151%;
+  }
+  80% {
+    left: -101%;
   }
   100% {
-    left: -401%;
+    left: -301%;
   }
 }

@@ -1,6 +1,4 @@
 import React from "react";
-
-import { DivInfo } from "./style/style";
 import { Button } from "../../styles/Buttons";
 
 function ClearButton(props) {

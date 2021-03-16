@@ -12,7 +12,7 @@ import {
 } from "../../components/Queue";
 
 // Import Styles
-import { Div, Line, H2, DivTracks, H4 } from "./style/style";
+import { Div, Line, H2, DivTracks, H4, H4Empty } from "./style/style";
 
 function Queue({ auth, queueTracks, deleteTrackFromQueue, clearQueue }) {
   const handleDeleteTrackFormQueue = (track) => {
@@ -49,7 +49,7 @@ function Queue({ auth, queueTracks, deleteTrackFromQueue, clearQueue }) {
                 <ClearButton handleClearQueue={handleClearQueue} />
               </DivTracks>
             ) : (
-              <H4>Empty queue</H4>
+              <H4Empty>Empty queue</H4Empty>
             )}
           </DivTracks>
         ) : (
