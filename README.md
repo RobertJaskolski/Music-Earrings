@@ -52,29 +52,29 @@ The project is almost ready, there are two things to do. Writing tests and creat
 
 ## Installation
 
-1. After cloning or extracting the .zip files of this repository:
-`cd Music-Earrings`
+1. After cloning or extracting the .zip files of this repository:  
+`cd Music-Earrings`  
 
-2. Next go to server file and install dependencies:
-`cd server`
-`yarn`
-`cd ..`
+2. Next go to server file and install dependencies:  
+`cd server`  
+`yarn`  
+`cd ..`  
 
-3. Next go to client and install dependencies:
-`cd client`
-`yarn`
-`cd ..`
+3. Next go to client and install dependencies:  
+`cd client`  
+`yarn`  
+`cd ..`  
 
-4. After installation of  dependencies, you must create .env files, I've already created sample files in the repository, you need to rename them and provide your environment variables.
-Rename files:
-`.envGlobal` to `dev.env`
-`server\.envServer` to `.env`
-`client\.envClient` to `.env`
-Enter yours secrets
+4. After installation of  dependencies, you must create .env files, I've already created sample files in the repository, you need to rename them and provide your environment variables.  
+Rename files:  
+`.envGlobal` to `dev.env`  
+`server\.envServer` to `.env`  
+`client\.envClient` to `.env`  
+Enter yours secrets  
 
-5. Create docker image and start application:
-`make build-dev`
-`make dev`
+5. Create docker image and start application:  
+`make build-dev`  
+`make dev`  
 
 ### Getting Started with Create React App
 
