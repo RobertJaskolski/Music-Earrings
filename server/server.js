@@ -8,8 +8,6 @@ require("dotenv").config();
 const client_id = process.env.CLIENT_ID; // Your client id
 const client_secret = process.env.CLIENT_SECRET; // Your secret
 const redirect_uri = process.env.REDIRECT_URI; // Your redirect uri
-const client_id_credensials = process.env.CLIENT_ID_CREDENSIALS;
-const client_secret_credensials = process.env.CLIENT_SECRET_CREDENSIALS;
 /**
  * Generates a random string containing numbers and letters
  * @param  {number} length The length of the string

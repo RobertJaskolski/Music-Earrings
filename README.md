@@ -27,7 +27,7 @@ API goes to sleep after 30 minutes of inactivity. Therefore, the first login may
 
 # Project Status
 
-The project is in the process of designing views.
+The project is almost ready, there are two things to do. Writing tests and creating a music player.
 
 **Features:**
 
@@ -35,7 +35,7 @@ The project is in the process of designing views.
 - Standard search for songs/artists/albums **(Done)**
 - Standard music player **(In progress)**
 - Generating a playlist based on given artists, the ability to save it on your Spotify account **(Done)**
-- Create a queue of songs **(In progress)**
+- Create a queue of songs **(Done)**
 - Check out our current favorites artists **(Done)**
 - And other features...
 
@@ -50,33 +50,31 @@ The project is in the process of designing views.
 - [Docker-Compose](https://docs.docker.com/compose/)
 - [Make](https://www.tutorialspoint.com/unix_commands/make.htm)
 
-## Installation Both
+## Installation
 
-In the directory from the repository, use the command:
+1. After cloning or extracting the .zip files of this repository:  
+`cd Music-Earrings`  
 
-### `make install`
+2. Next go to server file and install dependencies:  
+`cd server`  
+`yarn`  
+`cd ..`  
 
-## Backend Installation
+3. Next go to client and install dependencies:  
+`cd client`  
+`yarn`  
+`cd ..`  
 
-In the directory **server**, use the command:
+4. After installation of  dependencies, you must create .env files, I've already created sample files in the repository, you need to rename them and provide your environment variables.  
+Rename files:  
+`.envGlobal` to `dev.env`  
+`server\.envServer` to `.env`  
+`client\.envClient` to `.env`  
+Enter yours secrets  
 
-### `yarn install`
-
-## Frontend Installation
-
-In the directory **client**, use the command:
-
-### `yarn install`
-
-## Dockerize an application
-
-Build dev images:
-
-### `make build-dev`
-
-Run development server:
-
-### `make dev`
+5. Create docker image and start application:  
+`make build-dev`  
+`make dev`  
 
 ### Getting Started with Create React App
 
