@@ -1,14 +1,16 @@
 // Import outside
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Container, Grid } from "@material-ui/core";
 import { connect } from "react-redux";
 import { compose } from "recompose";
+import Snackbar from "@material-ui/core/Snackbar";
 
 // Import some utils, API's and etc.
 import { tokensActions } from "../reducers/tokens";
 import MyAPI from "../api/MyAPI";
 import GetHash from "../utils/GetHash";
 import API from "../api/SpotifyAPI";
+import { Alert } from "../styles/Toast";
 
 // Import HOC's
 import withAuthorizedState from "../components/shared/HOC/withAuthorized";
@@ -67,17 +69,46 @@ function RootContainer({
       getFavArtists();
     }
   });
+  const [openSuccessArtist, setOpenSuccessArtist] = useState(false);
+  const [openSuccessTrack, setOpenSuccessTrack] = useState(false);
+  const [openFail, setOpenFail] = useState(false);
+
+  const handleOpenSuccessArtist = () => {
+    setOpenSuccessArtist(true);
+  };
+  const handleOpenSuccessTrack = () => {
+    setOpenSuccessTrack(true);
+  };
+  const handleOpenFail = () => {
+    setOpenFail(true);
+  };
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpenSuccessArtist(false);
+    setOpenSuccessTrack(false);
+    setOpenFail(false);
+  };
   return (
-    <Container maxWidth='xl'>
+    <Container maxWidth="xl">
       <Grid container spacing={1}>
         <Grid item xs={12}>
           <WithAuthorizedAndUserAndDataResponseAndSettingsNav />
         </Grid>
         <Grid item xs={12}>
-          <WithAuthorizedAndResponseDataAndSettingsAndQueueSearchResults />
+          <WithAuthorizedAndResponseDataAndSettingsAndQueueSearchResults
+            handleOpenSuccessArtist={handleOpenSuccessArtist}
+            handleOpenFail={handleOpenFail}
+            handleOpenSuccessTrack={handleOpenSuccessTrack}
+          />
         </Grid>
         <Grid item xs={12}>
-          <WithAuthorizedAndUserResponseAndSettingsFavArtists />
+          <WithAuthorizedAndUserResponseAndSettingsFavArtists
+            handleOpenSuccessArtist={handleOpenSuccessArtist}
+            handleOpenFail={handleOpenFail}
+          />
         </Grid>
         <Grid item md={8} xs={12}>
           <WithAuthorizedAndResponseDataAndSettingsAndQueueTracklist />
@@ -89,6 +120,46 @@ function RootContainer({
           <Footer />
         </Grid>
       </Grid>
+      {/* Toasty */}
+      <Snackbar
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "right",
+        }}
+        open={openSuccessArtist}
+        autoHideDuration={2000}
+        onClose={handleClose}
+      >
+        <Alert onClose={handleClose} severity="success">
+          The artist has been added!
+        </Alert>
+      </Snackbar>
+      <Snackbar
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "right",
+        }}
+        open={openSuccessTrack}
+        autoHideDuration={2000}
+        onClose={handleClose}
+      >
+        <Alert onClose={handleClose} severity="success">
+          The track has been added!
+        </Alert>
+      </Snackbar>
+      <Snackbar
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "right",
+        }}
+        open={openFail}
+        autoHideDuration={3000}
+        onClose={handleClose}
+      >
+        <Alert onClose={handleClose} severity="error">
+          You can generate a tracklist on the basis of 5 options!
+        </Alert>
+      </Snackbar>
     </Container>
   );
 }
