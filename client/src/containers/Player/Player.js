@@ -3,18 +3,13 @@ import React from "react";
 // Import styles
 import { PlayerDiv } from "./style/style";
 // Import Components
-import {
-  PlayerButtons,
-  PlayerTrack,
-  PlayerTrackLength,
-} from "../../components/Player";
+import { PlayerTrack, PlayerNotAuth } from "../../components/Player";
 
 function Player() {
   return (
     <PlayerDiv>
       <PlayerTrack />
-      <PlayerTrackLength />
-      <PlayerButtons />
+      <PlayerNotAuth />
     </PlayerDiv>
   );
 }
