@@ -1,10 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Player } from "@lottiefiles/react-lottie-player";
 import animationPauseAndPlay from "../../assets/pause.json";
 import animationVolume from "../../assets/mute.json";
 import { DivPlayerNotAuth } from "./style/style";
 import InputRange from "react-input-range";
 import "./style/style.css";
+
+const calculateTime = (secs) => {
+  const minutes = Math.floor(secs / 60);
+  const seconds = Math.floor(secs % 60);
+  const returnedSeconds = seconds < 10 ? `0${seconds}` : `${seconds}`;
+  return `${minutes}:${returnedSeconds}`;
+};
 
 function PlayerNotAuth(props) {
   const { track } = props;
@@ -13,12 +20,15 @@ function PlayerNotAuth(props) {
   const [animationLottieVolume, setAnimationLottieVolume] = useState(null);
   const [volume, setVolume] = useState(25);
   const [audioPlayer, setAudioPlayer] = useState(null);
+  const [duration, setDuration] = useState(0);
   const [mute, setMute] = useState(false);
   const handleOnClickPlayOrPause = () => {
     if (!playerState) {
+      if (audioPlayer) audioPlayer.play();
       animationLottie.playSegments([30, 0], true);
       setPlayerState(true);
     } else if (playerState) {
+      if (audioPlayer) audioPlayer.pause();
       animationLottie.playSegments([0, 50], true);
       setPlayerState(false);
     }
@@ -40,6 +50,20 @@ function PlayerNotAuth(props) {
       if (value) setMute(false);
     }
   };
+  useEffect(() => {
+    if (!audioPlayer || track?.preview_url !== audioPlayer.src) {
+      setAudioPlayer(document.getElementById("audioHTML5"));
+    } else {
+      audioPlayer.addEventListener("canplaythrough", (e) => {
+        audioPlayer.play();
+        setDuration(calculateTime(audioPlayer.duration));
+      });
+      audioPlayer.addEventListener("timeupdate", (e) => {
+        console.log(audioPlayer.currentTime);
+      });
+    }
+  }, [audioPlayer, track]);
+
   return (
     <DivPlayerNotAuth>
       {track?.preview_url && (
@@ -47,7 +71,7 @@ function PlayerNotAuth(props) {
           id="audioHTML5"
           src={track?.preview_url}
           preload="metadata"
-          autoPlay
+          autoPlay={false}
         />
       )}
       <span onClick={handleOnClickPlayOrPause} className={"stopPlay"}>
@@ -71,7 +95,7 @@ function PlayerNotAuth(props) {
           onChange={() => {}}
         />
       </span>
-      <span className={"duration"}>0:00</span>
+      <span className={"duration"}>{audioPlayer && duration}</span>
       <span onClick={handleMute}>
         <Player
           lottieRef={(instance) => {
