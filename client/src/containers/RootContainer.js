@@ -18,6 +18,7 @@ import withUserResponsesFromAPIState from "../components/shared/HOC/withUserResp
 import withResponseFromAPIState from "../components/shared/HOC/withResponsesFromAPI";
 import withSettingsState from "../components/shared/HOC/withSettings";
 import withQueueState from "../components/shared/HOC/withQueue";
+import withPlayerNotAuthState from "../components/shared/HOC/withPlayerNotAuth";
 
 // Import containers
 import SearchResults from "./SearchResults/SearchResults";
@@ -26,8 +27,10 @@ import Tracklist from "./Tracklist/Tracklist";
 import Queue from "./Queue/Queue";
 import Nav from "./Nav/Nav";
 import Footer from "../components/Footer/Footer";
+import Player from "./Player/Player";
 
 // Containers with HOC's
+const PlayerWithPlayerState = compose(withPlayerNotAuthState)(Player);
 const WithAuthorizedAndUserResponseAndSettingsFavArtists = compose(
   withAuthorizedState,
   withUserResponsesFromAPIState,
@@ -39,17 +42,19 @@ const WithAuthorizedAndUserAndDataResponseAndSettingsNav = compose(
   withResponseFromAPIState,
   withSettingsState
 )(Nav);
-const WithAuthorizedAndResponseDataAndSettingsAndQueueSearchResults = compose(
+const WithAuthorizedAndResponseDataAndSettingsAndQueueAndPlayerSearchResults = compose(
   withAuthorizedState,
   withResponseFromAPIState,
   withSettingsState,
-  withQueueState
+  withQueueState,
+  withPlayerNotAuthState
 )(SearchResults);
-const WithAuthorizedAndResponseDataAndSettingsAndQueueTracklist = compose(
+const WithAuthorizedAndResponseDataAndSettingsAndQueueAndPlayerTracklist = compose(
   withAuthorizedState,
   withResponseFromAPIState,
   withSettingsState,
-  withQueueState
+  withQueueState,
+  withPlayerNotAuthState
 )(Tracklist);
 const WithQueueStateQueue = compose(withQueueState)(Queue);
 
@@ -98,7 +103,10 @@ function RootContainer({
           <WithAuthorizedAndUserAndDataResponseAndSettingsNav />
         </Grid>
         <Grid item xs={12}>
-          <WithAuthorizedAndResponseDataAndSettingsAndQueueSearchResults
+          <PlayerWithPlayerState />
+        </Grid>
+        <Grid item xs={12}>
+          <WithAuthorizedAndResponseDataAndSettingsAndQueueAndPlayerSearchResults
             handleOpenSuccessArtist={handleOpenSuccessArtist}
             handleOpenFail={handleOpenFail}
             handleOpenSuccessTrack={handleOpenSuccessTrack}
@@ -111,7 +119,7 @@ function RootContainer({
           />
         </Grid>
         <Grid item md={8} xs={12}>
-          <WithAuthorizedAndResponseDataAndSettingsAndQueueTracklist />
+          <WithAuthorizedAndResponseDataAndSettingsAndQueueAndPlayerTracklist />
         </Grid>
         <Grid item md={4} xs={12}>
           <WithQueueStateQueue auth={auth} />
