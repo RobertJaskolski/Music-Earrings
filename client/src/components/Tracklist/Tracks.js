@@ -9,21 +9,21 @@ import {
 import PlayArrowIcon from "@material-ui/icons/PlayArrow";
 import PlaylistAddIcon from "@material-ui/icons/PlaylistAdd";
 function Tracks(props) {
-  const { track, seedsLength, addToQueue } = props;
+  const { track, seedsLength, addToQueue, changePlayingTrack } = props;
   const { name, album } = track;
   if (!seedsLength) {
     return null;
   }
   return (
-    <ChipTrack data-test='chipComponent'>
+    <ChipTrack data-test="chipComponent">
       <DivTrack>
         <LineTrack />
         <span>
           <IMGTrack
-            data-test='chipIMG'
+            data-test="chipIMG"
             src={album?.images[0]?.url || "/images/wrapper.jpg"}
-            width='40x'
-            height='auto'
+            width="40x"
+            height="auto"
           />
           <TextTrack>{name}</TextTrack>
         </span>
@@ -35,7 +35,13 @@ function Tracks(props) {
               }}
             />
           </div>
-          <PlayArrowIcon />
+          {track?.preview_url && (
+            <PlayArrowIcon
+              onClick={() => {
+                changePlayingTrack(track);
+              }}
+            />
+          )}
         </span>
       </DivTrack>
     </ChipTrack>

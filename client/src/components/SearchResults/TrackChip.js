@@ -6,22 +6,35 @@ import Tooltip from "@material-ui/core/Tooltip";
 import { ChipTrack, DivTrack, IMGTrack } from "./style/style";
 import { DivTrackPhone, Line, TextTrackPhone } from "./style/phone.style";
 function TrackChip(props) {
-  const { track, addToFilters, auth, changeChip, addToQueue } = props;
+  const {
+    track,
+    addToFilters,
+    auth,
+    changeChip,
+    addToQueue,
+    changePlayingTrack,
+  } = props;
   const { name, album, external_urls } = track;
   if (!name) {
     return null;
   }
   return (
-    <ChipTrack data-test='chipComponent' desktop={changeChip}>
+    <ChipTrack data-test="chipComponent" desktop={changeChip}>
       {changeChip ? (
         <DivTrack>
           <span>
-            <PlayArrowIcon />
+            {track?.preview_url && (
+              <PlayArrowIcon
+                onClick={() => {
+                  changePlayingTrack(track);
+                }}
+              />
+            )}
             <IMGTrack
-              data-test='chipIMG'
+              data-test="chipIMG"
               src={album?.images[0]?.url || "/images/wrapper.jpg"}
-              width='40x'
-              height='auto'
+              width="40x"
+              height="auto"
             />
             <div>{name}</div>
           </span>
@@ -31,23 +44,23 @@ function TrackChip(props) {
                 style={
                   auth ? { display: "inline-block" } : { color: "#282828" }
                 }
-                title='Add to quequ'
+                title="Add to quequ"
               >
                 <PlaylistAddIcon onClick={() => addToQueue(track)} />
               </Tooltip>
             ) : (
-              <Tooltip title='Listen on Spotify'>
-                <a target='_blank' href={external_urls["spotify"] || ""}>
+              <Tooltip title="Listen on Spotify">
+                <a target="_blank" href={external_urls["spotify"] || ""}>
                   <img
-                    alt='spotify Logo'
-                    width='35px'
-                    height='35px'
-                    src='/images/spotifyLogo.svg'
+                    alt="spotify Logo"
+                    width="35px"
+                    height="35px"
+                    src="/images/spotifyLogo.svg"
                   />
                 </a>
               </Tooltip>
             )}
-            <Tooltip title='Add to filters for generate playlist'>
+            <Tooltip title="Add to filters for generate playlist">
               <QueueIcon onClick={() => addToFilters(track)} />
             </Tooltip>
           </span>
@@ -57,10 +70,10 @@ function TrackChip(props) {
           <Line />
           <span>
             <IMGTrack
-              data-test='chipIMG'
+              data-test="chipIMG"
               src={album?.images[0]?.url || "/images/wrapper.jpg"}
-              width='40x'
-              height='auto'
+              width="40x"
+              height="auto"
             />
             <TextTrackPhone>{name}</TextTrackPhone>
           </span>
@@ -69,18 +82,24 @@ function TrackChip(props) {
               {auth ? (
                 <PlaylistAddIcon onClick={() => addToQueue(track)} />
               ) : (
-                <a target='_blank' href={external_urls["spotify"] || ""}>
+                <a target="_blank" href={external_urls["spotify"] || ""}>
                   <img
-                    alt='spotify Logo'
-                    width='35px'
-                    height='35px'
-                    src='/images/spotifyLogo.svg'
+                    alt="spotify Logo"
+                    width="35px"
+                    height="35px"
+                    src="/images/spotifyLogo.svg"
                   />
                 </a>
               )}
               <QueueIcon onClick={() => addToFilters(track)} />
             </div>
-            <PlayArrowIcon />
+            {track?.preview_url && (
+              <PlayArrowIcon
+                onClick={() => {
+                  changePlayingTrack(track);
+                }}
+              />
+            )}
           </span>
         </DivTrackPhone>
       )}

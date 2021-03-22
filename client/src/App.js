@@ -8,8 +8,8 @@ const RootwithAuthorized = withAuthorized(RootContainer);
 
 function App() {
   return (
-    <Router basename='/'>
-      <div className='App'>
+    <Router basename="/">
+      <div className="App">
         <RootwithAuthorized />
       </div>
     </Router>

@@ -26,20 +26,31 @@ function SearchResults({
   addArtistToSeeds,
   setSearchText,
   addTrackToQueue,
+  handleOpenSuccessArtist,
+  handleOpenFail,
+  handleOpenSuccessTrack,
+  changePlayingTrack,
 }) {
   let changeChip = useMediaQuery("(min-width:1000px)");
   const showSearch = searchText ? true : false;
   const addToFilters = (item) => {
     if (trackSeeds.length + artistSeeds.length < 5) {
-      if (item.type === "track") addTrackToSeeds(item);
-      else if (item.type === "artist") addArtistToSeeds(item);
+      if (item.type === "track") {
+        addTrackToSeeds(item);
+        handleOpenSuccessTrack();
+      } else if (item.type === "artist") {
+        addArtistToSeeds(item);
+        handleOpenSuccessArtist();
+      }
+    } else {
+      handleOpenFail();
     }
   };
   const addToQueue = (item) => {
     addTrackToQueue(item);
   };
   return (
-    <Section id='searchBox' active={showSearch}>
+    <Section id="searchBox" active={showSearch}>
       {loadingArtistsAndTracks ? (
         <Grid container>
           <Grid item lg={6} xs={12}>
@@ -119,6 +130,7 @@ function SearchResults({
                       addToQueue={addToQueue}
                       addToFilters={addToFilters}
                       changeChip={changeChip}
+                      changePlayingTrack={changePlayingTrack}
                     />
                   );
                 })}

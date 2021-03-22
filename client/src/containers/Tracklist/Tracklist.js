@@ -47,6 +47,7 @@ function Tracklist({
   setLimit,
   limit,
   addTrackToQueue,
+  changePlayingTrack,
 }) {
   const seedsLength = artistSeeds.length + trackSeeds.length;
   const handleChangeTracklistName = (event) => {
@@ -124,10 +125,12 @@ function Tracklist({
           recommendedTracks?.map((track) => {
             return (
               <Tracks
+                auth={auth}
                 track={track}
                 key={track.id}
                 seedsLength={seedsLength}
                 addToQueue={addToQueue}
+                changePlayingTrack={changePlayingTrack}
               />
             );
           })}

@@ -5,6 +5,7 @@ import responseReducer from "./reducers/responsesFromApi";
 import userResponseReducer from "./reducers/userResponsesFromAPI";
 import clientSettingsReducer from "./reducers/clientSettings";
 import queueReducer from "./reducers/queue";
+import playerNotAuthReducer from "./reducers/playerNotAuth";
 const rootReducer = combineReducers({
   tokens: tokensReducer,
   auth: authReducer,
@@ -12,6 +13,7 @@ const rootReducer = combineReducers({
   userResponses: userResponseReducer,
   settings: clientSettingsReducer,
   queue: queueReducer,
+  playerNotAuth: playerNotAuthReducer,
 });
 
 export default rootReducer;
