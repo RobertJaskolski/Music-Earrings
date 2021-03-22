@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Player } from "@lottiefiles/react-lottie-player";
 import animationPauseAndPlay from "../../assets/pause.json";
 import animationVolume from "../../assets/mute.json";
@@ -6,11 +6,13 @@ import { DivPlayerNotAuth } from "./style/style";
 import InputRange from "react-input-range";
 import "./style/style.css";
 
-function PlayerNotAuth() {
+function PlayerNotAuth(props) {
+  const { track } = props;
   const [playerState, setPlayerState] = useState(true);
   const [animationLottie, setAnimationLottie] = useState(null);
   const [animationLottieVolume, setAnimationLottieVolume] = useState(null);
   const [volume, setVolume] = useState(25);
+  const [audioPlayer, setAudioPlayer] = useState(null);
   const [mute, setMute] = useState(false);
   const handleOnClickPlayOrPause = () => {
     if (!playerState) {
@@ -40,6 +42,14 @@ function PlayerNotAuth() {
   };
   return (
     <DivPlayerNotAuth>
+      {track?.preview_url && (
+        <audio
+          id="audioHTML5"
+          src={track?.preview_url}
+          preload="metadata"
+          autoPlay
+        />
+      )}
       <span onClick={handleOnClickPlayOrPause} className={"stopPlay"}>
         <Player
           lottieRef={(instance) => {

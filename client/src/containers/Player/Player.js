@@ -5,11 +5,12 @@ import { PlayerDiv } from "./style/style";
 // Import Components
 import { PlayerTrack, PlayerNotAuth } from "../../components/Player";
 
-function Player() {
+function Player({ playingTrack }) {
+  if (playingTrack?.preview_url === undefined) return null;
   return (
     <PlayerDiv>
-      <PlayerTrack />
-      <PlayerNotAuth />
+      <PlayerTrack track={playingTrack} />
+      <PlayerNotAuth track={playingTrack} />
     </PlayerDiv>
   );
 }

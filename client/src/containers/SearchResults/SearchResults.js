@@ -29,6 +29,7 @@ function SearchResults({
   handleOpenSuccessArtist,
   handleOpenFail,
   handleOpenSuccessTrack,
+  changePlayingTrack,
 }) {
   let changeChip = useMediaQuery("(min-width:1000px)");
   const showSearch = searchText ? true : false;
@@ -129,6 +130,7 @@ function SearchResults({
                       addToQueue={addToQueue}
                       addToFilters={addToFilters}
                       changeChip={changeChip}
+                      changePlayingTrack={changePlayingTrack}
                     />
                   );
                 })}
