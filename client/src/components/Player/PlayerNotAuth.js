@@ -16,11 +16,14 @@ const calculateTime = (secs) => {
 function PlayerNotAuth(props) {
   const { track } = props;
   const [playerState, setPlayerState] = useState(true);
+  const [durationText, setDurationText] = useState("");
+  const [durationNumber, setDurationNumber] = useState(0);
+  const [currentTimeText, setCurrentTimeText] = useState("");
+  const [currentTimeNumber, setCurrentTimeNumber] = useState(0);
   const [animationLottie, setAnimationLottie] = useState(null);
   const [animationLottieVolume, setAnimationLottieVolume] = useState(null);
   const [volume, setVolume] = useState(25);
   const [audioPlayer, setAudioPlayer] = useState(null);
-  const [duration, setDuration] = useState(0);
   const [mute, setMute] = useState(false);
   const handleOnClickPlayOrPause = () => {
     if (!playerState) {
@@ -56,10 +59,12 @@ function PlayerNotAuth(props) {
     } else {
       audioPlayer.addEventListener("canplaythrough", (e) => {
         audioPlayer.play();
-        setDuration(calculateTime(audioPlayer.duration));
+        setDurationText(calculateTime(audioPlayer.duration));
+        setDurationNumber(audioPlayer.duration);
       });
       audioPlayer.addEventListener("timeupdate", (e) => {
-        console.log(audioPlayer.currentTime);
+        setCurrentTimeText(calculateTime(audioPlayer.currentTime));
+        setCurrentTimeNumber(audioPlayer.currentTime);
       });
     }
   }, [audioPlayer, track]);
@@ -86,16 +91,19 @@ function PlayerNotAuth(props) {
           style={{ height: "50px", width: "50px" }}
         ></Player>
       </span>
-      <span className={"duration"}>0:00</span>
+      <span className={"duration"}>{audioPlayer && currentTimeText}</span>
       <span className={"input-range-span"}>
         <InputRange
-          maxValue={100}
+          maxValue={durationNumber || 100}
           minValue={0}
-          value={20}
-          onChange={() => {}}
+          value={currentTimeNumber || 0}
+          onChange={(value) => {
+            setCurrentTimeNumber(value);
+            if (audioPlayer) audioPlayer.currentTime = value;
+          }}
         />
       </span>
-      <span className={"duration"}>{audioPlayer && duration}</span>
+      <span className={"duration"}>{audioPlayer && durationText}</span>
       <span onClick={handleMute}>
         <Player
           lottieRef={(instance) => {
