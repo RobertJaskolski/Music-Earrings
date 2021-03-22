@@ -41,10 +41,12 @@ function PlayerNotAuth(props) {
       setMute(false);
       setVolume(24);
       animationLottieVolume.goToAndStop(24, true);
+      if (audioPlayer) audioPlayer.volume = 1.0;
     } else {
       setVolume(0);
       setMute(true);
       animationLottieVolume.goToAndStop(0, true);
+      if (audioPlayer) audioPlayer.volume = 0.0;
     }
   };
   const handleChangeVolumeAnimation = (value) => {
@@ -65,6 +67,10 @@ function PlayerNotAuth(props) {
       audioPlayer.addEventListener("timeupdate", (e) => {
         setCurrentTimeText(calculateTime(audioPlayer.currentTime));
         setCurrentTimeNumber(audioPlayer.currentTime);
+      });
+      audioPlayer.addEventListener("ended", (e) => {
+        audioPlayer.pause();
+        setPlayerState(false);
       });
     }
   }, [audioPlayer, track]);
@@ -124,6 +130,7 @@ function PlayerNotAuth(props) {
           value={volume}
           onChange={(value) => {
             setVolume(value);
+            if (audioPlayer) audioPlayer.volume = (value * 4) / 100;
             handleChangeVolumeAnimation(value);
           }}
         />
