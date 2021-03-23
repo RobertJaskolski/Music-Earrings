@@ -14,7 +14,7 @@ const calculateTime = (secs) => {
 };
 
 function PlayerNotAuth(props) {
-  const { track } = props;
+  const { track, changePlayerView } = props;
   const [playerState, setPlayerState] = useState(true);
   const [durationText, setDurationText] = useState("");
   const [durationNumber, setDurationNumber] = useState(0);
@@ -63,6 +63,8 @@ function PlayerNotAuth(props) {
         audioPlayer.play();
         setDurationText(calculateTime(audioPlayer.duration));
         setDurationNumber(audioPlayer.duration);
+        setPlayerState(true);
+        if (animationLottie) animationLottie.goToAndStop(0, true);
       });
       audioPlayer.addEventListener("timeupdate", (e) => {
         setCurrentTimeText(calculateTime(audioPlayer.currentTime));
@@ -71,12 +73,13 @@ function PlayerNotAuth(props) {
       audioPlayer.addEventListener("ended", (e) => {
         audioPlayer.pause();
         setPlayerState(false);
+        if (animationLottie) animationLottie.goToAndStop(40, true);
       });
     }
-  }, [audioPlayer, track]);
+  }, [audioPlayer, track, animationLottie]);
 
   return track?.preview_url ? (
-    <DivPlayerNotAuth>
+    <DivPlayerNotAuth changePlayerView={changePlayerView}>
       <audio
         id="audioHTML5"
         src={track?.preview_url}
@@ -136,7 +139,7 @@ function PlayerNotAuth(props) {
       </span>
     </DivPlayerNotAuth>
   ) : (
-    <DivPlayerNotAuth>
+    <DivPlayerNotAuth changePlayerView={changePlayerView}>
       <span className={"stopPlay"}>
         <Player
           autoplay={false}
