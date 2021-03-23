@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 // TRACK
 export const DivTrack = styled.div`
@@ -19,6 +19,20 @@ export const DivTrack = styled.div`
     bottom: -20px;
     border-radius: 3px;
   }
+  ${({ changePlayerView }) =>
+    !changePlayerView &&
+    css`
+      flex-basis: 25%;
+      margin: 0 auto;
+      padding: 0;
+      padding-left: 5px;
+      span:first-of-type {
+        font-size: 14px;
+      }
+      span:last-of-type {
+        font-size: 12px;
+      }
+    `}
 `;
 // Player Not auth
 export const DivPlayerNotAuth = styled.div`
@@ -56,4 +70,32 @@ export const DivPlayerNotAuth = styled.div`
     cursor: pointer;
     margin-left: 10px;
   }
+  ${({ changePlayerView }) =>
+    !changePlayerView &&
+    css`
+      flex-basis: 73%;
+      .stopPlay {
+        margin: 0;
+        padding: 0;
+        flex-basis: 25%;
+      }
+      .input-range-span {
+        padding: 0px 0px;
+        flex-basis: 70%;
+        display: flex;
+        justify-content: space-between;
+        .duration {
+          flex-basis: 2%;
+          &:first-of-type {
+            margin-right: 15px;
+          }
+          &:last-of-type {
+            margin-left: 15px;
+          }
+        }
+      }
+      .input-volume-range-span {
+        flex-basis: 40%;
+      }
+    `}
 `;
