@@ -50,7 +50,11 @@ function TrackChip(props) {
               </Tooltip>
             ) : (
               <Tooltip title="Listen on Spotify">
-                <a target="_blank" href={external_urls["spotify"] || ""}>
+                <a
+                  target="_blank"
+                  rel="noreferrer"
+                  href={external_urls["spotify"] || ""}
+                >
                   <img
                     alt="spotify Logo"
                     width="35px"
@@ -82,7 +86,11 @@ function TrackChip(props) {
               {auth ? (
                 <PlaylistAddIcon onClick={() => addToQueue(track)} />
               ) : (
-                <a target="_blank" href={external_urls["spotify"] || ""}>
+                <a
+                  target="_blank"
+                  rel="noreferrer"
+                  href={external_urls["spotify"] || ""}
+                >
                   <img
                     alt="spotify Logo"
                     width="35px"

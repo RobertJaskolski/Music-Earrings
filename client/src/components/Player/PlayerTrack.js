@@ -9,7 +9,7 @@ function PlayerTrack(props) {
     <DivTrack changePlayerView={changePlayerView}>
       {changePlayerView && (
         <img
-          alt="Song image"
+          alt={track?.name}
           src={track?.album?.images[0]?.url || "/images/wrapper.jpg"}
           width={80}
           height={80}
