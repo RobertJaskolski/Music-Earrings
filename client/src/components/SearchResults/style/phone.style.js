@@ -70,5 +70,7 @@ export const Line = styled.div`
 
 export const TextTrackPhone = styled.span`
   margin-left: 45px;
+  word-wrap: break-word;
+  word-break: break-all;
 `;
 //Track skelton

@@ -18,30 +18,30 @@ function ArtistChip(props) {
     return null;
   }
   return (
-    <ChipArtist data-test='chipComponent' desktop={changeChip}>
+    <ChipArtist data-test="chipComponent" desktop={changeChip}>
       {changeChip ? (
         <DivArtist>
           <IMGArtist
-            data-test='chipIMG'
-            height='65px'
-            width='65px'
+            data-test="chipIMG"
+            height="65px"
+            width="65px"
             src={images[0]?.url || "/images/wrapper.jpg"}
             alt={name}
           />
-          <H2Artist data-test='chipText'>{name}</H2Artist>
+          <H2Artist data-test="chipText">{name}</H2Artist>
 
           {auth ? (
             <span>
-              <Tooltip title='Listen artist radio'>
+              <Tooltip title="Listen artist radio">
                 <RadioIcon />
               </Tooltip>
-              <Tooltip title='Add to filters'>
+              <Tooltip title="Add to filters">
                 <QueueIcon onClick={() => addToFilters(artist)} />
               </Tooltip>
             </span>
           ) : (
             <span>
-              <Tooltip title='Add to filters'>
+              <Tooltip title="Add to filters">
                 <QueueIcon onClick={() => addToFilters(artist)} />
               </Tooltip>
             </span>
@@ -50,9 +50,9 @@ function ArtistChip(props) {
       ) : (
         <DivArtistPhone>
           <IMGArtistPhone
-            data-test='chipIMG'
-            height='110px'
-            width='110px'
+            data-test="chipIMG"
+            height="110px"
+            width="110px"
             src={images[0]?.url || "/images/wrapper.jpg"}
             alt={name}
           />

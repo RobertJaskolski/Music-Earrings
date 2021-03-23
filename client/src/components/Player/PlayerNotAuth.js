@@ -14,7 +14,7 @@ const calculateTime = (secs) => {
 };
 
 function PlayerNotAuth(props) {
-  const { track } = props;
+  const { track, changePlayerView } = props;
   const [playerState, setPlayerState] = useState(true);
   const [durationText, setDurationText] = useState("");
   const [durationNumber, setDurationNumber] = useState(0);
@@ -63,6 +63,8 @@ function PlayerNotAuth(props) {
         audioPlayer.play();
         setDurationText(calculateTime(audioPlayer.duration));
         setDurationNumber(audioPlayer.duration);
+        setPlayerState(true);
+        if (animationLottie) animationLottie.goToAndStop(0, true);
       });
       audioPlayer.addEventListener("timeupdate", (e) => {
         setCurrentTimeText(calculateTime(audioPlayer.currentTime));
@@ -71,20 +73,19 @@ function PlayerNotAuth(props) {
       audioPlayer.addEventListener("ended", (e) => {
         audioPlayer.pause();
         setPlayerState(false);
+        if (animationLottie) animationLottie.goToAndStop(40, true);
       });
     }
-  }, [audioPlayer, track]);
+  }, [audioPlayer, track, animationLottie]);
 
-  return (
-    <DivPlayerNotAuth>
-      {track?.preview_url && (
-        <audio
-          id="audioHTML5"
-          src={track?.preview_url}
-          preload="metadata"
-          autoPlay={false}
-        />
-      )}
+  return track?.preview_url ? (
+    <DivPlayerNotAuth changePlayerView={changePlayerView}>
+      <audio
+        id="audioHTML5"
+        src={track?.preview_url}
+        preload="metadata"
+        autoPlay={false}
+      />
       <span onClick={handleOnClickPlayOrPause} className={"stopPlay"}>
         <Player
           lottieRef={(instance) => {
@@ -97,8 +98,8 @@ function PlayerNotAuth(props) {
           style={{ height: "50px", width: "50px" }}
         ></Player>
       </span>
-      <span className={"duration"}>{audioPlayer && currentTimeText}</span>
       <span className={"input-range-span"}>
+        <span className={"duration"}>{audioPlayer && currentTimeText}</span>
         <InputRange
           maxValue={durationNumber || 100}
           minValue={0}
@@ -108,8 +109,53 @@ function PlayerNotAuth(props) {
             if (audioPlayer) audioPlayer.currentTime = value;
           }}
         />
+        <span className={"duration"}>{audioPlayer && durationText}</span>
       </span>
-      <span className={"duration"}>{audioPlayer && durationText}</span>
+
+      <span onClick={handleMute}>
+        <Player
+          lottieRef={(instance) => {
+            setAnimationLottieVolume(instance);
+            instance.goToAndStop(24, true);
+          }}
+          autoplay={false}
+          loop={false}
+          keepLastFrame={true}
+          src={animationVolume}
+          style={{ height: "50px", width: "65px" }}
+        ></Player>
+      </span>
+      <span className={"input-volume-range-span"}>
+        <InputRange
+          maxValue={25}
+          minValue={0}
+          value={volume}
+          onChange={(value) => {
+            setVolume(value);
+            if (audioPlayer) audioPlayer.volume = (value * 4) / 100;
+            handleChangeVolumeAnimation(value);
+          }}
+        />
+      </span>
+    </DivPlayerNotAuth>
+  ) : (
+    <DivPlayerNotAuth changePlayerView={changePlayerView}>
+      <span className={"stopPlay"}>
+        <Player
+          autoplay={false}
+          loop={false}
+          keepLastFrame={true}
+          src={animationPauseAndPlay}
+          style={{ height: "50px", width: "50px" }}
+        ></Player>
+      </span>
+
+      <span className={"input-range-span"}>
+        <span className={"duration"}>0:00</span>
+        <InputRange onChange={() => {}} maxValue={100} minValue={0} value={0} />
+        <span className={"duration"}>0:00</span>
+      </span>
+
       <span onClick={handleMute}>
         <Player
           lottieRef={(instance) => {

@@ -14,6 +14,8 @@ export const DivSave = styled.div`
 
 export const Chip = styled.span`
   //font-size: 18px;
+  word-wrap: break-word;
+  word-break: break-all;
   font-weight: bold;
   margin: 5px;
   border-radius: 5px;
@@ -81,6 +83,8 @@ export const LineTrack = styled.div`
 
 export const TextTrack = styled.span`
   margin-left: 45px;
+  word-wrap: break-word;
+  word-break: break-all;
 `;
 
 export const ChipTrack = styled.div`
@@ -98,7 +102,7 @@ export const ChipTrack = styled.div`
     z-index: 10;
     font-size: 40px;
   }
-  :hover {
+  spna :hover {
     opacity: 1;
     span:first-child svg {
       opacity: 1;
