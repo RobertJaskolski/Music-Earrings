@@ -28,9 +28,13 @@ export const DivTrack = styled.div`
       padding-left: 5px;
       span:first-of-type {
         font-size: 14px;
+        word-wrap: break-word;
+        word-break: break-all;
       }
       span:last-of-type {
         font-size: 12px;
+        word-wrap: break-word;
+        word-break: break-all;
       }
     `}
 `;

@@ -97,37 +97,49 @@ function RootContainer({
     setOpenFail(false);
   };
   return (
-    <Container maxWidth="xl">
-      <Grid container spacing={1}>
-        <Grid item xs={12}>
-          <WithAuthorizedAndUserAndDataResponseAndSettingsNav />
+    <Container
+      style={{
+        height: "100%",
+      }}
+      maxWidth="xl"
+    >
+      <div
+        style={{
+          height: "100%",
+          display: "flex",
+          flexWrap: "wrap",
+          alignItems: "space-between",
+        }}
+      >
+        <Grid container spacing={1} style={{ height: "auto" }}>
+          <Grid item xs={12}>
+            <WithAuthorizedAndUserAndDataResponseAndSettingsNav />
+          </Grid>
+          <Grid item xs={12}>
+            <WithAuthorizedAndResponseDataAndSettingsAndQueueAndPlayerSearchResults
+              handleOpenSuccessArtist={handleOpenSuccessArtist}
+              handleOpenFail={handleOpenFail}
+              handleOpenSuccessTrack={handleOpenSuccessTrack}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <PlayerWithPlayerState />
+          </Grid>
+          <Grid item xs={12}>
+            <WithAuthorizedAndUserResponseAndSettingsFavArtists
+              handleOpenSuccessArtist={handleOpenSuccessArtist}
+              handleOpenFail={handleOpenFail}
+            />
+          </Grid>
+          <Grid item md={8} xs={12}>
+            <WithAuthorizedAndResponseDataAndSettingsAndQueueAndPlayerTracklist />
+          </Grid>
+          <Grid item md={4} xs={12}>
+            <WithQueueStateQueue auth={auth} />
+          </Grid>
         </Grid>
-        <Grid item xs={12}>
-          <WithAuthorizedAndResponseDataAndSettingsAndQueueAndPlayerSearchResults
-            handleOpenSuccessArtist={handleOpenSuccessArtist}
-            handleOpenFail={handleOpenFail}
-            handleOpenSuccessTrack={handleOpenSuccessTrack}
-          />
-        </Grid>
-        <Grid item xs={12}>
-          <PlayerWithPlayerState />
-        </Grid>
-        <Grid item xs={12}>
-          <WithAuthorizedAndUserResponseAndSettingsFavArtists
-            handleOpenSuccessArtist={handleOpenSuccessArtist}
-            handleOpenFail={handleOpenFail}
-          />
-        </Grid>
-        <Grid item md={8} xs={12}>
-          <WithAuthorizedAndResponseDataAndSettingsAndQueueAndPlayerTracklist />
-        </Grid>
-        <Grid item md={4} xs={12}>
-          <WithQueueStateQueue auth={auth} />
-        </Grid>
-        <Grid item xs={12}>
-          <Footer />
-        </Grid>
-      </Grid>
+        <Footer />
+      </div>
       {/* Toasty */}
       <Snackbar
         anchorOrigin={{

@@ -9,70 +9,68 @@ export default function Footer() {
   const changeFooter = useMediaQuery("(min-width:650px)");
 
   return (
-    <Grid data-test="FooterComponent" item xs={12}>
-      <Grid container justify="center">
-        <Grid item sm={10} xs={12}>
-          <Line></Line>
-        </Grid>
-        <Grid item sm={10} xs={12}>
-          {changeFooter ? (
-            <FooterStyled>
-              <span data-test="copyright">&copy; 2021 Robert Jaskólski</span>
-              <span>
-                <Ul>
-                  <Li>
-                    <Flag lang="pl" />
-                  </Li>
+    <Grid style={{ margin: "auto 0px 15px 0px" }} container justify="center">
+      <Grid item sm={10} xs={12}>
+        <Line></Line>
+      </Grid>
+      <Grid item sm={10} xs={12}>
+        {changeFooter ? (
+          <FooterStyled>
+            <span data-test="copyright">&copy; 2021 Robert Jaskólski</span>
+            <span>
+              <Ul>
+                <Li>
+                  <Flag lang="pl" />
+                </Li>
+                <a
+                  href="https://github.com/RobertJaskolski"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <Li data-test="links">Github</Li>
+                </a>
+                <a
+                  href="https://www.linkedin.com/in/robert-jask%C3%B3lski-b207351a4/"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <Li data-test="links">Linkedin</Li>
+                </a>
+                <Li data-test="links">Contact</Li>
+              </Ul>
+            </span>
+          </FooterStyled>
+        ) : (
+          <FooterStyledPhone>
+            <span data-test="copyright">&copy; 2021 Robert Jaskólski</span>
+            <span>
+              <Ul>
+                <LiPhone>
+                  <Flag lang="pl" />
+                </LiPhone>
+                <LiPhone data-test="links">
                   <a
                     href="https://github.com/RobertJaskolski"
                     target="_blank"
                     rel="noreferrer"
                   >
-                    <Li data-test="links">Github</Li>
+                    Github
                   </a>
+                </LiPhone>
+                <LiPhone data-test="links">
                   <a
                     href="https://www.linkedin.com/in/robert-jask%C3%B3lski-b207351a4/"
                     target="_blank"
                     rel="noreferrer"
                   >
-                    <Li data-test="links">Linkedin</Li>
+                    Linkedin
                   </a>
-                  <Li data-test="links">Contact</Li>
-                </Ul>
-              </span>
-            </FooterStyled>
-          ) : (
-            <FooterStyledPhone>
-              <span data-test="copyright">&copy; 2021 Robert Jaskólski</span>
-              <span>
-                <Ul>
-                  <LiPhone>
-                    <Flag lang="pl" />
-                  </LiPhone>
-                  <LiPhone data-test="links">
-                    <a
-                      href="https://github.com/RobertJaskolski"
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      Github
-                    </a>
-                  </LiPhone>
-                  <LiPhone data-test="links">
-                    <a
-                      href="https://www.linkedin.com/in/robert-jask%C3%B3lski-b207351a4/"
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      Linkedin
-                    </a>
-                  </LiPhone>
-                  <LiPhone data-test="links">Contact</LiPhone>
-                </Ul>
-              </span>
-            </FooterStyledPhone>
-          )}
-        </Grid>
+                </LiPhone>
+                <LiPhone data-test="links">Contact</LiPhone>
+              </Ul>
+            </span>
+          </FooterStyledPhone>
+        )}
       </Grid>
     </Grid>
   );
