@@ -103,14 +103,14 @@ function RootContainer({
           <WithAuthorizedAndUserAndDataResponseAndSettingsNav />
         </Grid>
         <Grid item xs={12}>
-          <PlayerWithPlayerState />
-        </Grid>
-        <Grid item xs={12}>
           <WithAuthorizedAndResponseDataAndSettingsAndQueueAndPlayerSearchResults
             handleOpenSuccessArtist={handleOpenSuccessArtist}
             handleOpenFail={handleOpenFail}
             handleOpenSuccessTrack={handleOpenSuccessTrack}
           />
+        </Grid>
+        <Grid item xs={12}>
+          <PlayerWithPlayerState />
         </Grid>
         <Grid item xs={12}>
           <WithAuthorizedAndUserResponseAndSettingsFavArtists

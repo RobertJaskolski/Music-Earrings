@@ -6,7 +6,6 @@ import { PlayerDiv } from "./style/style";
 import { PlayerTrack, PlayerNotAuth } from "../../components/Player";
 
 function Player({ playingTrack }) {
-  if (playingTrack?.preview_url === undefined) return null;
   return (
     <PlayerDiv>
       <PlayerTrack track={playingTrack} />

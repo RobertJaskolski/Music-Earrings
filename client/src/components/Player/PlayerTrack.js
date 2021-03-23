@@ -10,11 +10,11 @@ function PlayerTrack(props) {
       <img
         alt="Song image"
         src={track?.album?.images[0]?.url || "/images/wrapper.jpg"}
-        width={50}
-        height={50}
+        width={80}
+        height={80}
       />
-      <span>{track?.artists[0]?.name}</span>
-      <span>{track?.name}</span>
+      <span>{track?.artists ? track?.artists[0]?.name : "Artist"}</span>
+      <span>{track?.name || "Track name"}</span>
     </DivTrack>
   );
 }
