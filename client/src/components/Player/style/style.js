@@ -103,3 +103,68 @@ export const DivPlayerNotAuth = styled.div`
       }
     `}
 `;
+//player auth
+export const DivPlayerAuth = styled.div`
+  flex-basis: 70%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  .stopPlay {
+    padding: 0px 10px;
+  }
+  .input-range-span {
+    padding: 0px 15px;
+    flex-basis: 40%;
+    display: flex;
+    justify-content: space-between;
+    .duration {
+      flex-basis: 2%;
+      &:first-of-type {
+        margin-right: 15px;
+      }
+      &:last-of-type {
+        margin-left: 15px;
+      }
+    }
+  }
+  .input-volume-range-span {
+    padding: 0px 15px;
+    flex-basis: 15%;
+  }
+  svg:first-of-type {
+    cursor: pointer;
+    margin-right: 15px;
+  }
+  svg:last-of-type {
+    cursor: pointer;
+    margin-left: 10px;
+  }
+  ${({ changePlayerView }) =>
+    !changePlayerView &&
+    css`
+      flex-basis: 73%;
+      .stopPlay {
+        margin: 0;
+        padding: 0;
+        flex-basis: 25%;
+      }
+      .input-range-span {
+        padding: 0px 0px;
+        flex-basis: 70%;
+        display: flex;
+        justify-content: space-between;
+        .duration {
+          flex-basis: 2%;
+          &:first-of-type {
+            margin-right: 15px;
+          }
+          &:last-of-type {
+            margin-left: 15px;
+          }
+        }
+      }
+      .input-volume-range-span {
+        flex-basis: 40%;
+      }
+    `}
+`;

@@ -30,7 +30,10 @@ import Footer from "../components/Footer/Footer";
 import Player from "./Player/Player";
 
 // Containers with HOC's
-const PlayerWithPlayerState = compose(withPlayerNotAuthState)(Player);
+const PlayerWithPlayerAndAuthState = compose(
+  withPlayerNotAuthState,
+  withAuthorizedState
+)(Player);
 const WithAuthorizedAndUserResponseAndSettingsFavArtists = compose(
   withAuthorizedState,
   withUserResponsesFromAPIState,
@@ -123,7 +126,7 @@ function RootContainer({
             />
           </Grid>
           <Grid item xs={12}>
-            <PlayerWithPlayerState />
+            <PlayerWithPlayerAndAuthState />
           </Grid>
           <Grid item xs={12}>
             <WithAuthorizedAndUserResponseAndSettingsFavArtists
