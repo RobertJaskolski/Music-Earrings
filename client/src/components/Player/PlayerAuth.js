@@ -8,9 +8,12 @@ import InputRange from "react-input-range";
 import "./style/style.css";
 
 function PlayerAuth(props) {
-  const { changePlayerView, track } = props;
+  const { changePlayerView, track, changePlayerView2 } = props;
   return track?.preview_url ? (
-    <DivPlayerAuth changePlayerView={changePlayerView}>
+    <DivPlayerAuth
+      changePlayerView2={changePlayerView2}
+      changePlayerView={changePlayerView}
+    >
       <span className="buttons">
         <span className="back">
           <Player
@@ -73,7 +76,10 @@ function PlayerAuth(props) {
       </span>
     </DivPlayerAuth>
   ) : (
-    <DivPlayerAuth changePlayerView={changePlayerView}>
+    <DivPlayerAuth
+      changePlayerView2={changePlayerView2}
+      changePlayerView={changePlayerView}
+    >
       <span className="buttons">
         <span className="back">
           <Player

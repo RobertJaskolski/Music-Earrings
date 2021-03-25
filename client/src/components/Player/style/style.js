@@ -105,19 +105,13 @@ export const DivPlayerNotAuth = styled.div`
 `;
 //player auth
 export const DivPlayerAuth = styled.div`
-  // Phone
-  ${({ changePlayerView }) =>
-    !changePlayerView &&
-    css`
-      flex-basis: 80%;
-    `}
   // Desktop
   flex-basis: 75%;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  span.buttons {
+  .buttons {
     flex-basis: 15%;
     display: flex;
     justify-content: space-between;
@@ -158,4 +152,48 @@ export const DivPlayerAuth = styled.div`
       }
     }
   }
+  // Phone
+  ${({ changePlayerView }) =>
+    !changePlayerView &&
+    css`
+      flex-basis: 80%;
+      .buttons {
+        flex-basis: 25%;
+      }
+      .progress {
+        flex-basis: 65%;
+        padding-right: 15px;
+      }
+      .volumme {
+        flex-basis: 30%;
+      }
+    `}
+  // Phone
+  ${({ changePlayerView2 }) =>
+    !changePlayerView2 &&
+    css`
+      flex-basis: 80%;
+      justify-content: center;
+      align-items: center;
+      .buttons {
+        flex-basis: 45%;
+      }
+      .progress {
+        flex-basis: 100%;
+        span {
+          &:first-of-type {
+            margin: 0 15px;
+          }
+          &:last-of-type {
+            margin-left: 15px;
+          }
+        }
+      }
+      .volumme {
+        flex-basis: 100%;
+        margin-right: 40%;
+        justify-content: flex-start;
+        padding: 5px 0px 0px;
+      }
+    `}
 `;

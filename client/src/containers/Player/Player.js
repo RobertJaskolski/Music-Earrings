@@ -12,11 +12,16 @@ import {
 
 function Player({ playingTrack, auth }) {
   let changePlayerView = useMediaQuery("(min-width:1000px)");
+  let changePlayerView2 = useMediaQuery("(min-width:500px)");
   return (
     <PlayerDiv changePlayerView={changePlayerView}>
       <PlayerTrack changePlayerView={changePlayerView} track={playingTrack} />
       {auth ? (
-        <PlayerAuth changePlayerView={changePlayerView} track={playingTrack} />
+        <PlayerAuth
+          changePlayerView2={changePlayerView2}
+          changePlayerView={changePlayerView}
+          track={playingTrack}
+        />
       ) : (
         <PlayerNotAuth
           changePlayerView={changePlayerView}
