@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Player } from "@lottiefiles/react-lottie-player";
+import { useSelector } from "react-redux";
 import animationPauseAndPlay from "../../assets/pause.json";
 import animationNext from "../../assets/next.json";
 import animationVolume from "../../assets/mute.json";
@@ -7,8 +8,65 @@ import { DivPlayerAuth } from "./style/style";
 import InputRange from "react-input-range";
 import "./style/style.css";
 
+const mapState = ({ tokens }) => ({
+  accessToken: tokens["accessToken"],
+});
+
+window.onSpotifyWebPlaybackSDKReady = () => {};
+
 function PlayerAuth(props) {
+  const { accessToken } = useSelector(mapState);
   const { changePlayerView, track, changePlayerView2 } = props;
+  const [playerInstance, setPlayerInstance] = useState(null);
+  window.onSpotifyWebPlaybackSDKReady = (accessToken) => {
+    window.playerInstance = new window.Spotify.Player({
+      name: "Music-Earrings Player",
+      getOAuthToken: (callback) => {
+        callback(accessToken);
+      },
+    });
+    // Error handling
+    window.playerInstance.addListener("initialization_error", ({ message }) => {
+      console.error(message);
+    });
+    window.playerInstance.addListener("authentication_error", ({ message }) => {
+      console.error(message);
+    });
+    window.playerInstance.addListener("account_error", ({ message }) => {
+      console.error(message);
+    });
+    window.playerInstance.addListener("playback_error", ({ message }) => {
+      console.error(message);
+    });
+
+    // Playback status updates
+    window.playerInstance.addListener("player_state_changed", (state) => {
+      console.log(state);
+    });
+
+    // Ready
+    window.playerInstance.addListener("ready", ({ device_id }) => {
+      console.log("Ready with Device ID", device_id);
+    });
+
+    // Not Ready
+    window.playerInstance.addListener("not_ready", ({ device_id }) => {
+      console.log("Device ID has gone offline", device_id);
+    });
+
+    // Connect to the player!
+    window.playerInstance.connect();
+  };
+  useEffect(() => {
+    if (accessToken || !window.playerInstance) {
+      window.onSpotifyWebPlaybackSDKReady(accessToken);
+    }
+    return () => {
+      if (window.playerInstance) {
+        window.playerInstance.disconnect();
+      }
+    };
+  }, []);
   return track?.preview_url ? (
     <DivPlayerAuth
       changePlayerView2={changePlayerView2}
