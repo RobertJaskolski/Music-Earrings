@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Player } from "@lottiefiles/react-lottie-player";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import animationPauseAndPlay from "../../assets/pause.json";
 import animationNext from "../../assets/next.json";
 import animationVolume from "../../assets/mute.json";
 import { DivPlayerAuth } from "./style/style";
 import InputRange from "react-input-range";
 import "./style/style.css";
-
+import API from "../../api/SpotifyAPI";
 const mapState = ({ tokens }) => ({
   accessToken: tokens["accessToken"],
 });
@@ -15,9 +15,10 @@ const mapState = ({ tokens }) => ({
 window.onSpotifyWebPlaybackSDKReady = () => {};
 
 function PlayerAuth(props) {
+  const dispatch = useDispatch();
   const { accessToken } = useSelector(mapState);
   const { changePlayerView, track, changePlayerView2 } = props;
-  const [playerInstance, setPlayerInstance] = useState(null);
+  const [deviceID, setDeviceID] = useState("");
   window.onSpotifyWebPlaybackSDKReady = (accessToken) => {
     window.playerInstance = new window.Spotify.Player({
       name: "Music-Earrings Player",
@@ -46,7 +47,7 @@ function PlayerAuth(props) {
 
     // Ready
     window.playerInstance.addListener("ready", ({ device_id }) => {
-      console.log("Ready with Device ID", device_id);
+      setDeviceID(device_id);
     });
 
     // Not Ready
@@ -82,13 +83,20 @@ function PlayerAuth(props) {
             style={{ height: "50px", width: "50px" }}
           ></Player>
         </span>
-        <Player
-          autoplay={false}
-          loop={false}
-          keepLastFrame={true}
-          src={animationPauseAndPlay}
-          style={{ height: "50px", width: "50px" }}
-        ></Player>
+        <span
+          className="play"
+          onClick={() => {
+            dispatch(API.PlayTrack(deviceID));
+          }}
+        >
+          <Player
+            autoplay={false}
+            loop={false}
+            keepLastFrame={true}
+            src={animationPauseAndPlay}
+            style={{ height: "50px", width: "50px" }}
+          ></Player>
+        </span>
         <span className="next">
           <Player
             autoplay={false}
