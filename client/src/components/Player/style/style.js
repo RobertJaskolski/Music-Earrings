@@ -180,13 +180,17 @@ export const DivPlayerAuth = styled.div`
       }
       .progress {
         flex-basis: 100%;
+        display: flex;
         span {
           &:first-of-type {
-            margin: 0 15px;
+            flex-basis: 10%;
           }
           &:last-of-type {
-            margin-left: 15px;
+            flex-basis: 10%;
           }
+        }
+        div {
+          flex-basis: 70%;
         }
       }
       .volumme {

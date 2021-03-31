@@ -23,6 +23,18 @@ export const optionsPOST = (Addurl, token, requestBody, method = "POST") => ({
   },
 });
 
+export const optionsPUT = (Addurl, token, requestBody, method = "PUT") => ({
+  method,
+  url: `https://api.spotify.com${Addurl}`,
+  timeout: 2000,
+  data: requestBody,
+  headers: {
+    Accept: "application/json",
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${token}`,
+  },
+});
+
 export const LogoutUser = (dispatch) => {
   dispatch(authActions.logout());
   dispatch(tokensActions.clear());

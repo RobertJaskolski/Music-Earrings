@@ -7,6 +7,7 @@ const INIT_STATE = {
   },
   recommendedTracklist: {
     tracklist: [],
+    uris: [],
     loading: false,
   },
   error: null,
@@ -40,6 +41,7 @@ const responseReducer = (state = INIT_STATE, action) => {
         recommendedTracklist: {
           loading: false,
           tracklist: action.payload.tracklist,
+          uris: action.payload.tracklist.map((t) => t.uri),
         },
       };
     default:
