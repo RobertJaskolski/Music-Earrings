@@ -9,7 +9,7 @@ import {
 import PlayArrowIcon from "@material-ui/icons/PlayArrow";
 import PlaylistAddIcon from "@material-ui/icons/PlaylistAdd";
 function Tracks(props) {
-  const { track, seedsLength, addToQueue, changePlayingTrack } = props;
+  const { track, seedsLength, addToQueue, changePlayingTrack, auth } = props;
   const { name, album } = track;
   if (!seedsLength) {
     return null;
@@ -35,7 +35,7 @@ function Tracks(props) {
               }}
             />
           </div>
-          {track?.preview_url && (
+          {(track?.preview_url || auth) && (
             <PlayArrowIcon
               onClick={() => {
                 changePlayingTrack(track);

@@ -23,7 +23,7 @@ function TrackChip(props) {
       {changeChip ? (
         <DivTrack>
           <span>
-            {track?.preview_url && (
+            {(track?.preview_url || auth) && (
               <PlayArrowIcon
                 onClick={() => {
                   changePlayingTrack(track);
@@ -101,7 +101,7 @@ function TrackChip(props) {
               )}
               <QueueIcon onClick={() => addToFilters(track)} />
             </div>
-            {track?.preview_url && (
+            {(track?.preview_url || auth) && (
               <PlayArrowIcon
                 onClick={() => {
                   changePlayingTrack(track);

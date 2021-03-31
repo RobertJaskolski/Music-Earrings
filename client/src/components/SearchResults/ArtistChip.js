@@ -1,7 +1,6 @@
 import React from "react";
 import Tooltip from "@material-ui/core/Tooltip";
 import QueueIcon from "@material-ui/icons/Queue";
-import RadioIcon from "@material-ui/icons/Radio";
 import { ChipArtist, DivArtist, IMGArtist, H2Artist } from "./style/style";
 import {
   DivArtistPhone,
@@ -32,9 +31,6 @@ function ArtistChip(props) {
 
           {auth ? (
             <span>
-              <Tooltip title="Listen artist radio">
-                <RadioIcon />
-              </Tooltip>
               <Tooltip title="Add to filters">
                 <QueueIcon onClick={() => addToFilters(artist)} />
               </Tooltip>
@@ -61,7 +57,6 @@ function ArtistChip(props) {
             <br />
             {auth ? (
               <SpanArtistPhone>
-                <RadioIcon />
                 <QueueIcon onClick={() => addToFilters(artist)} />
               </SpanArtistPhone>
             ) : (
