@@ -30,6 +30,11 @@ function Player({ playingTrack, auth }) {
                 ? [...urisTracklist]
                 : ["spotify:artist:6HQYnRM4OzToCYPpVBInuU"]
             }
+            offset={
+              Array.isArray(urisTracklist) && urisTracklist.length
+                ? urisTracklist.indexOf(track.uri)
+                : 0
+            }
           />
         </div>
       ) : (
