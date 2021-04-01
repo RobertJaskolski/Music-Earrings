@@ -8,35 +8,49 @@ import { PlayerDiv } from "./style/style";
 // Import Components
 import { PlayerTrack, PlayerNotAuth } from "../../components/Player";
 
-const mapState = ({ tokens, playerNotAuth, responses }) => ({
+const mapState = ({ tokens, playerNotAuth, responses, userResponses }) => ({
   accessToken: tokens["accessToken"],
   track: playerNotAuth["track"],
   urisTracklist: responses.recommendedTracklist["uris"],
+  user: userResponses.userProfile["info"],
 });
 window.onSpotifyWebPlaybackSDKReady = () => {};
 function Player({ playingTrack, auth }) {
-  const { accessToken, track, urisTracklist } = useSelector(mapState);
+  const { accessToken, track, urisTracklist, user } = useSelector(mapState);
   let changePlayerView = useMediaQuery("(min-width:1000px)");
 
   return (
     <section>
       {auth ? (
-        <div className="authPlayer">
-          <SpotifyPlayer
-            name="Music Earrings Player"
-            token={accessToken}
-            uris={
-              Array.isArray(urisTracklist) && urisTracklist.length > 0
-                ? [...urisTracklist]
-                : ["spotify:artist:6HQYnRM4OzToCYPpVBInuU"]
-            }
-            offset={
-              Array.isArray(urisTracklist) && urisTracklist.length
-                ? urisTracklist.indexOf(track.uri)
-                : 0
-            }
-          />
-        </div>
+        user?.product === "premium" ? (
+          <div className="authPlayer">
+            <SpotifyPlayer
+              name="Music Earrings Player"
+              token={accessToken}
+              uris={
+                Array.isArray(urisTracklist) && urisTracklist.length > 0
+                  ? [...urisTracklist]
+                  : ["spotify:artist:6HQYnRM4OzToCYPpVBInuU"]
+              }
+              offset={
+                Array.isArray(urisTracklist) && urisTracklist.length
+                  ? urisTracklist.indexOf(track.uri)
+                  : 0
+              }
+            />
+          </div>
+        ) : (
+          <PlayerDiv changePlayerView={changePlayerView}>
+            <PlayerTrack
+              changePlayerView={changePlayerView}
+              track={playingTrack}
+            />
+            <PlayerNotAuth
+              changePlayerView={changePlayerView}
+              track={playingTrack}
+            />
+          </PlayerDiv>
+        )
       ) : (
         <PlayerDiv changePlayerView={changePlayerView}>
           <PlayerTrack
