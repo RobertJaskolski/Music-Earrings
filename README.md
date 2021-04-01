@@ -27,17 +27,16 @@ API goes to sleep after 30 minutes of inactivity. Therefore, the first login may
 
 # Project Status
 
-The project is almost ready, there are two things to do. Writing tests and creating a music player.
+The project is almost ready, there are two things to do.
 
 **Features:**
 
 - OAuth with spotifyApi **(Done)**
 - Standard search for songs/artists/albums **(Done)**
-- Standard music player **(In progress)**
+- Standard music player (When I have a premium account on spotify we can use full replay. With a regular account or not logged in, we can only listen to 30 seconds of the song) **(Done)**
 - Generating a playlist based on given artists, the ability to save it on your Spotify account **(Done)**
-- Create a queue of songs **(Done)**
 - Check out our current favorites artists **(Done)**
-- And other features...
+- Unit and integration tests **(In progress)**
 
 # Installation and Setup Instructions
 
@@ -53,45 +52,40 @@ The project is almost ready, there are two things to do. Writing tests and creat
 ## Installation
 
 1. After cloning or extracting the .zip files of this repository:  
-`cd Music-Earrings`  
+   `cd Music-Earrings`
 
 2. Next go to server file and install dependencies:  
-`cd server`  
-`yarn`  
-`cd ..`  
+   `cd server`  
+   `yarn`  
+   `cd ..`
 
 3. Next go to client and install dependencies:  
-`cd client`  
-`yarn`  
-`cd ..`  
+   `cd client`  
+   `yarn`  
+   `cd ..`
 
-4. After installation of  dependencies, you must create .env files, I've already created sample files in the repository, you need to rename them and provide your environment variables.  
-Rename files:  
-`.envGlobal` to `dev.env`  
-`server\.envServer` to `.env`  
-`client\.envClient` to `.env`  
-Enter yours secrets  
+4. After installation of dependencies, you must create .env files, I've already created sample files in the repository, you need to rename them and provide your environment variables.  
+   Rename files:  
+   `.envGlobal` to `dev.env`  
+   `server\.envServer` to `.env`  
+   `client\.envClient` to `.env`  
+   Enter yours secrets
 
 5. Create docker image and start application:  
-`make build-dev`  
-`make dev`  
+   `make build-dev`  
+   `make dev`
 
 ### Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Application views
-![navbar](./ss/Navbar.jpg)
-Navbar
 
-![navbar  logged in](./ss/NavbarLogged.jpg)
-Navbar while logged in
+![while logged in (Premium user)](./ss/premiumPlayer.png)
+while logged in (Premium user)
 
-![Search Results](./ss/Search.jpg)
-Search results
+![while logged in (Normal user)](./ss/normalPlayer.png)
+while logged in (Normal user)
 
-![Search Results  logged in](./ss/SearchLogged.jpg)
-Search results while logged in
-
-![favorite artists](./ss/Favs.jpg)
-Our favorite artists while logged in
+![while logged out ](./ss/logoutPlayer.png)
+while logged out
