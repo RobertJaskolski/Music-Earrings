@@ -11,12 +11,16 @@ import { PlayerTrack, PlayerNotAuth } from "../../components/Player";
 const mapState = ({ tokens, playerNotAuth, responses, userResponses }) => ({
   accessToken: tokens["accessToken"],
   track: playerNotAuth["track"],
+  type: playerNotAuth["type"],
   urisTracklist: responses.recommendedTracklist["uris"],
   user: userResponses.userProfile["info"],
 });
+
 window.onSpotifyWebPlaybackSDKReady = () => {};
 function Player({ playingTrack, auth }) {
-  const { accessToken, track, urisTracklist, user } = useSelector(mapState);
+  const { accessToken, track, urisTracklist, user, type } = useSelector(
+    mapState
+  );
   let changePlayerView = useMediaQuery("(min-width:1000px)");
 
   return (
@@ -24,20 +28,28 @@ function Player({ playingTrack, auth }) {
       {auth ? (
         user?.product === "premium" ? (
           <div className="authPlayer">
-            <SpotifyPlayer
-              name="Music Earrings Player"
-              token={accessToken}
-              uris={
-                Array.isArray(urisTracklist) && urisTracklist.length > 0
-                  ? [...urisTracklist]
-                  : ["spotify:artist:6HQYnRM4OzToCYPpVBInuU"]
-              }
-              offset={
-                Array.isArray(urisTracklist) && urisTracklist.length
-                  ? urisTracklist.indexOf(track.uri)
-                  : 0
-              }
-            />
+            {type === "m" ? (
+              <SpotifyPlayer
+                name="Music Earrings Player"
+                token={accessToken}
+                uris={
+                  Array.isArray(urisTracklist) && urisTracklist.length > 0
+                    ? [...urisTracklist]
+                    : ["spotify:artist:6HQYnRM4OzToCYPpVBInuU"]
+                }
+                offset={
+                  Array.isArray(urisTracklist) && urisTracklist.length
+                    ? urisTracklist.indexOf(track.uri)
+                    : 0
+                }
+              />
+            ) : (
+              <SpotifyPlayer
+                name="Music Earrings Player"
+                token={accessToken}
+                uris={track?.uri || ["spotify:artist:6HQYnRM4OzToCYPpVBInuU"]}
+              />
+            )}
           </div>
         ) : (
           <PlayerDiv changePlayerView={changePlayerView}>

@@ -38,7 +38,7 @@ function Tracks(props) {
           {track?.preview_url || (auth && user?.product === "premium") ? (
             <PlayArrowIcon
               onClick={() => {
-                changePlayingTrack(track);
+                changePlayingTrack(track, "m");
               }}
             />
           ) : (

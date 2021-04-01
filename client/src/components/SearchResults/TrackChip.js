@@ -25,7 +25,7 @@ function TrackChip(props) {
             {(track?.preview_url || (auth && user?.product === "premium")) && (
               <PlayArrowIcon
                 onClick={() => {
-                  changePlayingTrack(track);
+                  changePlayingTrack(track, "s");
                 }}
               />
             )}
@@ -96,7 +96,7 @@ function TrackChip(props) {
             {(track?.preview_url || (auth && user?.product === "premium")) && (
               <PlayArrowIcon
                 onClick={() => {
-                  changePlayingTrack(track);
+                  changePlayingTrack(track, "s");
                 }}
               />
             )}

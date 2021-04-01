@@ -34,8 +34,8 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    changePlayingTrack: (track) => {
-      dispatch(playerNotAuthActions.addTrackToNotAuthPlayer({ track }));
+    changePlayingTrack: (track, type) => {
+      dispatch(playerNotAuthActions.addTrackToNotAuthPlayer({ track, type }));
     },
   };
 };
