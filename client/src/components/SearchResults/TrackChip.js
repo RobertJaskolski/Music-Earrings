@@ -1,19 +1,18 @@
 import React from "react";
 import PlayArrowIcon from "@material-ui/icons/PlayArrow";
-import PlaylistAddIcon from "@material-ui/icons/PlaylistAdd";
 import QueueIcon from "@material-ui/icons/Queue";
 import Tooltip from "@material-ui/core/Tooltip";
 import { ChipTrack, DivTrack, IMGTrack } from "./style/style";
 import { DivTrackPhone, Line, TextTrackPhone } from "./style/phone.style";
+import { useSelector } from "react-redux";
+
+const mapState = ({ userResponses }) => ({
+  user: userResponses.userProfile["info"],
+});
+
 function TrackChip(props) {
-  const {
-    track,
-    addToFilters,
-    auth,
-    changeChip,
-    addToQueue,
-    changePlayingTrack,
-  } = props;
+  const { user } = useSelector(mapState);
+  const { track, addToFilters, auth, changeChip, changePlayingTrack } = props;
   const { name, album, external_urls } = track;
   if (!name) {
     return null;
@@ -23,7 +22,7 @@ function TrackChip(props) {
       {changeChip ? (
         <DivTrack>
           <span>
-            {(track?.preview_url || auth) && (
+            {(track?.preview_url || (auth && user?.product === "premium")) && (
               <PlayArrowIcon
                 onClick={() => {
                   changePlayingTrack(track);
@@ -39,16 +38,7 @@ function TrackChip(props) {
             <div>{name}</div>
           </span>
           <span>
-            {auth ? (
-              <Tooltip
-                style={
-                  auth ? { display: "inline-block" } : { color: "#282828" }
-                }
-                title="Add to quequ"
-              >
-                <PlaylistAddIcon onClick={() => addToQueue(track)} />
-              </Tooltip>
-            ) : (
+            {!auth || user?.product === "open" ? (
               <Tooltip title="Listen on Spotify">
                 <a
                   target="_blank"
@@ -63,6 +53,8 @@ function TrackChip(props) {
                   />
                 </a>
               </Tooltip>
+            ) : (
+              <div></div>
             )}
             <Tooltip title="Add to filters for generate playlist">
               <QueueIcon onClick={() => addToFilters(track)} />
@@ -83,9 +75,7 @@ function TrackChip(props) {
           </span>
           <span>
             <div>
-              {auth ? (
-                <PlaylistAddIcon onClick={() => addToQueue(track)} />
-              ) : (
+              {!auth || user?.product === "open" ? (
                 <a
                   target="_blank"
                   rel="noreferrer"
@@ -98,10 +88,12 @@ function TrackChip(props) {
                     src="/images/spotifyLogo.svg"
                   />
                 </a>
+              ) : (
+                <div></div>
               )}
               <QueueIcon onClick={() => addToFilters(track)} />
             </div>
-            {(track?.preview_url || auth) && (
+            {(track?.preview_url || (auth && user?.product === "premium")) && (
               <PlayArrowIcon
                 onClick={() => {
                   changePlayingTrack(track);

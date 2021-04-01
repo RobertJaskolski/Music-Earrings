@@ -25,7 +25,6 @@ function SearchResults({
   addTrackToSeeds,
   addArtistToSeeds,
   setSearchText,
-  addTrackToQueue,
   handleOpenSuccessArtist,
   handleOpenFail,
   handleOpenSuccessTrack,
@@ -45,9 +44,6 @@ function SearchResults({
     } else {
       handleOpenFail();
     }
-  };
-  const addToQueue = (item) => {
-    addTrackToQueue(item);
   };
   return (
     <Section id="searchBox" active={showSearch}>
@@ -127,7 +123,6 @@ function SearchResults({
                       key={item.id}
                       track={item}
                       auth={auth}
-                      addToQueue={addToQueue}
                       addToFilters={addToFilters}
                       changeChip={changeChip}
                       changePlayingTrack={changePlayingTrack}
