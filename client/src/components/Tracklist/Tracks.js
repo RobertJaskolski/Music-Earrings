@@ -6,11 +6,17 @@ import {
   IMGTrack,
   TextTrack,
 } from "./style/style";
+import { useSelector } from "react-redux";
 import PlayArrowIcon from "@material-ui/icons/PlayArrow";
-import PlaylistAddIcon from "@material-ui/icons/PlaylistAdd";
+
+const mapState = ({ userResponses }) => ({
+  user: userResponses.userProfile["info"],
+});
+
 function Tracks(props) {
-  const { track, seedsLength, addToQueue, changePlayingTrack, auth } = props;
-  const { name, album } = track;
+  const { user } = useSelector(mapState);
+  const { track, seedsLength, changePlayingTrack, auth } = props;
+  const { name, album, external_urls } = track;
   if (!seedsLength) {
     return null;
   }
@@ -28,19 +34,26 @@ function Tracks(props) {
           <TextTrack>{name}</TextTrack>
         </span>
         <span>
-          <div>
-            <PlaylistAddIcon
-              onClick={() => {
-                addToQueue(track);
-              }}
-            />
-          </div>
-          {(track?.preview_url || auth) && (
+          <div></div>
+          {track?.preview_url || (auth && user?.product === "premium") ? (
             <PlayArrowIcon
               onClick={() => {
                 changePlayingTrack(track);
               }}
             />
+          ) : (
+            <a
+              target="_blank"
+              rel="noreferrer"
+              href={external_urls["spotify"] || ""}
+            >
+              <img
+                alt="spotify Logo"
+                width="35px"
+                height="35px"
+                src="/images/spotifyLogo.svg"
+              />
+            </a>
           )}
         </span>
       </DivTrack>
