@@ -4,6 +4,7 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { Provider } from "react-redux";
 import configureStore from "./store";
+import "./i18n";
 
 const store = configureStore();
 
