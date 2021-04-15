@@ -12,17 +12,7 @@ export default function Footer() {
   const [lang, setLang] = useState("en");
   const handleChangeLanguage = (language) => {
     i18n.changeLanguage(language);
-    localStorage.setItem("lang", language);
   };
-  useEffect(() => {
-    if (localStorage.getItem("lang")) {
-      handleChangeLanguage(localStorage.getItem("lang"));
-      setLang(localStorage.getItem("lang"));
-    }
-    return () => {
-      localStorage.setItem("lang", lang);
-    };
-  }, []);
   return (
     <Grid style={{ margin: "auto 0px 15px 0px" }} container justify="center">
       <Grid item sm={10} xs={12}>
@@ -81,7 +71,26 @@ export default function Footer() {
             <span>
               <Ul>
                 <LiPhone>
-                  <Flag lang="pl" />
+                  <Flag
+                    onClick={() => {
+                      switch (lang) {
+                        case "en":
+                          handleChangeLanguage("pl");
+                          setLang("pl");
+                          break;
+                        case "pl":
+                          handleChangeLanguage("en");
+                          setLang("en");
+                          break;
+
+                        default:
+                          handleChangeLanguage("en");
+                          setLang("en");
+                          break;
+                      }
+                    }}
+                    lang={lang}
+                  />
                 </LiPhone>
                 <LiPhone data-test="links">
                   <a

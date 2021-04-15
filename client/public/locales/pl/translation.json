@@ -35,7 +35,8 @@
         "addToFilters": "Dodaj do filtrów"
       },
       "TrackChip": {
-        "addToFilters": "Dodaj do filtrów"
+        "addToFilters": "Dodaj do filtrów",
+        "spoti": "Słuchaj na spotiify"
       }
     },
     "Tracklist": {
@@ -48,7 +49,7 @@
       "SaveButton": {
         "save": "Zapisz playlistę na spotify",
         "login": "Musisz być zalogowanym by zapisać playlistę",
-        "generate": "Najpierw, wygeneruj playlistę",
+        "generate": "Wygeneruj playlistę!",
         "name": "Podaj nazwę"
       }
     }

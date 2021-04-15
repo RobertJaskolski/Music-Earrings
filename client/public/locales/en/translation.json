@@ -35,7 +35,8 @@
         "addToFilters": "Add to filters"
       },
       "TrackChip": {
-        "addToFilters": "Add to filters for generate playlist"
+        "addToFilters": "Add to filters for generate playlist",
+        "spoti": "Listen on spotify"
       }
     },
     "Tracklist": {

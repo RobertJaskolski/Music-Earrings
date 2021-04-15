@@ -2,6 +2,7 @@ import React from "react";
 import { Div } from "./style/style";
 import TextField from "@material-ui/core/TextField";
 import { withStyles } from "@material-ui/core/styles";
+import { useTranslation } from "react-i18next";
 
 const CssTextField = withStyles({
   root: {
@@ -35,6 +36,7 @@ const CssTextField = withStyles({
 })(TextField);
 
 function SearchInput(props) {
+  const { t } = useTranslation();
   const { handleOnChangeSearch } = props;
   if (!handleOnChangeSearch) {
     return null;
@@ -44,7 +46,7 @@ function SearchInput(props) {
       <CssTextField
         onChange={handleOnChangeSearch}
         data-test="searchTextField"
-        label="Search artist or song..."
+        label={t("components.Nav.searchInput.search")}
         fullWidth={true}
       />
     </Div>

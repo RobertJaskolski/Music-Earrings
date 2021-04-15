@@ -12,7 +12,7 @@ export function Flag(props) {
         alt="lang"
         width="100%"
         height="100%"
-        src={lang === "pl" ? "/images/poland.ico" : "/images/eng.webp"}
+        src={lang === "en" ? "/images/poland.ico" : "/images/eng.webp"}
         data-test="FlagIMG"
       />
     </FlagBox>

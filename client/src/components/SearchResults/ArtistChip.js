@@ -8,8 +8,10 @@ import {
   H4ArtistPhone,
   SpanArtistPhone,
 } from "./style/phone.style";
+import { useTranslation } from "react-i18next";
 
 function ArtistChip(props) {
+  const { t } = useTranslation();
   const { artist, auth, addToFilters, changeChip } = props;
   const { name, images } = artist;
 
@@ -31,13 +33,17 @@ function ArtistChip(props) {
 
           {auth ? (
             <span>
-              <Tooltip title="Add to filters">
+              <Tooltip
+                title={t("components.SearchResults.ArtistChip.addToFilters")}
+              >
                 <QueueIcon onClick={() => addToFilters(artist)} />
               </Tooltip>
             </span>
           ) : (
             <span>
-              <Tooltip title="Add to filters">
+              <Tooltip
+                title={t("components.SearchResults.ArtistChip.addToFilters")}
+              >
                 <QueueIcon onClick={() => addToFilters(artist)} />
               </Tooltip>
             </span>

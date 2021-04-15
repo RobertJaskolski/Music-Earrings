@@ -4,6 +4,7 @@ import TextField from "@material-ui/core/TextField";
 import { withStyles } from "@material-ui/core/styles";
 import { DivSave } from "./style/style";
 import LoginButton from "../Nav/LoginButton";
+import { useTranslation } from "react-i18next";
 
 const CssTextField = withStyles({
   root: {
@@ -38,6 +39,7 @@ const CssTextField = withStyles({
 })(TextField);
 
 function SaveButton(props) {
+  const { t } = useTranslation();
   const {
     auth,
     handleTextField,
@@ -55,7 +57,9 @@ function SaveButton(props) {
             disabled={disabledName}
             onChange={handleTextField}
             label={
-              disabledName ? "First, generate playlist" : "Name of playlist"
+              disabledName
+                ? t("components.Tracklist.SaveButton.generate")
+                : t("components.Tracklist.SaveButton.name")
             }
           />
           <Button
@@ -65,12 +69,12 @@ function SaveButton(props) {
             }}
             disabled={disabledButton}
           >
-            Save tracklist to spotify
+            {t("components.Tracklist.SaveButton.save")}
           </Button>
         </div>
       ) : (
         <LoginButton redirectLink={`${process.env.REACT_APP_API_URL}/login`}>
-          You must login in to save playlist to Spotify
+          {t("components.Tracklist.SaveButton.login")}
         </LoginButton>
       )}
     </DivSave>
