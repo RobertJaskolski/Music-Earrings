@@ -5,6 +5,7 @@ export const FooterStyledPhone = styled.footer`
   display: flex;
   justify-content: space-between;
   padding-top: 10px;
+  padding-bottom: 130px;
 `;
 
 export const LiPhone = styled.li`
