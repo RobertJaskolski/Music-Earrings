@@ -1,0 +1,56 @@
+{
+  "containers": {
+    "FavArtists": {
+      "yoursfavs": "Yours favs"
+    },
+    "Nav": {
+      "connectWithSpotify": "Connect with Spotify"
+    },
+    "SearchResults": {
+      "noResults": "No results",
+      "artists": "Artists",
+      "tracks": "Tracks"
+    },
+    "Tracklist": {
+      "tracklist": "Tracklist"
+    },
+    "Root": {
+      "addTrack": "The track has been added!",
+      "addArtist": "The artist has been added!",
+      "limit": "You can generate a tracklist on the basis of 5 options!"
+    }
+  },
+
+  "components": {
+    "Nav": {
+      "LogoutButton": {
+        "logout": "Logout"
+      },
+      "searchInput": {
+        "search": "Search artist or song..."
+      }
+    },
+    "SearchResults": {
+      "ArtistChip": {
+        "addToFilters": "Add to filters"
+      },
+      "TrackChip": {
+        "addToFilters": "Add to filters for generate playlist"
+      }
+    },
+    "Tracklist": {
+      "Filters": {
+        "maxTracks": "Max Tracks",
+        "popularity": "Popularity",
+        "energy": "Energy",
+        "danceable": "Danceable"
+      },
+      "SaveButton": {
+        "save": "Save tracklist to spotify",
+        "login": "You must login in to save playlist to Spotify",
+        "generate": "First, generate playlist",
+        "name": "Name of playlist"
+      }
+    }
+  }
+}

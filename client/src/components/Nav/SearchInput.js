@@ -40,11 +40,11 @@ function SearchInput(props) {
     return null;
   }
   return (
-    <Div data-test='SearchInputComponent'>
+    <Div data-test="SearchInputComponent">
       <CssTextField
         onChange={handleOnChangeSearch}
-        data-test='searchTextField'
-        label='Search artist, song or album...'
+        data-test="searchTextField"
+        label="Search artist or song..."
         fullWidth={true}
       />
     </Div>
