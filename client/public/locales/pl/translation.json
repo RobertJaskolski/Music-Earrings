@@ -1,0 +1,57 @@
+{
+  "containers": {
+    "FavArtists": {
+      "yoursfavs": "Ulubieni artyści"
+    },
+    "Nav": {
+      "connectWithSpotify": "Połącz z Spotify"
+    },
+    "SearchResults": {
+      "noResults": "Brak wyników",
+      "artists": "Artyści",
+      "tracks": "Utwory"
+    },
+    "Tracklist": {
+      "tracklist": "Playlista"
+    },
+    "Root": {
+      "addTrack": "Utwór został dodany!",
+      "addArtist": "Artysta został dodany!",
+      "limit": "Możesz wygenerować playlistę na posdstawie 5 wytycznych!"
+    }
+  },
+
+  "components": {
+    "Nav": {
+      "LogoutButton": {
+        "logout": "Wyloguj"
+      },
+      "searchInput": {
+        "search": "Wyszukaj artystę lub utwór..."
+      }
+    },
+    "SearchResults": {
+      "ArtistChip": {
+        "addToFilters": "Dodaj do filtrów"
+      },
+      "TrackChip": {
+        "addToFilters": "Dodaj do filtrów",
+        "spoti": "Słuchaj na spotiify"
+      }
+    },
+    "Tracklist": {
+      "Filters": {
+        "maxTracks": "Limit utworów",
+        "popularity": "Popularność",
+        "energy": "Energia",
+        "danceable": "Taneczność"
+      },
+      "SaveButton": {
+        "save": "Zapisz playlistę na spotify",
+        "login": "Musisz być zalogowanym by zapisać playlistę",
+        "generate": "Wygeneruj playlistę!",
+        "name": "Podaj nazwę"
+      }
+    }
+  }
+}

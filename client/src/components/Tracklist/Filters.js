@@ -11,6 +11,7 @@ import { Grid } from "@material-ui/core";
 import { Section } from "./style/style";
 import API from "../../api/SpotifyAPI";
 import MyAPI from "../../api/MyAPI";
+import { useTranslation } from "react-i18next";
 
 const CustomInput = withStyles((theme) => ({
   root: {
@@ -76,7 +77,7 @@ function Filters(props) {
     trackSeeds,
     artistSeeds,
   } = props;
-
+  const { t } = useTranslation();
   const handleChange = (name, newValue) => {
     if (name === "energy") {
       setEnergyState(newValue);
@@ -113,13 +114,13 @@ function Filters(props) {
     <Section>
       <Grid container spacing={6}>
         <Grid item xs={12} md={2}>
-          <Typography id='range-slider-Popularity' gutterBottom>
-            Max Tracks
+          <Typography gutterBottom>
+            {t("components.Tracklist.Filters.maxTracks")}
           </Typography>
           <FormControl>
             <Select
-              labelId='demo-customized-select-label'
-              id='demo-customized-select'
+              labelId="demo-customized-select-label"
+              id="demo-customized-select"
               value={limit}
               onChange={handleChangeLimit}
               input={<CustomInput />}
@@ -132,8 +133,8 @@ function Filters(props) {
           </FormControl>
         </Grid>
         <Grid item xs={12} md={3}>
-          <Typography id='range-slider-Popularity' gutterBottom>
-            Popularity
+          <Typography gutterBottom>
+            {t("components.Tracklist.Filters.popularity")}
           </Typography>
           <CustomSlider
             onChangeCommitted={responseToApi}
@@ -141,12 +142,12 @@ function Filters(props) {
             onChange={(_, newValue) => {
               handleChange("popularity", newValue);
             }}
-            aria-labelledby='range-slider-Popularity'
+            aria-labelledby="range-slider-Popularity"
           />
         </Grid>
         <Grid item xs={12} md={3}>
-          <Typography id='range-slider-Energy' gutterBottom>
-            Energy
+          <Typography gutterBottom>
+            {t("components.Tracklist.Filters.energy")}
           </Typography>
           <CustomSlider
             value={energy}
@@ -154,12 +155,12 @@ function Filters(props) {
               handleChange("energy", newValue);
             }}
             onChangeCommitted={responseToApi}
-            aria-labelledby='range-slider-Energy'
+            aria-labelledby="range-slider-Energy"
           />
         </Grid>
         <Grid item xs={12} md={3}>
-          <Typography id='range-slider-Danceable' gutterBottom>
-            Danceable
+          <Typography gutterBottom>
+            {t("components.Tracklist.Filters.danceable")}
           </Typography>
           <CustomSlider
             value={danceable}
@@ -167,7 +168,7 @@ function Filters(props) {
               handleChange("danceable", newValue);
             }}
             onChangeCommitted={responseToApi}
-            aria-labelledby='range-slider-Danceable'
+            aria-labelledby="range-slider-Danceable"
           />
         </Grid>
       </Grid>

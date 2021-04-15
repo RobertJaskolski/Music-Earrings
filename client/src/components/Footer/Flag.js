@@ -7,13 +7,13 @@ export function Flag(props) {
     return null;
   }
   return (
-    <FlagBox data-test='FlagComponent'>
+    <FlagBox data-test="FlagComponent">
       <img
-        alt='lang'
-        width='100%'
-        height='100%'
-        src='/images/poland.ico'
-        data-test='FlagIMG'
+        alt="lang"
+        width="100%"
+        height="100%"
+        src={lang === "en" ? "/images/poland.ico" : "/images/eng.webp"}
+        data-test="FlagIMG"
       />
     </FlagBox>
   );

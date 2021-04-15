@@ -4,6 +4,7 @@ import { Container, Grid } from "@material-ui/core";
 import { connect } from "react-redux";
 import { compose } from "recompose";
 import Snackbar from "@material-ui/core/Snackbar";
+import { useTranslation } from "react-i18next";
 
 // Import some utils, API's and etc.
 import { tokensActions } from "../reducers/tokens";
@@ -64,6 +65,7 @@ function RootContainer({
   getFavArtists,
   getRefreshToken,
 }) {
+  const { t } = useTranslation();
   useEffect(() => {
     GetHash(refresh);
     getRefreshToken(refreshToken);
@@ -146,7 +148,7 @@ function RootContainer({
         onClose={handleClose}
       >
         <Alert onClose={handleClose} severity="success">
-          The artist has been added!
+          {t("containers.Root.addArtist")}
         </Alert>
       </Snackbar>
       <Snackbar
@@ -159,7 +161,7 @@ function RootContainer({
         onClose={handleClose}
       >
         <Alert onClose={handleClose} severity="success">
-          The track has been added!
+          {t("containers.Root.addTrack")}
         </Alert>
       </Snackbar>
       <Snackbar
@@ -172,7 +174,7 @@ function RootContainer({
         onClose={handleClose}
       >
         <Alert onClose={handleClose} severity="error">
-          You can generate a tracklist on the basis of 5 options!
+          {t("containers.Root.limit")}
         </Alert>
       </Snackbar>
     </Container>

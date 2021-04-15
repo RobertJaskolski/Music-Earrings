@@ -5,12 +5,14 @@ import Tooltip from "@material-ui/core/Tooltip";
 import { ChipTrack, DivTrack, IMGTrack } from "./style/style";
 import { DivTrackPhone, Line, TextTrackPhone } from "./style/phone.style";
 import { useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 
 const mapState = ({ userResponses }) => ({
   user: userResponses.userProfile["info"],
 });
 
 function TrackChip(props) {
+  const { t } = useTranslation();
   const { user } = useSelector(mapState);
   const { track, addToFilters, auth, changeChip, changePlayingTrack } = props;
   const { name, album, external_urls } = track;
@@ -39,7 +41,7 @@ function TrackChip(props) {
           </span>
           <span>
             {!auth || user?.product === "open" ? (
-              <Tooltip title="Listen on Spotify">
+              <Tooltip title={t("components.SearchResults.TrackChip.spoti")}>
                 <a
                   target="_blank"
                   rel="noreferrer"
@@ -56,7 +58,9 @@ function TrackChip(props) {
             ) : (
               <div></div>
             )}
-            <Tooltip title="Add to filters for generate playlist">
+            <Tooltip
+              title={t("components.SearchResults.TrackChip.addToFilters")}
+            >
               <QueueIcon onClick={() => addToFilters(track)} />
             </Tooltip>
           </span>

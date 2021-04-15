@@ -2,6 +2,7 @@
 import React from "react";
 import { Grid } from "@material-ui/core";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
+import { useTranslation } from "react-i18next";
 // Import Components
 import FavArtist from "../../components/FavArtists/FavArtist";
 // Import Styles
@@ -16,6 +17,7 @@ function FavArtists({
   handleOpenFail,
   handleOpenSuccessArtist,
 }) {
+  const { t } = useTranslation();
   const changeFav = useMediaQuery("(min-width:500px)");
   const addToFilters = (item) => {
     if (trackSeeds.length + artistSeeds.length < 5) {
@@ -31,7 +33,7 @@ function FavArtists({
   return (
     <GridContainer container>
       <Grid item xs={12}>
-        <H2>Yours favs</H2>
+        <H2>{t("containers.FavArtists.yoursfavs")}</H2>
         <Div>
           {userFavoriteArtists.map((item) => {
             return (
