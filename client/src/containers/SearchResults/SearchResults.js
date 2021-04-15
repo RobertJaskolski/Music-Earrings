@@ -3,6 +3,7 @@ import React from "react";
 import { Grid } from "@material-ui/core";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import CancelPresentationIcon from "@material-ui/icons/CancelPresentation";
+import { useTranslation } from "react-i18next";
 // Import Components
 import {
   ArtistChip,
@@ -30,6 +31,7 @@ function SearchResults({
   handleOpenSuccessTrack,
   changePlayingTrack,
 }) {
+  const { t } = useTranslation();
   let changeChip = useMediaQuery("(min-width:1000px)");
   const showSearch = searchText ? true : false;
   const addToFilters = (item) => {
@@ -50,7 +52,7 @@ function SearchResults({
       {loadingArtistsAndTracks ? (
         <Grid container>
           <Grid item lg={6} xs={12}>
-            <H1 active={showSearch}>Artists</H1>
+            <H1 active={showSearch}>{t("containers.SearchResults.artists")}</H1>
             <Div>
               <SkeletonArtist changeChip={changeChip} />
               <SkeletonArtist changeChip={changeChip} />
@@ -61,7 +63,7 @@ function SearchResults({
             </Div>
           </Grid>
           <Grid item lg={6} xs={12}>
-            <H1 active={showSearch}>Tracks</H1>
+            <H1 active={showSearch}>{t("containers.SearchResults.tracks")}</H1>
             <Div>
               <SkieletonTrack changeChip={changeChip} />
               <SkieletonTrack changeChip={changeChip} />
@@ -90,7 +92,7 @@ function SearchResults({
       ) : (
         <Grid container>
           <Grid item lg={6} xs={12}>
-            <H1 active={showSearch}>Artists</H1>
+            <H1 active={showSearch}>{t("containers.SearchResults.artists")}</H1>
             {artists.length ? (
               <Div>
                 {artists.map((item) => {
@@ -109,12 +111,14 @@ function SearchResults({
               </Div>
             ) : (
               <DivNoResults active={showSearch}>
-                <H1 active={showSearch}>No results</H1>
+                <H1 active={showSearch}>
+                  {t("containers.SearchResults.noResults")}
+                </H1>
               </DivNoResults>
             )}
           </Grid>
           <Grid item lg={6} xs={12}>
-            <H1 active={showSearch}>Tracks</H1>
+            <H1 active={showSearch}>{t("containers.SearchResults.tracks")}</H1>
             {tracks.length ? (
               <Div>
                 {tracks.map((item) => {
@@ -132,7 +136,9 @@ function SearchResults({
               </Div>
             ) : (
               <DivNoResults active={showSearch}>
-                <H1 active={showSearch}>No results</H1>
+                <H1 active={showSearch}>
+                  {t("containers.SearchResults.noResults")}
+                </H1>
               </DivNoResults>
             )}
           </Grid>

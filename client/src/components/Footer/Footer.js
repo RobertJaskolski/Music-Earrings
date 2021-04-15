@@ -1,13 +1,28 @@
 import { Grid } from "@material-ui/core";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Flag from "./Flag";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { FooterStyled, Li, Line, Ul } from "./style/style";
 import { LiPhone, FooterStyledPhone } from "./style/phone.style";
+import { useTranslation } from "react-i18next";
 
 export default function Footer() {
   const changeFooter = useMediaQuery("(min-width:650px)");
-
+  const { i18n } = useTranslation();
+  const [lang, setLang] = useState("en");
+  const handleChangeLanguage = (language) => {
+    i18n.changeLanguage(language);
+    localStorage.setItem("lang", language);
+  };
+  useEffect(() => {
+    if (localStorage.getItem("lang")) {
+      handleChangeLanguage(localStorage.getItem("lang"));
+      setLang(localStorage.getItem("lang"));
+    }
+    return () => {
+      localStorage.setItem("lang", lang);
+    };
+  }, []);
   return (
     <Grid style={{ margin: "auto 0px 15px 0px" }} container justify="center">
       <Grid item sm={10} xs={12}>
@@ -19,8 +34,26 @@ export default function Footer() {
             <span data-test="copyright">&copy; 2021 Robert Jaskólski</span>
             <span>
               <Ul>
-                <Li>
-                  <Flag lang="pl" />
+                <Li
+                  onClick={() => {
+                    switch (lang) {
+                      case "en":
+                        handleChangeLanguage("pl");
+                        setLang("pl");
+                        break;
+                      case "pl":
+                        handleChangeLanguage("en");
+                        setLang("en");
+                        break;
+
+                      default:
+                        handleChangeLanguage("en");
+                        setLang("en");
+                        break;
+                    }
+                  }}
+                >
+                  <Flag lang={lang} />
                 </Li>
                 <a
                   href="https://github.com/RobertJaskolski"
@@ -36,7 +69,9 @@ export default function Footer() {
                 >
                   <Li data-test="links">Linkedin</Li>
                 </a>
-                <Li data-test="links">Contact</Li>
+                <a href="mailto:robertjaskolski98@gmail.com">
+                  <Li data-test="links">Contact</Li>
+                </a>
               </Ul>
             </span>
           </FooterStyled>

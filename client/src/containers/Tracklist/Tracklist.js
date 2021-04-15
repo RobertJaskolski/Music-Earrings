@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import { withStyles } from "@material-ui/core/styles";
+import { useTranslation } from "react-i18next";
 // Import utils, API's and etc.
 import API from "../../api/SpotifyAPI";
 import MyAPI from "../../api/MyAPI";
@@ -52,7 +53,7 @@ function Tracklist({
   const handleChangeTracklistName = (event) => {
     setTracklistName(event.target.value);
   };
-
+  const { t } = useTranslation();
   const handleSaveTracklistName = () => {
     if (tracklistName) {
       SpotifyCreatePlaylist();
@@ -95,7 +96,7 @@ function Tracklist({
   return (
     <Div>
       <main style={{ width: "100%" }}>
-        <H2>Tracklist</H2>
+        <H2>{t("containers.Tracklist.tracklist")}</H2>
         <Line />
         <Filters
           auth={auth}
