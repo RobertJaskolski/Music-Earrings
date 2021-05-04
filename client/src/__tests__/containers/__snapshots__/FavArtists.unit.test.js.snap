@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Fav artists container should not render if user logout 1`] = `""`;
+
+exports[`Fav artists container should render correctly when user login 1`] = `
+<Styled(WithStyles(ForwardRef(Grid)))
+  container={true}
+>
+  <WithStyles(ForwardRef(Grid))
+    item={true}
+    xs={12}
+  >
+    <styled.h2>
+      containers.FavArtists.yoursfavs
+    </styled.h2>
+    <styled.div />
+  </WithStyles(ForwardRef(Grid))>
+</Styled(WithStyles(ForwardRef(Grid)))>
+`;
