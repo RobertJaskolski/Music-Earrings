@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Tracklist container should render component 1`] = `
+<Tracklist
+  MyAPIGetRecommendations={[Function]}
+  SpotifyCreatePlaylist={[Function]}
+  SpotifyGetRecommendations={[Function]}
+  store={
+    Object {
+      "dispatch": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+      Symbol(observable): [Function],
+    }
+  }
+/>
+`;

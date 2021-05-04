@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Root container should render component 1`] = `
+<ContextProvider
+  value={null}
+>
+  <RootContainer
+    getFavArtists={[Function]}
+    getRefreshToken={[Function]}
+    getUserProfile={[Function]}
+    refresh={[Function]}
+    refreshToken=""
+    store={
+      Object {
+        "dispatch": [Function],
+        "getState": [Function],
+        "replaceReducer": [Function],
+        "subscribe": [Function],
+        Symbol(observable): [Function],
+      }
+    }
+  />
+</ContextProvider>
+`;

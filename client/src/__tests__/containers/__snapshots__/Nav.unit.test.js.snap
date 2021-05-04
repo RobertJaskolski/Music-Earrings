@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Nav container should render component 1`] = `
+<Nav
+  MyAPIGetArtistAndTrack={[Function]}
+  SpotifyGetArtistAndTrack={[Function]}
+  clearTokens={[Function]}
+  logout={[Function]}
+  store={
+    Object {
+      "dispatch": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+      Symbol(observable): [Function],
+    }
+  }
+/>
+`;

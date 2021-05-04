@@ -1,12 +1,7 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import { shallow } from 'enzyme';
 import toJson from 'enzyme-to-json';
 import FavArtists from '../../containers/FavArtists/FavArtists';
-
-jest.mock('react-i18next', () => ({
-  useTranslation: () => ({ t: (key) => key }),
-}));
 
 describe('Fav artists container', () => {
   test('should not render if user logout', () => {

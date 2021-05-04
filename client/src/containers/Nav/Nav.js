@@ -1,14 +1,14 @@
 // Import outside
-import React from "react";
-import { Grid } from "@material-ui/core";
-import { connect } from "react-redux";
-import useMediaQuery from "@material-ui/core/useMediaQuery";
-import { useTranslation } from "react-i18next";
+import React from 'react';
+import { Grid } from '@material-ui/core';
+import { connect } from 'react-redux';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
+import { useTranslation } from 'react-i18next';
 // Import utils, API's and etc.
-import { tokensActions } from "../../reducers/tokens";
-import { authActions } from "../../reducers/auth";
-import API from "../../api/SpotifyAPI";
-import MyAPI from "../../api/MyAPI";
+import { tokensActions } from '../../reducers/tokens';
+import { authActions } from '../../reducers/auth';
+import API from '../../api/SpotifyAPI';
+import MyAPI from '../../api/MyAPI';
 // Import Components
 import {
   LoginButton,
@@ -16,7 +16,7 @@ import {
   SearchInput,
   LogoutButton,
   SkieletonNav,
-} from "../../components/Nav";
+} from '../../components/Nav';
 
 const Nav = ({
   logout,
@@ -31,7 +31,7 @@ const Nav = ({
 }) => {
   let time;
   const { t } = useTranslation();
-  const changeNav = useMediaQuery("(min-width:650px)");
+  const changeNav = useMediaQuery('(min-width:650px)');
   const handleLogout = () => {
     logout();
     clearTokens();
@@ -52,37 +52,32 @@ const Nav = ({
     }, 700);
   };
   return (
-    <Grid item data-test="NavContainer">
+    <Grid item>
       <nav>
         {changeNav ? (
           <Grid container spacing={2}>
             <Grid item lg={1} md={2} sm={2}>
-              <Logo widthLogo="75px" heightLogo="75px" data-test="logo" />
+              <Logo widthLogo='75px' heightLogo='75px' data-test='logo' />
             </Grid>
             <Grid item lg={8} md={6} sm={5}>
-              <SearchInput
-                handleOnChangeSearch={handleOnChangeSearch}
-                data-test="searchInput"
-              />
+              <SearchInput handleOnChangeSearch={handleOnChangeSearch} />
             </Grid>
             <Grid item lg={3} md={4} sm={5}>
               {userProfileLoading ? (
-                <SkieletonNav data-test="skielton" />
+                <SkieletonNav data-test='skielton' />
               ) : auth ? (
                 <LogoutButton
-                  data-test="logout"
                   logout={handleLogout}
-                  name={userProfile?.display_name || "Avatar"}
+                  name={userProfile?.display_name || 'Avatar'}
                   imageURL={
-                    userProfile?.images ? userProfile?.images[0]?.url : ""
+                    userProfile?.images ? userProfile?.images[0]?.url : ''
                   }
                 />
               ) : (
                 <LoginButton
-                  data-test="login"
                   redirectLink={`${process.env.REACT_APP_API_URL}/login`}
                 >
-                  {t("containers.Nav.connectWithSpotify")}
+                  {t('containers.Nav.connectWithSpotify')}
                 </LoginButton>
               )}
             </Grid>
@@ -90,23 +85,21 @@ const Nav = ({
         ) : (
           <Grid container>
             <Grid item xs={2}>
-              <Logo widthLogo="50px" heightLogo="50px" data-test="logo" />
+              <Logo widthLogo='50px' heightLogo='50px' />
             </Grid>
             <Grid item xs={10}>
               {userProfileLoading ? (
-                <SkieletonNav data-test="skielton" />
+                <SkieletonNav />
               ) : auth ? (
                 <LogoutButton
-                  data-test="logout"
                   logout={handleLogout}
-                  name={userProfile?.display_name || "Avatar"}
+                  name={userProfile?.display_name || 'Avatar'}
                   imageURL={
-                    userProfile?.images ? userProfile?.images[0]?.url : ""
+                    userProfile?.images ? userProfile?.images[0]?.url : ''
                   }
                 />
               ) : (
                 <LoginButton
-                  data-test="login"
                   redirectLink={`${process.env.REACT_APP_API_URL}/login`}
                 >
                   Connect with Spotify
@@ -114,10 +107,7 @@ const Nav = ({
               )}
             </Grid>
             <Grid item xs={12}>
-              <SearchInput
-                handleOnChangeSearch={handleOnChangeSearch}
-                data-test="searchInput"
-              />
+              <SearchInput handleOnChangeSearch={handleOnChangeSearch} />
             </Grid>
           </Grid>
         )}

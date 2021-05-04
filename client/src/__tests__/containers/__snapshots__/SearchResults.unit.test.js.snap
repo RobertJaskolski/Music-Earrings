@@ -1,0 +1,69 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Search results container should render component 1`] = `
+<styled.section
+  active={false}
+  id="searchBox"
+>
+  <WithStyles(ForwardRef(Grid))
+    container={true}
+  >
+    <WithStyles(ForwardRef(Grid))
+      item={true}
+      lg={6}
+      xs={12}
+    >
+      <styled.h1
+        active={false}
+      >
+        containers.SearchResults.artists
+      </styled.h1>
+      <Styled(styled.div)
+        active={false}
+      >
+        <styled.h1
+          active={false}
+        >
+          containers.SearchResults.noResults
+        </styled.h1>
+      </Styled(styled.div)>
+    </WithStyles(ForwardRef(Grid))>
+    <WithStyles(ForwardRef(Grid))
+      item={true}
+      lg={6}
+      xs={12}
+    >
+      <styled.h1
+        active={false}
+      >
+        containers.SearchResults.tracks
+      </styled.h1>
+      <Styled(styled.div)
+        active={false}
+      >
+        <styled.h1
+          active={false}
+        >
+          containers.SearchResults.noResults
+        </styled.h1>
+      </Styled(styled.div)>
+    </WithStyles(ForwardRef(Grid))>
+    <WithStyles(ForwardRef(Grid))
+      item={true}
+      lg={11}
+      xs={5}
+    />
+    <WithStyles(ForwardRef(Grid))
+      item={true}
+      lg={1}
+      xs={1}
+    >
+      <styled.div>
+        <Memo(ForwardRef(CancelPresentationIcon))
+          onClick={[Function]}
+        />
+      </styled.div>
+    </WithStyles(ForwardRef(Grid))>
+  </WithStyles(ForwardRef(Grid))>
+</styled.section>
+`;
