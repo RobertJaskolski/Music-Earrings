@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: akhileshns/heroku-deploy@v3.8.9
+      - uses: akhileshns/heroku-deploy@v3.12.12
         name: Deploy client
         with:
           heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
@@ -21,7 +21,7 @@ jobs:
         env:
           REACT_APP_API_URL: ${{ secrets.REACT_APP_API_URL }}
           REACT_APP_URL: ${{ secrets.REACT_APP_URL }}
-      - uses: akhileshns/heroku-deploy@v3.8.9
+      - uses: akhileshns/heroku-deploy@v3.12.12
         name: Deploy server
         with:
           heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
