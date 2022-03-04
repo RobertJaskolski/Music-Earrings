@@ -57,6 +57,10 @@ app.get("/login", function (req, res) {
   );
 });
 
+app.post("/notifications", function (req, res) {
+  console.log(req, res);
+});
+
 app.get("/callback", function (req, res) {
   // your application requests refresh and access tokens
   // after checking the state parameter
