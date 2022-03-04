@@ -14,7 +14,7 @@ jobs:
         name: Deploy client
         with:
           heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
-          heroku_app_name: "music-earrings"
+          heroku_app_name: "music-earrings-v2"
           heroku_email: ${{ secrets.HEROKU_EMAIL }}
           usedocker: true
           appdir: "client"
@@ -25,7 +25,7 @@ jobs:
         name: Deploy server
         with:
           heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
-          heroku_app_name: "music-earrings-api"
+          heroku_app_name: "music-earrings-v2-api"
           heroku_email: ${{ secrets.HEROKU_EMAIL }}
           usedocker: true
           appdir: "server"
